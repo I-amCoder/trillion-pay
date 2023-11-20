@@ -1,0 +1,33 @@
+{
+	"version": "1.0",
+	"files": [
+		{
+			"root_directory": "update/up1/navbar.blade.php",
+			"update_directory": "resources/views/backend/layout/navbar.blade.php"
+		},
+
+		{
+			"root_directory": "update/up1/withdraw_all.blade.php",
+			"update_directory": "resources/views/backend/withdraw/withdraw_all.blade.php"
+		},
+
+		{
+			"root_directory": "update/up1/profile.blade.php",
+			"update_directory": "resources/views/frontend/user/profile.blade.php"
+		},
+		{
+			"root_directory": "update/up1/profile1.blade.php",
+			"update_directory": "resources/views/theme2/user/profile.blade.php"
+		},
+		{
+			"root_directory": "update/up1/profile2.blade.php",
+			"update_directory": "resources/views/theme3/user/profile.blade.php"
+		},
+		{
+			"root_directory": "update/up1/withdrawcontroller.php",
+			"update_directory": "app/Http/Controllers/Admin/ManageWithdrawController.php"
+		}
+		
+		
+	]
+}

@@ -1,0 +1,179 @@
+{
+    "banner":{
+        "no_selection":true,
+       "content":{
+           "backgroundimage":"file",
+            "title":"text",            
+            "short_description":"textarea",
+            "button_text":"text",
+            "button_text_link":"text",
+            "button_text_2":"text",
+            "button_text_2_link":"text",
+            "cta_title":"text"
+       },
+       "element":{
+           "total":"text",
+           "title":"text"
+       }
+    }, 
+
+    "about":{
+        "content":{
+            "image":"file",
+            "title":"text",
+            "button_text":"text",
+            "button_text_link":"text",
+            "description":"textarea_nic"
+        }
+    },
+
+
+    "feature":{
+        "content":{
+            "title":"text"
+        },
+        "element":{
+            "card_title":"text",
+            "card_icon":"icon",
+            "card_description":"textarea"
+        }
+    },
+
+
+    "plan": {
+        "content": {
+            "title": "text"
+        }
+    },
+
+
+    "howitwork": {
+        "content": {
+            "title": "text"
+        },
+        "element":{
+            "title" : "text",
+            "short_description":"textarea"         
+        }
+    },
+
+
+
+    "faq":{
+        "content":{
+            "title":"text"
+        },
+        "element":{
+            "question":"text",
+            "answer":"textarea"
+        }
+    },
+
+
+    "transaction": {       
+        "content": {
+            "title": "text"
+        }
+    },
+    
+    "investor":{
+        "content":{
+            "image":"file",
+            "title":"text"
+        }
+    },
+
+
+    
+    "testimonial": {       
+        "content": {
+            "title": "text"          
+        },
+        "element":{
+            "image":"file",
+            "client_name" : "text",
+            "designation":"text",
+            "answer":"textarea"         
+        }
+    },
+
+    "affiliate": { 
+        "content": {
+            "title":"text" 
+        }
+    },
+
+
+    "blog":{
+        "content":{
+          "title":"text"  
+        },
+        "element":{
+            "image":"file",
+            "title" : "text",
+            "short_description":"textarea",
+            "description":"textarea_nic",
+            "tag":"text"
+        }
+    },
+
+
+    "newsletter": {       
+        "content": {
+            "title": "text",
+            "short_description":"textarea"
+        }
+    },
+
+
+
+
+
+
+    "contact":{
+        "content":{
+            "title":"text",
+            "location":"text",
+            "email":"text",
+            "phone":"text"
+        }
+        
+    },
+
+    "footer":{
+        "no_selection":true,
+        "content":{
+            "multiple_image":{
+                "map_image":"file",            
+                "payment_image":"file"  
+            },
+            "footer_short_description":"textarea" 
+        },
+        "element":{
+            "social_link":"text",
+            "social_icon" : "icon"
+            
+        }
+    },
+
+
+    
+
+    "service": {       
+        "no_selection":true,
+        "element":{
+            "title" : "text",
+            "description":"textarea_nic",
+            "slug":"text"     
+        }
+    },
+    
+    "privacy policy": {    
+        "no_selection":true,   
+        "content": {
+            "Title":"text",
+            "Privacy_Policy": "textarea_nic"          
+        }
+    }
+   
+}
