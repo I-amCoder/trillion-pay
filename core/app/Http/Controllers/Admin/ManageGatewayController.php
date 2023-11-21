@@ -1371,7 +1371,7 @@ class ManageGatewayController extends Controller
         $payment->wallet_id = $wallet->id;
         $payment->next_payment_time = Carbon::now()->addHours(24);
 
-        if ($booking->wallet_type == $type) {
+        if ($booking->wallet_type == "business_pack_payments") {
             // Implement Payments Logic Here
             $payment->next_payment_time = Carbon::now()->addHours($booking->plan->time->time);
 
@@ -1385,7 +1385,7 @@ class ManageGatewayController extends Controller
 
         }
 
-        if ($booking->wallet_type == $type) {
+        if ($booking->wallet_type == "business_value_payments") {
             $payment->return_for = $request->return_for;
             if ($request->sponser_profit) {
                 // Validate Sponser profit
