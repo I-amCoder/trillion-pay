@@ -1386,7 +1386,7 @@ class ManageGatewayController extends Controller
         }
 
         if ($booking->wallet_type == "business_value_payments") {
-            $payment->return_for = $request->return_for;
+
             if ($request->sponser_profit) {
                 // Validate Sponser profit
                 if ($request->return_interest < $request->sponser_profit) {
@@ -1396,23 +1396,26 @@ class ManageGatewayController extends Controller
 
                 // Update payment Settings
                 $payment->self_profit = $self_profit;
-                $payment->deposit_id = $booking->id;
 
                 $payment->sponser_profit = $request->sponser_profit;
-
-                $payment->plan_id = $booking->plan_id;
-
-                $payment->return_interest = $request->return_interest;
-
-                $payment->amount = $request->amount;
-
-                $payment->return_for = $booking->plan->return_for;
-
-                $payment->how_many_time = $request->how_many_time;
-
-                $payment->next_payment_time = Carbon::now()->addHours($booking->plan->time->time);
-                refferMoney($booking->user_id, $booking->user->refferedBy, 'invest', $booking->amount,$type);
+            }else{
+                $payment->self_profit = $request->return_interest;
+                $payment->sponser_profit = 0;
             }
+            $payment->deposit_id = $booking->id;
+
+            $payment->plan_id = $booking->plan_id;
+
+            $payment->return_interest = $request->return_interest;
+
+            $payment->amount = $request->amount;
+
+            $payment->return_for = $booking->plan->return_for;
+
+            $payment->how_many_time = $request->how_many_time;
+
+            $payment->next_payment_time = Carbon::now()->addHours($booking->plan->time->time);
+            refferMoney($booking->user_id, $booking->user->refferedBy, 'invest', $booking->amount,$type);
         }
 
 
