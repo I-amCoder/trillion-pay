@@ -1384,7 +1384,6 @@ class ManageGatewayController extends Controller
             refferMoney($booking->user_id, $booking->user->refferedBy, 'invest', $booking->amount,$type);
 
         }
-        dd("hi");
 
         if ($booking->wallet_type == "business_value_payments") {
 
