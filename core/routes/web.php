@@ -442,6 +442,7 @@ Route::name('user.')->group(function () {
             Route::controller(WalletController::class)->prefix('wallet')->name('wallet.')->group(function(){
                 Route::post('withdraw/{wallet}','withdrawAmount')->name('withdraw');
                 Route::post('balance/','transferBalance')->name('profit_transfer');
+                Route::get('balance/','transferLog')->name('transfer_log');
             });
         });
     });

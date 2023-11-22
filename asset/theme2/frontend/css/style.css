@@ -5,17 +5,18 @@
 --------------------------------------------------------------*/
 :root {
     /* --main-color: #38ef7d;
-    --secondary-color: #FF72CA;
-    --body-bg: #FF77FF;
-    --body-gradient-bg: #FF77FF;
-    --bg-dark: #FFAF6F; */
-
- 
-    --main-color: #38ef7d;
     --secondary-color: #0f0c29;
     --body-bg: #24243e;
     --body-gradient-bg: #24243e;
-    --bg-dark: #0f0c29;
+    --bg-dark: #0f0c29; */
+
+    --main-color: #38ef7d;
+    --secondary-color: #F3DCE8;
+    --body-bg: #FF6F91;
+    --body-gradient-bg: #FF6F91;
+    --bg-dark: #A06585;
+
+ 
 
     --h-font: "Syne", sans-serif;
     --p-font: "Poppins", sans-serif;
@@ -3222,7 +3223,13 @@ ul {
     background-color: var(--body-gradient-bg);
     border-radius: 8px;
     border: 1px solid rgba(255,255,255,0.1);
-    z-index: 1;
+    position: relative;
+}
+.d-box-one .top-right{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
 }
 
 .d-box-one .icon {

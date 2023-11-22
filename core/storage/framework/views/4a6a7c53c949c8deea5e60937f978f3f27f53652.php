@@ -1,71 +1,72 @@
-@extends(template() . 'layout.master2')
-
-
-@section('content2')
+<?php $__env->startSection('content2'); ?>
     <div class="dashboard-body-part">
-        <div class="h4 section-title text-capitalize">{{ str_replace('_',' ',Request('wallet')) }} Deposits</div>
+        <div class="h4 section-title text-capitalize"><?php echo e(str_replace('_',' ',Request('wallet'))); ?> Deposits</div>
         <div class="card-body text-end">
             <form action="" method="get" class="d-inline-flex">
                 <input type="text" name="trx" class="form-control me-2" placeholder="transaction id">
                 <input type="date" class="form-control me-3" placeholder="Search User" name="date">
-                <button type="submit" class="cmn-btn">{{ __('Search') }}</button>
+                <button type="submit" class="cmn-btn"><?php echo e(__('Search')); ?></button>
             </form>
         </div>
         <div class="table-responsive">
             <table class="table cmn-table">
                 <thead>
                     <tr>
-                        <th>{{ __('Trx') }}</th>
-                        <th>{{ __('User') }}</th>
-                        <th>{{ __('Gateway') }}</th>
-                        <th>{{ __('Amount') }}</th>
-                        <th>{{ __('Currency') }}</th>
-                        <th>{{ __('Charge') }}</th>
-                        <th>{{ __('Payment Date') }}</th>
-                        <th>{{ __('Invoice') }}</th>
+                        <th><?php echo e(__('Trx')); ?></th>
+                        <th><?php echo e(__('User')); ?></th>
+                        <th><?php echo e(__('Gateway')); ?></th>
+                        <th><?php echo e(__('Amount')); ?></th>
+                        <th><?php echo e(__('Currency')); ?></th>
+                        <th><?php echo e(__('Charge')); ?></th>
+                        <th><?php echo e(__('Payment Date')); ?></th>
+                        <th><?php echo e(__('Invoice')); ?></th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    @forelse($transactions as $key => $transaction)
+                    <?php $__empty_1 = true; $__currentLoopData = $transactions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $transaction): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                         <tr>
-                            <td data-caption="{{ __('Trx') }}">{{ $transaction->transaction_id }}</td>
-                            <td data-caption="{{ __('User') }}">
-                                {{ @$transaction->user->fname . ' ' . @$transaction->user->lname }}</td>
-                            <td data-caption="{{ __('Gateway') }}">
-                                {{ @$transaction->gateway->gateway_name ?? 'Account Transfer' }}</td>
-                            <td data-caption="{{ __('Amount') }}">{{ $transaction->amount }}</td>
-                            <td data-caption="{{ __('Currency') }}">
-                                {{ $transaction->gateway->gateway_parameters->gateway_currency }}</td>
-                            <td data-caption="{{ __('Charge') }}">
-                                {{ $transaction->charge . ' ' . $transaction->currency }}</td>
+                            <td data-caption="<?php echo e(__('Trx')); ?>"><?php echo e($transaction->transaction_id); ?></td>
+                            <td data-caption="<?php echo e(__('User')); ?>">
+                                <?php echo e(@$transaction->user->fname . ' ' . @$transaction->user->lname); ?></td>
+                            <td data-caption="<?php echo e(__('Gateway')); ?>">
+                                <?php echo e(@$transaction->gateway->gateway_name ?? 'Account Transfer'); ?></td>
+                            <td data-caption="<?php echo e(__('Amount')); ?>"><?php echo e($transaction->amount); ?></td>
+                            <td data-caption="<?php echo e(__('Currency')); ?>">
+                                <?php echo e($transaction->gateway->gateway_parameters->gateway_currency); ?></td>
+                            <td data-caption="<?php echo e(__('Charge')); ?>">
+                                <?php echo e($transaction->charge . ' ' . $transaction->currency); ?></td>
 
-                            <td data-caption="{{ __('Payment Date') }}">{{ $transaction->created_at->format('Y-m-d') }}
+                            <td data-caption="<?php echo e(__('Payment Date')); ?>"><?php echo e($transaction->created_at->format('Y-m-d')); ?>
+
                             </td>
                             <td data-caption="Invoice"><a href="#"
-                                    data-date="{{ $transaction->created_at->format('Y-m-d') }}"
-                                    data-wallet_type={{ rtrim($transaction->wallet_type,'s') }}
-                                    data-deposit="{{ json_encode($transaction) }}" class="invoice-action"><i
+                                    data-date="<?php echo e($transaction->created_at->format('Y-m-d')); ?>"
+                                    data-wallet_type=<?php echo e(rtrim($transaction->wallet_type,'s')); ?>
+
+                                    data-deposit="<?php echo e(json_encode($transaction)); ?>" class="invoice-action"><i
                                         class="fa fa-print"></i> Invoice</a></td>
                         </tr>
-                    @empty
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                         <tr>
                             <td class="text-center" colspan="100%">
-                                {{ __('No users Found') }}
+                                <?php echo e(__('No users Found')); ?>
+
                             </td>
                         </tr>
-                    @endforelse
+                    <?php endif; ?>
                 </tbody>
             </table>
 
-            @if ($transactions->hasPages())
-                {{ $transactions->links() }}
-            @endif
+            <?php if($transactions->hasPages()): ?>
+                <?php echo e($transactions->links()); ?>
+
+            <?php endif; ?>
         </div>
     </div>
 
 
-    {{-- Invoice Modal --}}
+    
     <!-- Modal -->
     <div class="modal fade" id="invoiceModal" tabindex="-1" aria-labelledby="invoiceModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -76,7 +77,7 @@
                 </div>
                 <div class="modal-body d-flex justify-content-center">
                     <div id="invoice" class="invoice-container text-center">
-                        <img src="{{ getFile('logo', @$general->logo) }}" width="50%" alt="pp">
+                        <img src="<?php echo e(getFile('logo', @$general->logo)); ?>" width="50%" alt="pp">
                         <h2>Invoice</h2>
 
                         <div class="invoice-item">
@@ -135,8 +136,8 @@
             </div>
         </div>
     </div>
-@endsection
-@push('style')
+<?php $__env->stopSection(); ?>
+<?php $__env->startPush('style'); ?>
     <style>
         .invoice-container {
             max-width: 400px;
@@ -175,8 +176,8 @@
             margin-top: 20px;
         }
     </style>
-@endpush
-@push('script')
+<?php $__env->stopPush(); ?>
+<?php $__env->startPush('script'); ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <script>
@@ -232,4 +233,6 @@
 
         }
     </script>
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make(template() . 'layout.master2', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Junaid Ali\Desktop\www\invest4sale\core\resources\views/theme2/user/deposit_log.blade.php ENDPATH**/ ?>

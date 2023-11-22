@@ -18,7 +18,6 @@
         <div class="row gy-4">
             <div class="col-xxl-6">
                 <div class="d-box-one h-100">
-
                     <div class="icon">
                         <i class="fas fa-wallet"></i>
                     </div>
@@ -27,33 +26,35 @@
                         <h3 class="d-box-one-amount">
                             {{ number_format(auth()->user()->balance, 3) . ' ' . $general->site_currency }}</h3>
                         <div class="d-flex flex-wrap">
-                            <div class="dropdown mx-2">
-                                <a class="btn btn-outline-success dropdown-toggle" href="{{ route('user.transfer_money') }}"
-                                    role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Transfer
-                                </a>
-
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="{{ route('user.transfer_money') }}">Transfer
-                                            Money</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('user.money.log') }}">Transfer log</a></li>
-                                </ul>
-                            </div>
-                            <div class="dropdown mx-2">
-                                <a class="btn btn-outline-success dropdown-toggle" href="#" role="button"
-                                    id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Withdraw
-                                </a>
-
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="{{ route('user.withdraw') }}">Withdraw</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('user.withdraw.pending') }}">Pending
-                                            Withdraw</a>
-                                    <li><a class="dropdown-item" href="{{ route('user.withdraw.all') }}">Withdraw Log</a>
-                                    </li>
-                                </ul>
-                            </div>
+                            <a class="btn btn-outline-warning mx-2" href="{{ route('user.transfer_money') }}">Transfer
+                                Money</a>
+                            <a class="btn btn-outline-warning mx-2" href="{{ route('user.withdraw') }}">Withdraw</a>
                         </div>
+                    </div>
+
+                    <div class="top-right dropdown ms-auto">
+                        <a href="#" data-bs-toggle="dropdown" aria-expanded="false" class="px-3">
+                            <i class="text-white fa fa-ellipsis-v" style="cursor: pointer"></i>
+                        </a>
+                        <ul class="dropdown-menu bg-white text-dark">
+                            <li>
+                                <span class="dropdown-item">
+                                    <a href=" href="{{ route('user.withdraw.all') }}" class="text-dark">Withdraw
+                                        History</a>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="dropdown-item">
+                                    <a href=" href="{{ route('user.withdraw.pending') }}" class="text-dark">Pending
+                                        Withdraw</a>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="dropdown-item">
+                                    <a href="{{ route('user.money.log') }}" class="text-dark"> Transfer History</a>
+                                </span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -70,6 +71,19 @@
                             data-href="{{ route('user.wallet.profit_transfer') }}">Transfer To Current Balance </button>
                     </div>
 
+                    {{-- <div class="top-right dropdown ms-auto">
+                        <a href="#" data-bs-toggle="dropdown" aria-expanded="false" class="px-3">
+                            <i class="fa fa-ellipsis-v" style="cursor: pointer"></i>
+                        </a>
+                        <ul class="dropdown-menu bg-white text-dark">
+                            <li>
+                                <span class="dropdown-item">
+
+                                </span>
+                            </li>
+                        </ul>
+                    </div> --}}
+
 
                 </div>
             </div>
@@ -79,8 +93,27 @@
         <div class="row gy-4 ">
             <div class="col-md-6">
                 <div class="card finance-card bg-1">
-                    <div class="card-header finance-card-header">
+                    <div class="card-header finance-card-header d-flex justify-content-between">
                         <h4 class="mb-0">Current Wallet</h4>
+                        <div class="dropdown ms-auto">
+                            <a href="#" data-bs-toggle="dropdown" aria-expanded="false" class="px-3">
+                                <i class="fa fa-ellipsis-v" style="cursor: pointer"></i>
+                            </a>
+                            <ul class="dropdown-menu bg-white text-dark">
+                                <li>
+                                    <span class="dropdown-item">
+                                        <a href="{{ route('user.deposit.log', ['wallet' => 'current_wallet']) }}"
+                                            class="text-dark"> Deposit History</a>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="dropdown-item">
+                                        <a href="{{ route('user.wallet.transfer_log', ['wallet' => 'current_wallet']) }}"
+                                            class="text-dark"> Transfer History</a>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="card-body finance-card-body">
                         <div class="text-center">
@@ -119,8 +152,27 @@
             </div>
             <div class="col-md-6">
                 <div class="card finance-card bg-1">
-                    <div class="card-header finance-card-header">
+                    <div class="card-header finance-card-header d-flex justify-content-between">
                         <h4 class="mb-0">Saving Wallet</h4>
+                        <div class="dropdown ms-auto">
+                            <a href="#" data-bs-toggle="dropdown" aria-expanded="false" class="px-3">
+                                <i class="fa fa-ellipsis-v" style="cursor: pointer"></i>
+                            </a>
+                            <ul class="dropdown-menu bg-white text-dark">
+                                <li>
+                                    <span class="dropdown-item">
+                                        <a href="{{ route('user.deposit.log', ['wallet' => 'saving_wallet']) }}"
+                                            class="text-dark"> Deposit History</a>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="dropdown-item">
+                                        <a href="{{ route('user.wallet.transfer_log', ['wallet' => '']) }}"
+                                            class="text-dark"> Transfer History</a>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="card-body finance-card-body">
                         <div class="text-center">
@@ -160,8 +212,29 @@
             </div>
             <div class="col-md-6">
                 <div class="card  finance-card bg-1">
-                    <div class="card-header finance-card-header">
+
+
+                    <div class="card-header finance-card-header d-flex justify-content-between">
                         <h4 class="mb-0">Sharing Wallet</h4>
+                        <div class="dropdown ms-auto">
+                            <a href="#" data-bs-toggle="dropdown" aria-expanded="false" class="px-3">
+                                <i class="fa fa-ellipsis-v" style="cursor: pointer"></i>
+                            </a>
+                            <ul class="dropdown-menu bg-white text-dark">
+                                <li>
+                                    <span class="dropdown-item">
+                                        <a href="{{ route('user.deposit.log', ['wallet' => 'sharing_wallet']) }}"
+                                            class="text-dark"> Deposit History</a>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="dropdown-item">
+                                        <a href="{{ route('user.wallet.transfer_log', ['wallet' => '']) }}"
+                                            class="text-dark"> Transfer History</a>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="card-body finance-card-body">
                         <div class="text-center">
@@ -201,8 +274,28 @@
             </div>
             <div class="col-md-6">
                 <div class="card  finance-card bg-1">
-                    <div class="card-header finance-card-header d-flex justify-content-between">
+                    <div
+                        class="card-header finance-card-header d-flex justify-content-between d-flex justify-content-between">
                         <h4 class="mb-0">Business Pack Wallet</h4>
+                        <div class="dropdown ms-auto">
+                            <a href="#" data-bs-toggle="dropdown" aria-expanded="false" class="px-3">
+                                <i class="fa fa-ellipsis-v" style="cursor: pointer"></i>
+                            </a>
+                            <ul class="dropdown-menu bg-white text-dark">
+                                <li>
+                                    <span class="dropdown-item">
+                                        <a href="{{ route('user.deposit.log', ['wallet' => 'business_pack_wallet']) }}"
+                                            class="text-dark"> Deposit History</a>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="dropdown-item">
+                                        <a href="{{ route('user.invest.log', ['wallet' => 'business_pack_wallet']) }}"
+                                            class="text-dark"> Investment History</a>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="card-body finance-card-body">
                         <div class="text-center">
@@ -216,16 +309,34 @@
                         <div class="text-center finance-buttons">
                             <a href="{{ route('user.investmentplan', ['wallet' => 'business_pack_wallet']) }}"
                                 class="btn btn-success"> Plans</a>
-                            <a href="{{ route('user.invest.log', ['wallet' => 'business_pack_wallet']) }}"
-                                class="btn btn-danger ml-2">Invest Logs</a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="card finance-card bg-1">
-                    <div class="card-header finance-card-header d-flex justify-content-between">
+                    <div
+                        class="card-header finance-card-header d-flex justify-content-between d-flex justify-content-between">
                         <h4 class="mb-0">Business Value Wallet</h4>
+                        <div class="dropdown ms-auto">
+                            <a href="#" data-bs-toggle="dropdown" aria-expanded="false" class="px-3">
+                                <i class="fa fa-ellipsis-v" style="cursor: pointer"></i>
+                            </a>
+                            <ul class="dropdown-menu bg-white text-dark">
+                                <li>
+                                    <span class="dropdown-item">
+                                        <a href="{{ route('user.deposit.log', ['wallet' => 'business_value_wallet']) }}"
+                                            class="text-dark"> Deposit History</a>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="dropdown-item">
+                                        <a href="{{ route('user.invest.log', ['wallet' => 'business_value_wallet']) }}"
+                                            class="text-dark">Investment History</a>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
 
                     </div>
                     <div class="card-body finance-card-body">
@@ -240,8 +351,6 @@
                         <div class="text-center finance-buttons">
                             <a href="{{ route('user.investmentplan', ['wallet' => 'business_value_wallet']) }}"
                                 class="btn btn-success"> Plans</a>
-                            <a href="{{ route('user.invest.log', ['wallet' => 'business_value_wallet']) }}"
-                                class="btn btn-danger ml-2">Invest Logs</a>
                         </div>
                     </div>
                 </div>
@@ -382,7 +491,7 @@
                             <div class="form-group mb-3">
                                 <label for="">{{ __('Amount after tax') }} <span id="tax"></span>%</label>
                                 <input id="total_amount" type="text" class="form-control"
-                                    placeholder="{{ __('Total Amount') }}" disabled>
+                                    placeholder="{{ __('Final Amount') }}" disabled>
                             </div>
                         </div>
                     </div>
@@ -609,8 +718,7 @@
 
         .finance-card.bg-1 {
             background-color: #1b2845;
-            background: rgb(196, 252, 239);
-            background: linear-gradient(90deg, rgba(196, 252, 239, 1) 0%, rgba(0, 201, 167, 1) 26%, rgba(132, 94, 194, 1) 100%);
+            background: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114));
             box-shadow: 1px 4px 5px rgb(252, 251, 121);
         }
 
@@ -772,7 +880,7 @@
             $("#w_amount").on("input change", function() {
                 let amount = $(this).val();
                 let tax_amount = (amount * tax) / 100;
-                let total = parseFloat(amount) + parseFloat(tax_amount);
+                let total = parseFloat(amount) - parseFloat(tax_amount);
                 $("#total_amount").val(total);
 
             });

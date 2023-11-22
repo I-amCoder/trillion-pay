@@ -62,9 +62,10 @@
         <div class="container-fluid d-flex align-items-center justify-content-between">
             <div class="d-flex flex-wrap align-items-center">
                 
-                <h3 class="logo me-auto me-lg-0 ">
+                <h3 class="logo me-auto p-2 me-lg-0 ">
                     <a href="<?php echo e(route('user.dashboard')); ?>">
-                       Dashboard
+                        <i class="fa fa-tachometer-alt" aria-hidden="true"></i> Dashboard
+
                     </a>
                 </h3>
             </div>
@@ -89,9 +90,12 @@
                         <span class="text-white ms-2"><?php echo e(auth()->user()->full_name); ?></span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="<?php echo e(route('user.interest.log')); ?>"><?php echo e(__('Interest log')); ?></a></li>
-                        <li><a class="dropdown-item" href="<?php echo e(route('user.transaction.log')); ?>"><?php echo e(__('Referral log')); ?></a></li>
-                        <li><a class="dropdown-item" href="<?php echo e(route('user.commision')); ?>"><?php echo e(__('Transaction log')); ?></a></li>
+                        <li><a class="dropdown-item"
+                                href="<?php echo e(route('user.interest.log')); ?>"><?php echo e(__('Interest log')); ?></a></li>
+                        <li><a class="dropdown-item"
+                                href="<?php echo e(route('user.transaction.log')); ?>"><?php echo e(__('Referral log')); ?></a></li>
+                        <li><a class="dropdown-item"
+                                href="<?php echo e(route('user.commision')); ?>"><?php echo e(__('Transaction log')); ?></a></li>
                         <li><a class="dropdown-item" href="<?php echo e(route('user.2fa')); ?>"><?php echo e(__('2FA')); ?></a></li>
                         <li><a class="dropdown-item" href="<?php echo e(route('user.profile')); ?>"><?php echo e(__('Settings')); ?></a></li>
                         <li><a class="dropdown-item" href="<?php echo e(route('user.logout')); ?>"><?php echo e(__('Logout')); ?></a></li>
@@ -183,8 +187,8 @@
             "use strict";
             <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 iziToast.error({
-                message: '<?php echo e(__($error)); ?>',
-                position: "topRight"
+                    message: '<?php echo e(__($error)); ?>',
+                    position: "topRight"
                 });
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </script>

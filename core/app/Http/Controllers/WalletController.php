@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\Auth;
 
 class WalletController extends Controller
 {
+    protected $template;
+    public function __construct()
+    {
+        $general = GeneralSetting::first();
+        $this->template = $general->theme == 1 ? 'frontend.' : "theme{$general->theme}.";
+    }
+
     public function index()
     {
         $settings = WalletProfits::first();
@@ -149,51 +156,88 @@ class WalletController extends Controller
                 $wallet = $user->sharing_wallet;
                 break;
             default:
-                return back();
+                return redirect()->route('user.dashboard');
                 break;
         }
 
         $tax_rate = $settings[$type . "_tax"];
         $tax = ($request->amount * $tax_rate) / 100;
         $amount  = $request->amount;
-        $total = $tax + $amount;
+        $final =  $amount - $tax;
 
-        if ($total > $wallet->amount) {
+        if ($amount > $wallet->amount) {
             return back()->withError("Insufficient Balance in wallet");
         }
 
         $transfer = new WalletTransfer();
-        $transfer->amount = $request->amount;
+        $transfer->amount = $final;
         $transfer->user_id = $user->id;
         $transfer->wallet_id = $wallet->id;
         $transfer->wallet_type = $type;
         $transfer->time = now()->addHours($settings[$type . "_time"]);
         $transfer->save();
 
-        $wallet->amount -= $total;
+        $wallet->amount -= $final;
         $wallet->save();
         return back()->withSuccess("Requested Successfully");
     }
 
-    public function transferBalance (Request $request){
+    /**
+     * transferBalance
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function transferBalance(Request $request)
+    {
         $request->validate([
-            'amount'=>'required|numeric'
+            'amount' => 'required|numeric'
         ]);
         $settings = GeneralSetting::first();
         $user = Auth::user();
         $amount = $request->amount;
         $tax_rate = $settings->profit_transfer_charge;
-        $tax = ($amount * $tax_rate) /100;
-        $total  = $amount + $tax;
+        $tax = ($amount * $tax_rate) / 100;
+        $final  = $amount - $tax;
 
-        if($total > $user->profit_balance){
+        // Check if amount is insufficient
+        if ($amount > $user->profit_balance) {
             return back()->withError('Insufficient profit balance');
         }
 
-        $user->balance += $amount;
-        $user->profit_balance -= $total;
+        $user->balance += $final;
+        $user->profit_balance -= $amount;
         $user->save();
         return back()->withSuccess("Transferred Successfully");
+    }
 
+    /**
+     * transferLog
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function transferLog(Request $request)
+    {
+        $pageTitle = strtoupper(str_replace('_', ' ', $request->wallet));
+        $query  = WalletTransfer::query();
+        switch ($request->wallet) {
+            case 'current_wallet':
+                $query->where('wallet_type', 'current_wallet');
+                break;
+            case 'saving_wallet':
+                $query->where('wallet_type', 'saving_wallet');
+                break;
+            case 'sharing_wallet':
+                $query->where('wallet_type', 'sharing_wallet');
+                break;
+
+            default:
+                return redirect()->route('user.dashboard');
+                break;
+        }
+
+        $transfers = $query->paginate();
+        return view($this->template . 'user.wallet_transfer_log', compact('pageTitle', 'transfers'));
     }
 }

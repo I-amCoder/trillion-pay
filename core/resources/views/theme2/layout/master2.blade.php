@@ -64,9 +64,10 @@
                     <i class="bi bi-arrow-bar-left"></i>
                     <i class="bi bi-arrow-bar-right"></i>
                 </button> --}}
-                <h3 class="logo me-auto me-lg-0 ">
+                <h3 class="logo me-auto p-2 me-lg-0 ">
                     <a href="{{ route('user.dashboard') }}">
-                       Dashboard
+                        <i class="fa fa-tachometer-alt" aria-hidden="true"></i> Dashboard
+
                     </a>
                 </h3>
             </div>
@@ -90,9 +91,12 @@
                         <span class="text-white ms-2">{{ auth()->user()->full_name }}</span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="{{ route('user.interest.log') }}">{{ __('Interest log') }}</a></li>
-                        <li><a class="dropdown-item" href="{{ route('user.transaction.log') }}">{{ __('Referral log') }}</a></li>
-                        <li><a class="dropdown-item" href="{{ route('user.commision') }}">{{ __('Transaction log') }}</a></li>
+                        <li><a class="dropdown-item"
+                                href="{{ route('user.interest.log') }}">{{ __('Interest log') }}</a></li>
+                        <li><a class="dropdown-item"
+                                href="{{ route('user.transaction.log') }}">{{ __('Referral log') }}</a></li>
+                        <li><a class="dropdown-item"
+                                href="{{ route('user.commision') }}">{{ __('Transaction log') }}</a></li>
                         <li><a class="dropdown-item" href="{{ route('user.2fa') }}">{{ __('2FA') }}</a></li>
                         <li><a class="dropdown-item" href="{{ route('user.profile') }}">{{ __('Settings') }}</a></li>
                         <li><a class="dropdown-item" href="{{ route('user.logout') }}">{{ __('Logout') }}</a></li>
@@ -184,8 +188,8 @@
             "use strict";
             @foreach ($errors->all() as $error)
                 iziToast.error({
-                message: '{{ __($error) }}',
-                position: "topRight"
+                    message: '{{ __($error) }}',
+                    position: "topRight"
                 });
             @endforeach
         </script>
