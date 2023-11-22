@@ -26,9 +26,9 @@
                         <h3 class="d-box-one-amount">
                             {{ number_format(auth()->user()->balance, 3) . ' ' . $general->site_currency }}</h3>
                         <div class="d-flex flex-wrap">
-                            <a class="btn btn-outline-warning mx-2" href="{{ route('user.transfer_money') }}">Transfer
+                            <a class="btn btn-outline-dark mx-2" href="{{ route('user.transfer_money') }}">Transfer
                                 Money</a>
-                            <a class="btn btn-outline-warning mx-2" href="{{ route('user.withdraw') }}">Withdraw</a>
+                            <a class="btn btn-outline-dark mx-2" href="{{ route('user.withdraw') }}">Withdraw</a>
                         </div>
                     </div>
 
@@ -67,7 +67,7 @@
                         <span class="caption-title">{{ __('Profit Balance') }}</span>
                         <h3 class="d-box-one-amount">
                             {{ number_format(auth()->user()->profit_balance, 3) . ' ' . $general->site_currency }}</h3>
-                        <button class="btn btn-outline-success text-white withdraw_now" data-wallet_type="profit_balance"
+                        <button class="btn btn-outline-dark  withdraw_now" data-wallet_type="profit_balance"
                             data-href="{{ route('user.wallet.profit_transfer') }}">Transfer To Current Balance </button>
                     </div>
 
