@@ -24,9 +24,9 @@
                         <h3 class="d-box-one-amount">
                             <?php echo e(number_format(auth()->user()->balance, 3) . ' ' . $general->site_currency); ?></h3>
                         <div class="d-flex flex-wrap">
-                            <a class="btn btn-outline-dark mx-2" href="<?php echo e(route('user.transfer_money')); ?>">Transfer
+                            <a class="btn btn-outline-dark m-2" href="<?php echo e(route('user.transfer_money')); ?>">Transfer
                                 Money</a>
-                            <a class="btn btn-outline-dark mx-2" href="<?php echo e(route('user.withdraw')); ?>">Withdraw</a>
+                            <a class="btn btn-outline-dark m-2" href="<?php echo e(route('user.withdraw')); ?>">Withdraw</a>
                         </div>
                     </div>
 
