@@ -215,9 +215,9 @@ class UserController extends Controller
 
         if ($withdraw->charge_type == 'percent') {
 
-            $total = $request->amount + ($withdraw->charge * $request->amount) / 100;
+            $total = $request->amount - ($withdraw->charge * $request->amount) / 100;
         } else {
-            $total = $request->amount + $withdraw->charge;
+            $total = $request->amount - $withdraw->charge;
         }
 
         if ($total != $request->final_amo) {
@@ -228,7 +228,7 @@ class UserController extends Controller
 
 
 
-        auth()->user()->balance = auth()->user()->balance - $total;
+        auth()->user()->balance = auth()->user()->balance - $request->amount;
         auth()->user()->save();
 
 

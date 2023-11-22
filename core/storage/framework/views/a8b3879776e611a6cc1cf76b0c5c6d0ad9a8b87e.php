@@ -1,27 +1,25 @@
-@extends(template().'layout.master2')
-
-@section('content2')
+<?php $__env->startSection('content2'); ?>
     <div class="dashboard-body-part">
         <div class="row gy-4">
             <div class="col-xxl-8 col-lg-6">
                 <div class="card">
                     <form action="" method="post">
-                        @csrf
+                        <?php echo csrf_field(); ?>
                         <div class="card-header">
                             <h4 class="mb-0">
-                                {{ __('Current Balance: ') }} <span class="color-change">{{ number_format(auth()->user()->balance, 2) . ' ' . $general->site_currency }}</span>
+                                <?php echo e(__('Current Balance: ')); ?> <span class="color-change"><?php echo e(number_format(auth()->user()->balance, 2) . ' ' . $general->site_currency); ?></span>
                             </h4>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="">{{ __('Withdraw Method') }}</label>
+                                <label for=""><?php echo e(__('Withdraw Method')); ?></label>
                                 <select name="method" id="" class="form-select">
-                                    <option value="" selected>{{ __('Select Method') }}</option>
-                                    @foreach ($withdraws as $withdraw)
-                                        <option value="{{ $withdraw->id }}"
-                                            data-url="{{ route('user.withdraw.fetch', $withdraw->id) }}">
-                                            {{ $withdraw->name }}</option>
-                                    @endforeach
+                                    <option value="" selected><?php echo e(__('Select Method')); ?></option>
+                                    <?php $__currentLoopData = $withdraws; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $withdraw): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($withdraw->id); ?>"
+                                            data-url="<?php echo e(route('user.withdraw.fetch', $withdraw->id)); ?>">
+                                            <?php echo e($withdraw->name); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </div>
                             <div class="row appendData"></div>
@@ -33,7 +31,7 @@
             <div class="col-xxl-4 col-lg-6 withdraw-ins">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="mb-0">{{ __('Withdraw Instruction') }}</h4>
+                        <h4 class="mb-0"><?php echo e(__('Withdraw Instruction')); ?></h4>
                     </div>
                     <div class="card-body">
                         <p class="instruction"></p>
@@ -42,9 +40,9 @@
             </div>
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('script')
+<?php $__env->startPush('script'); ?>
 
     <script>
         $(function() {
@@ -98,13 +96,13 @@
                         let html = `
 
                                 <div class="col-md-12 mb-3 mt-3">
-                                    <label for="">{{ __('Withdraw Amount') }} <span class="text-danger">*</span></label>
+                                    <label for=""><?php echo e(__('Withdraw Amount')); ?> <span class="text-danger">*</span></label>
                                     <input type="text" name="amount" class="form-control amount" required>
-                                    <p class="text-small color-change mb-0 mt-1"><span>{{ __('Min Amount & ') }}  ${Number.parseFloat(response.min_amount).toFixed(2)}</span> <span>{{ __('Max Amount') }} ${Number.parseFloat(response.max_amount).toFixed(2)}</span></p>
+                                    <p class="text-small color-change mb-0 mt-1"><span><?php echo e(__('Min Amount & ')); ?>  ${Number.parseFloat(response.min_amount).toFixed(2)}</span> <span><?php echo e(__('Max Amount')); ?> ${Number.parseFloat(response.max_amount).toFixed(2)}</span></p>
                                 </div>
 
                                 <div class="col-md-12 mb-3">
-                                    <label>{{ __('Withdraw Charge') }}</label>
+                                    <label><?php echo e(__('Withdraw Charge')); ?></label>
                                     <div class="input-group">
                                         <input type="text" class="form-control charge" value="${Number.parseFloat(response.charge).toFixed(2)}" required disabled>
                                         <div class="input-group-text bg-main text-white border-0">
@@ -114,27 +112,27 @@
                                 </div>
 
                                 <div class="col-md-12 mb-3">
-                                    <label for="">{{ __('Final Withdraw Amount') }} <span class="text-danger">*</span></label>
+                                    <label for=""><?php echo e(__('Final Withdraw Amount')); ?> <span class="text-danger">*</span></label>
                                     <input type="text" name="final_amo" class="form-control final_amo" required readonly>
                                 </div>
 
                                 <div class="col-md-12 mb-3">
-                                    <label for="">{{ __('Account Email / Wallet Address') }} <span class="text-danger">*</span></label>
+                                    <label for=""><?php echo e(__('Account Email / Wallet Address')); ?> <span class="text-danger">*</span></label>
                                     <input type="text" name="email" class="form-control" required>
                                 </div>
 
                                 <div class="col-md-12 mb-3">
-                                    <label for="">{{ __('Account Information') }}</label>
+                                    <label for=""><?php echo e(__('Account Information')); ?></label>
                                    <textarea class="form-control" name="account_information" row="5"></textarea>
                                 </div>
 
                                 <div class="col-md-12 mb-3">
-                                    <label for="">{{ __('Additional Note') }}</label>
+                                    <label for=""><?php echo e(__('Additional Note')); ?></label>
                                    <textarea class="form-control" name="note" row="5"></textarea>
                                 </div>
 
                                 <div class="col-md-12">
-                                   <button class="cmn-btn w-100" type="submit">{{ __('Withdraw Now') }}</button>
+                                   <button class="cmn-btn w-100" type="submit"><?php echo e(__('Withdraw Now')); ?></button>
                                 </div>
                    `;
 
@@ -145,4 +143,6 @@
         })
     </script>
 
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make(template().'layout.master2', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Junaid Ali\Desktop\www\invest4sale\core\resources\views/theme2/user/withdraw/index.blade.php ENDPATH**/ ?>
