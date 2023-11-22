@@ -12,13 +12,13 @@
                 <input type="text" id="refer-link" class="form-control copy-text"
                     value="{{ route('user.register', @Auth::user()->username) }}" placeholder="referallink.com/refer"
                     aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
-                <button type="button" class="input-group-text copy cmn-btn"
-                    id="basic-addon2">{{ __('Copy') }}</button>
+                <button type="button" class="input-group-text copy cmn-btn" id="basic-addon2">{{ __('Copy') }}</button>
             </div>
         </div>
         <div class="row gy-4">
             <div class="col-xxl-6">
                 <div class="d-box-one h-100">
+
                     <div class="icon">
                         <i class="fas fa-wallet"></i>
                     </div>
@@ -47,7 +47,8 @@
 
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                     <li><a class="dropdown-item" href="{{ route('user.withdraw') }}">Withdraw</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('user.withdraw.pending') }}">Pending Withdraw</a>
+                                    <li><a class="dropdown-item" href="{{ route('user.withdraw.pending') }}">Pending
+                                            Withdraw</a>
                                     <li><a class="dropdown-item" href="{{ route('user.withdraw.all') }}">Withdraw Log</a>
                                     </li>
                                 </ul>
@@ -608,7 +609,8 @@
 
         .finance-card.bg-1 {
             background-color: #1b2845;
-            background-image: linear-gradient(315deg, #1b2845 0%, #274060 74%);
+            background: rgb(196, 252, 239);
+            background: linear-gradient(90deg, rgba(196, 252, 239, 1) 0%, rgba(0, 201, 167, 1) 26%, rgba(132, 94, 194, 1) 100%);
             box-shadow: 1px 4px 5px rgb(252, 251, 121);
         }
 

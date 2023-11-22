@@ -4,13 +4,17 @@
 # General
 --------------------------------------------------------------*/
 :root {
+    /* --main-color: #38ef7d;
+    --secondary-color: #FF72CA;
+    --body-bg: #FF77FF;
+    --body-gradient-bg: #FF77FF;
+    --bg-dark: #FFAF6F; */
+
+ 
     --main-color: #38ef7d;
-    /* --secondary-color: #101010; */
     --secondary-color: #0f0c29;
     --body-bg: #24243e;
     --body-gradient-bg: #24243e;
-
-    /* --bg-dark: #0c0e01; */
     --bg-dark: #0f0c29;
 
     --h-font: "Syne", sans-serif;
@@ -19,7 +23,7 @@
 
 body {
     background-color: var(--body-gradient-bg);
-    color: #c5c5c5;
+    color: 	#36454F;
     font-family: var(--p-font);
     line-height: 1.7;
     display: flex;
@@ -3940,7 +3944,7 @@ ion-icon {
         margin: 0 !important;
     }
 }
-
+/* dashboard body */
 .dashboard-body-part {
     padding: 110px 35px 50px 35px;
 }

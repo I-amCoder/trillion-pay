@@ -62,16 +62,11 @@
         <div class="container-fluid d-flex align-items-center justify-content-between">
             <div class="d-flex flex-wrap align-items-center">
                 
-                <h1 class="logo me-auto me-lg-0 ">
+                <h3 class="logo me-auto me-lg-0 ">
                     <a href="<?php echo e(route('user.dashboard')); ?>">
-                        <?php if(@$general->logo): ?>
-                            <img class="img-fluid rounded sm-device-img text-align"
-                                src="<?php echo e(getFile('logo', @$general->logo)); ?>" width="100%" alt="pp">
-                        <?php else: ?>
-                            <h4><?php echo e(__('No Logo Found')); ?></h4>
-                        <?php endif; ?>
+                       Dashboard
                     </a>
-                </h1>
+                </h3>
             </div>
             <div class="header-right d-flex">
                 <select class="changeLang" aria-label="Default select example">

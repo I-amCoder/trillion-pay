@@ -64,16 +64,11 @@
                     <i class="bi bi-arrow-bar-left"></i>
                     <i class="bi bi-arrow-bar-right"></i>
                 </button> --}}
-                <h1 class="logo me-auto me-lg-0 ">
+                <h3 class="logo me-auto me-lg-0 ">
                     <a href="{{ route('user.dashboard') }}">
-                        @if (@$general->logo)
-                            <img class="img-fluid rounded sm-device-img text-align"
-                                src="{{ getFile('logo', @$general->logo) }}" width="100%" alt="pp">
-                        @else
-                            <h4>{{ __('No Logo Found') }}</h4>
-                        @endif
+                       Dashboard
                     </a>
-                </h1>
+                </h3>
             </div>
             <div class="header-right d-flex">
                 <select class="changeLang" aria-label="Default select example">
