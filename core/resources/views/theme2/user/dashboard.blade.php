@@ -6,6 +6,16 @@
 
 
     <div class="dashboard-body-part">
+        <div class="mt-4">
+            <label>{{ __('Your refferal link') }}</label>
+            <div class="input-group mb-3">
+                <input type="text" id="refer-link" class="form-control copy-text"
+                    value="{{ route('user.register', @Auth::user()->username) }}" placeholder="referallink.com/refer"
+                    aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
+                <button type="button" class="input-group-text copy cmn-btn"
+                    id="basic-addon2">{{ __('Copy') }}</button>
+            </div>
+        </div>
         <div class="row gy-4">
             <div class="col-xxl-6">
                 <div class="d-box-one h-100">
@@ -16,6 +26,33 @@
                         <span class="caption-title">{{ __('Current Balance') }}</span>
                         <h3 class="d-box-one-amount">
                             {{ number_format(auth()->user()->balance, 3) . ' ' . $general->site_currency }}</h3>
+                        <div class="d-flex flex-wrap justify-content-around">
+                            <div class="dropdown">
+                                <a class="btn btn-outline-success dropdown-toggle" href="{{ route('user.transfer_money') }}"
+                                    role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Transfer
+                                </a>
+
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <li><a class="dropdown-item" href="{{ route('user.transfer_money') }}">Transfer
+                                            Money</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('user.money.log') }}">Transfer log</a></li>
+                                </ul>
+                            </div>
+                            <div class="dropdown">
+                                <a class="btn btn-outline-success dropdown-toggle" href="#" role="button"
+                                    id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Withdraw
+                                </a>
+
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <li><a class="dropdown-item" href="{{ route('user.withdraw') }}">Withdraw</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('user.withdraw.pending') }}">Pending Withdraw</a>
+                                    <li><a class="dropdown-item" href="{{ route('user.withdraw.all') }}">Withdraw Log</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -28,7 +65,8 @@
                         <span class="caption-title">{{ __('Profit Balance') }}</span>
                         <h3 class="d-box-one-amount">
                             {{ number_format(auth()->user()->profit_balance, 3) . ' ' . $general->site_currency }}</h3>
-                        <button class="btn btn-outline-dark text-white withdraw_now" data-wallet_type="profit_balance" data-href="{{ route('user.wallet.profit_transfer') }}">Transfer to main balance </button>
+                        <button class="btn btn-outline-success text-white withdraw_now" data-wallet_type="profit_balance"
+                            data-href="{{ route('user.wallet.profit_transfer') }}">Transfer To Current Balance </button>
                     </div>
 
 
@@ -63,14 +101,15 @@
                             @else
                                 0
                             @endif
-                                {{ $general->site_currency }}
+                            {{ $general->site_currency }}
                         </p>
                         <p class="text-center">
                             <span id="currentTimerPlaceholder" class="timer"></span>
                         </p>
                         <div class="text-center finance-buttons">
-                            <button class="btn btn-success deposit_now" data-href="{{ route('user.paynow', $gateway->id) }}"
-                                data-wallet_type="current_wallet" data-id="{{ $gateway->id }}">Deposit</button>
+                            <button class="btn btn-success deposit_now"
+                                data-href="{{ route('user.paynow', $gateway->id) }}" data-wallet_type="current_wallet"
+                                data-id="{{ $gateway->id }}">Deposit</button>
                             <button class="btn btn-danger ml-2 withdraw_now" data-wallet_type="current_wallet"
                                 data-href="{{ route('user.wallet.withdraw', 'current_wallet') }}">Transfer</button>
                         </div>
@@ -102,7 +141,7 @@
                             @else
                                 0
                             @endif
-                                {{ $general->site_currency }}
+                            {{ $general->site_currency }}
                         </p>
                         <p class="text-center">
                             <span id="savingTimerPlaceholder" class="timer"></span>
@@ -143,7 +182,7 @@
                             @else
                                 0
                             @endif
-                                {{ $general->site_currency }}
+                            {{ $general->site_currency }}
                         </p>
                         <p class="text-center">
                             <span id="sharingTimerPlaceholder" class="timer"></span>
@@ -161,7 +200,7 @@
             </div>
             <div class="col-md-6">
                 <div class="card  finance-card bg-1">
-                    <div class="card-header finance-card-header">
+                    <div class="card-header finance-card-header d-flex justify-content-between">
                         <h4 class="mb-0">Business Pack Wallet</h4>
                     </div>
                     <div class="card-body finance-card-body">
@@ -176,15 +215,17 @@
                         <div class="text-center finance-buttons">
                             <a href="{{ route('user.investmentplan', ['wallet' => 'business_pack_wallet']) }}"
                                 class="btn btn-success"> Plans</a>
-                            <a href="{{ route('user.invest.log') }}" class="btn btn-danger ml-2">Invest Logs</a>
+                            <a href="{{ route('user.invest.log', ['wallet' => 'business_pack_wallet']) }}"
+                                class="btn btn-danger ml-2">Invest Logs</a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="card finance-card bg-1">
-                    <div class="card-header finance-card-header">
+                    <div class="card-header finance-card-header d-flex justify-content-between">
                         <h4 class="mb-0">Business Value Wallet</h4>
+
                     </div>
                     <div class="card-body finance-card-body">
                         <div class="text-center">
@@ -198,80 +239,15 @@
                         <div class="text-center finance-buttons">
                             <a href="{{ route('user.investmentplan', ['wallet' => 'business_value_wallet']) }}"
                                 class="btn btn-success"> Plans</a>
-                            <a href="{{ route('user.invest.log') }}" class="btn btn-danger ml-2">Invest Logs</a>
+                            <a href="{{ route('user.invest.log', ['wallet' => 'business_value_wallet']) }}"
+                                class="btn btn-danger ml-2">Invest Logs</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row gy-4 mt-2 d-box-four-wrapper">
-            <div class="col-xxl-3 col-sm-6">
-                <div class="d-box-four">
-                    <a href="{{ route('user.invest.all') }}" class="link-btn"><i class="bi bi-arrow-up-right"></i></a>
-                    <div class="icon">
-                        <i class="fas fa-wallet"></i>
-                    </div>
-                    <div class="content">
-                        <span class="caption-title">{{ __('Total Invest') }}</span>
-                        <h3 class="d-box-four-amount">
-                            {{ number_format($totalInvest, 2) . ' ' . $general->site_currency }}</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xxl-3 col-sm-6">
-                <div class="d-box-four">
-                    <a href="{{ route('user.invest.pending') }}" class="link-btn"><i
-                            class="bi bi-arrow-up-right"></i></a>
-                    <div class="icon">
-                        <i class="fas fa-hourglass-start"></i>
-                    </div>
-                    <div class="content">
-                        <span class="caption-title">{{ __('Pending Invest') }}</span>
-                        <h3 class="d-box-four-amount">
-                            {{ number_format($pendingInvest, 2) . ' ' . $general->site_currency }}</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xxl-3 col-sm-6">
-                <div class="d-box-four">
-                    <a href="{{ route('user.withdraw.pending') }}" class="link-btn"><i
-                            class="bi bi-arrow-up-right"></i></a>
-                    <div class="icon">
-                        <i class="fas fa-hourglass-end"></i>
-                    </div>
-                    <div class="content">
-                        <span class="caption-title">{{ __('Pending Withdraw') }}</span>
-                        <h3 class="d-box-four-amount">
-                            {{ number_format($pendingWithdraw, 2) . ' ' . $general->site_currency }}</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xxl-3 col-sm-6">
-                <div class="d-box-four">
-                    <a href="{{ route('user.commision') }}" class="link-btn"><i class="bi bi-arrow-up-right"></i></a>
-                    <div class="icon">
-                        <i class="fas fa-network-wired"></i>
-                    </div>
-                    <div class="content">
-                        <span class="caption-title">{{ __('Refferal Earn') }}</span>
-                        <h3 class="d-box-four-amount">{{ number_format($commison, 2) }}
-                            {{ @$general->site_currency }}</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="mt-4">
-            <label>{{ __('Your refferal link') }}</label>
-            <div class="input-group mb-3">
-                <input type="text" id="refer-link" class="form-control copy-text"
-                    value="{{ route('user.register', @Auth::user()->username) }}" placeholder="referallink.com/refer"
-                    aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
-                <button type="button" class="input-group-text copy cmn-btn"
-                    id="basic-addon2">{{ __('Copy') }}</button>
-            </div>
-        </div>
 
 
         @php
@@ -289,16 +265,14 @@
                                 <li class="single-child root-child">
                                     <p>
                                         <img src="{{ getFile('user', auth()->user()->image) }}">
-                                        <span
-                                            class="mb-0">{{ auth()->user()->full_name  }}</span>
+                                        <span class="mb-0">{{ auth()->user()->full_name }}</span>
                                     </p>
                                     <ul class="sub-child-list step-2">
                                         @foreach ($reference as $user)
                                             <li class="single-child">
                                                 <p>
                                                     <img src="{{ getFile('user', $user->image) }}">
-                                                    <span
-                                                        class="mb-0">{{ $user->full_name  }}</span>
+                                                    <span class="mb-0">{{ $user->full_name }}</span>
                                                 </p>
 
                                                 <ul class="sub-child-list step-3">
@@ -306,8 +280,7 @@
                                                         <li class="single-child">
                                                             <p>
                                                                 <img src="{{ getFile('user', $ref->image) }}">
-                                                                <span
-                                                                    class="mb-0">{{ $ref->full_name  }}</span>
+                                                                <span class="mb-0">{{ $ref->full_name }}</span>
                                                             </p>
 
                                                             <ul class="sub-child-list step-4">

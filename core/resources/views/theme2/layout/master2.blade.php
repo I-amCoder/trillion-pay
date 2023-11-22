@@ -60,12 +60,12 @@
     <header id="header" class="fixed-top header-inner-pages">
         <div class="container-fluid d-flex align-items-center justify-content-between">
             <div class="d-flex flex-wrap align-items-center">
-                <button type="button" class="sidebar-open-btn me-3">
+                {{-- <button type="button" class="sidebar-open-btn me-3">
                     <i class="bi bi-arrow-bar-left"></i>
                     <i class="bi bi-arrow-bar-right"></i>
-                </button>
+                </button> --}}
                 <h1 class="logo me-auto me-lg-0 ">
-                    <a href="{{ route('home') }}">
+                    <a href="{{ route('user.dashboard') }}">
                         @if (@$general->logo)
                             <img class="img-fluid rounded sm-device-img text-align"
                                 src="{{ getFile('logo', @$general->logo) }}" width="100%" alt="pp">
@@ -95,6 +95,9 @@
                         <span class="text-white ms-2">{{ auth()->user()->full_name }}</span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="{{ route('user.interest.log') }}">{{ __('Interest log') }}</a></li>
+                        <li><a class="dropdown-item" href="{{ route('user.transaction.log') }}">{{ __('Referral log') }}</a></li>
+                        <li><a class="dropdown-item" href="{{ route('user.commision') }}">{{ __('Transaction log') }}</a></li>
                         <li><a class="dropdown-item" href="{{ route('user.2fa') }}">{{ __('2FA') }}</a></li>
                         <li><a class="dropdown-item" href="{{ route('user.profile') }}">{{ __('Settings') }}</a></li>
                         <li><a class="dropdown-item" href="{{ route('user.logout') }}">{{ __('Logout') }}</a></li>
@@ -109,7 +112,7 @@
     <main id="main" class="dashboard-main">
         <section class="dashboard-section">
 
-            @include(template().'layout.user_sidebar')
+            {{-- @include(template().'layout.user_sidebar') --}}
             @yield('content2')
         </section>
     </main>

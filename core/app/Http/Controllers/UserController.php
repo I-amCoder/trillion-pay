@@ -310,13 +310,13 @@ class UserController extends Controller
 
 
 
-    public function pendingInvest()
-    {
-        $data['payments'] = Payment::where('user_id', Auth::id())->where('payment_status', 2)->latest()->get();
-        $data['pageTitle'] = 'Pending Invest';
+    // public function pendingInvest()
+    // {
+    //     $data['payments'] = Payment::where('user_id', Auth::id())->where('payment_status', 2)->latest()->get();
+    //     $data['pageTitle'] = 'Pending Invest';
 
-        return view($this->template . 'user.pending_invest')->with($data);
-    }
+    //     return view($this->template . 'user.pending_invest')->with($data);
+    // }
 
     public function allInvest()
     {

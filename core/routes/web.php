@@ -425,7 +425,7 @@ Route::name('user.')->group(function () {
 
 
 
-            Route::get('invest/pending', [UserController::class, 'pendingInvest'])->name('invest.pending');
+            // Route::get('invest/pending', [UserController::class, 'pendingInvest'])->name('invest.pending');
             Route::get('invest/all', [UserController::class, 'allInvest'])->name('invest.all');
 
             Route::get('interest/log', [UserController::class, 'interestLog'])->name('interest.log');

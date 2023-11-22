@@ -26,6 +26,8 @@
 
     <div class="dashboard-body-part">
 
+        @if(Request('wallet') == "business_pack_wallet")
+
         <div class="card-body d-flex justify-content-between flex-wrap">
             <h3>Busines Pack Investments</h3>
             <form action="" method="get" class=" d-inline-flex">
@@ -87,7 +89,9 @@
             @endif
 
         </div>
-        <hr>
+        @endif
+        @if(Request('wallet') == "business_value_wallet")
+
         <div class="card-body d-flex justify-content-between flex-wrap">
             <h3>Busines Value Investments</h3>
             <form action="" method="get" class=" d-inline-flex">
@@ -151,6 +155,7 @@
             @endif
 
         </div>
+        @endif
     </div>
 @endsection
 

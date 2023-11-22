@@ -27,7 +27,7 @@ class ManageWithdrawController extends Controller
     public function withdrawMethodCreate (Request $request)
     {
 
-        
+
         $request->validate([
             'name' => 'required|unique:withdraw_gateways,name',
             'min_amount' => 'required|numeric|gt:0',
@@ -131,7 +131,7 @@ class ManageWithdrawController extends Controller
         $withdraw->status = 1;
         $withdraw->save();
 
-       
+
 
         Transaction::create([
             'trx' => $withdraw->transaction_id,
