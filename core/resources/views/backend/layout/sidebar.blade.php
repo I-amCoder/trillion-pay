@@ -136,6 +136,15 @@
                 </li>
             @endif
 
+            @if (auth()->guard('admin'))
+                <li class="nav-item dropdown {{ menuActive('admin.login.message') }}">
+                    <a href="{{ route('admin.login.message') }}" class="nav-link ">
+                        <i data-feather="message-circle"></i>
+                        <span>{{ __('Login Message') }}</span>
+                    </a>
+                </li>
+            @endif
+
 
 
 

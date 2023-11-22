@@ -24,7 +24,7 @@
                                             'id' => 'search_text',
                                             'filter_colum' => 'email'
                                         ],
-                                        
+
                                         'select' => [
                                             'options' => [
                                                 '1' => 'Active',
@@ -78,10 +78,13 @@
                                                 </td>
 
                                                 <td>
-
-                                                    <a href="{{ route('admin.user.details', $user) }}"
+                                                    <form method="POST" action="{{ route('admin.user.delete',encrypt($user->id)) }}">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <a href="{{ route('admin.user.details', $user) }}"
                                                         class="btn btn-sm btn-outline-primary"><i class="fa fa-eye mr-2"></i>{{ __('Details') }}</a>
-
+                                                        <button type="submit" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i></button>
+                                                    </form>
                                                 </td>
 
 

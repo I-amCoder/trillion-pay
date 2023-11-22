@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Models\LoginMessage;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -189,5 +190,38 @@ class AdminController extends Controller
 
 
         return view('backend.filter_view', compact('tables', 'type'));
+    }
+
+    //login message for user
+    public function loginMessage()
+    {
+        $pageTitle =  'Login Messages & Picture for User';
+        $msg = LoginMessage::first();
+
+        return view('backend.userLoginMessage', compact('pageTitle', 'msg'));
+    }
+
+    public function loginMessageUpdate(Request $request)
+    {
+        $msg = LoginMessage::first();
+
+        $request->validate([
+            'message' => 'required',
+            'image' => 'nullable|mimes:jpg,png,jpeg'
+        ]);
+
+        if ($msg != '') {
+            $msg->update([
+                'message' => $request->message,
+                'picture' => $request->has('image') ? uploadImage($request->image, filePath('admins')) : $msg->picture
+            ]);
+            return redirect()->back()->with('success', 'Successfully updated');
+        } else {
+            $msg =  LoginMessage::create([
+                'message' => $request->message,
+                'picture' => $request->has('image') ? uploadImage($request->image, filePath('admins')) : ''
+            ]);
+            return redirect()->back()->with('success', 'Successfully inserted');
+        }
     }
 }

@@ -12,7 +12,8 @@
                 <input type="text" id="refer-link" class="form-control copy-text"
                     value="{{ route('user.register', @Auth::user()->username) }}" placeholder="referallink.com/refer"
                     aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
-                <button type="button" class="input-group-text text-dark copy cmn-btn" id="basic-addon2">{{ __('Copy') }}</button>
+                <button type="button" class="input-group-text text-dark copy cmn-btn"
+                    id="basic-addon2">{{ __('Copy') }}</button>
             </div>
         </div>
         <div class="row gy-4">
@@ -623,6 +624,30 @@
         </div>
     @endif
 
+    @if($loginMessage)
+    <!-- Modal -->
+    <div class="modal fade" id="loginMessageModal" tabindex="-1" aria-labelledby="loginMessageModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title text-dark" id="loginMessageModalLabel">Message</h6>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        {{ $loginMessage->message }}
+                    </p>
+                    <img src="{{ getFile('admins', $loginMessage->picture) }}" alt="alt">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+
 @endsection
 
 @push('style')
@@ -888,6 +913,9 @@
 
             @if (Session::has('deposit'))
                 $("#invoiceModal").modal('show');
+            @endif
+            @if($loginMessage)
+            $("#loginMessageModal").modal('show');
             @endif
         })
 

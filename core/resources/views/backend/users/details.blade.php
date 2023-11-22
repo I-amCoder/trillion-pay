@@ -324,6 +324,84 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">{{ __('Business Pack Investments') }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <th>Plan</th>
+
+                                        <th>Action</th>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($businessPackInvestments as $investment)
+                                            <tr>
+                                                <td>{{ $investment->plan->plan_name }}</td>
+
+                                                <td class="display-flex">
+                                                    <form method="POST"
+                                                        action="{{ route('admin.user.interest.delete', encrypt($investment->id . '|' . $user->id)) }}">
+                                                        @method('delete')
+                                                        @csrf
+                                                        <input type="hidden" name="wallet_type" value="business_pack_wallet">
+                                                        <button type="submit"
+                                                            class="btn btn-danger text-white">Delete</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">{{ __('Business Value Investments') }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <th>Plan</th>
+
+                                        <th>Action</th>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($businessValueInvestments as $investment)
+                                            <tr>
+                                                <td>{{ $investment->plan->plan_name }}</td>
+
+                                                <td class="display-flex">
+                                                    <form method="POST"
+                                                        action="{{ route('admin.user.interest.delete', encrypt($investment->id . '|' . $user->id)) }}">
+                                                        @method('delete')
+                                                        @csrf
+                                                        <input type="hidden" name="wallet_type" value="business_value_wallet">
+                                                        <button type="submit"
+                                                            class="btn btn-danger text-white">Delete</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
             @php
                 $reference = $user->refferals;
             @endphp

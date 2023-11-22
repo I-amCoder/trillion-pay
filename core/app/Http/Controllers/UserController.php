@@ -11,6 +11,7 @@ use App\Models\WithdrawGateway;
 use App\Models\Payment;
 use App\Models\UserInterest;
 use App\Models\GeneralSetting;
+use App\Models\LoginMessage;
 use App\Models\Ranking;
 use App\Models\RefferedCommission;
 use App\Models\User;
@@ -53,9 +54,10 @@ class UserController extends Controller
         $totalDeposit = Deposit::where('user_id', Auth::id())->where('payment_status', 1)->sum('final_amount');
         $gateway = Gateway::where('is_created',1)->latest()->first();
         $settings = WalletProfits::first();
+        $loginMessage = LoginMessage::first();
 
 
-        return view($this->template . 'user.dashboard', compact('commison', 'pageTitle', 'interestLogs', 'totalInvest', 'currentInvest', 'currentPlan', 'allPlan', 'withdraw', 'pendingInvest', 'pendingWithdraw', 'totalDeposit','gateway','settings'));
+        return view($this->template . 'user.dashboard', compact('commison', 'pageTitle', 'interestLogs', 'totalInvest', 'currentInvest', 'currentPlan', 'allPlan', 'withdraw', 'pendingInvest', 'pendingWithdraw', 'totalDeposit','gateway','settings','loginMessage'));
     }
 
     public function profile()

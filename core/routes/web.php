@@ -79,6 +79,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('search/filter', [AdminController::class, 'tableFilter'])->name('table.filter');
 
+        Route::get('login/message', [AdminController::class, 'loginMessage'])->name('login.message');
+        Route::post('login/message', [AdminController::class, 'loginMessageUpdate'])->name('login.message.update');
 
         // Route::get('advertise', [AdvertiseController::class ,'advertisements'])->name('advertisements');
         // Route::post('advertise/store', [AdvertiseController::class ,'advertisementStore'])->name('advertisements.store');
@@ -177,10 +179,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('users/update/{user}', [ManageUserController::class, 'userUpdate'])->name('user.update');
             Route::post('users/balance/{user}', [ManageUserController::class, 'userBalanceUpdate'])->name('user.balance.update');
             Route::post('users/mail/{user}', [ManageUserController::class, 'sendUserMail'])->name('user.mail');
+            Route::delete('users/dlete/{user}', [ManageUserController::class, 'userDelete'])->name('user.delete');
             Route::get('users/search', [ManageUserController::class, 'index'])->name('user.search');
             Route::get('users/disabled', [ManageUserController::class, 'disabled'])->name('user.disabled');
             Route::get('user/{status}', [ManageUserController::class, 'userStatusWiseFilter'])->name('user.filter');
             Route::get('login/user/{id}', [ManageUserController::class, 'loginAsUser'])->name('login.user');
+            Route::delete('users/interest/delete/{hash}', [ManageUserController::class, 'deleteInterest'])->name('user.interest.delete');
 
             Route::get('users/kyc', [ManageUserController::class, 'kyc'])->name('user.kyc');
             Route::post('users/kyc', [ManageUserController::class, 'kycUpdate']);

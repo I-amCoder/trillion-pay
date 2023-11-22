@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\BusinessPackPayment;
+use App\Models\BusinessValuePayment;
 use App\Models\Deposit;
 use App\Models\GeneralSetting;
 use App\Models\Payment;
@@ -12,6 +14,7 @@ use App\Models\UserInterest;
 use App\Models\Withdraw;
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class ManageUserController extends Controller
@@ -62,7 +65,10 @@ class ManageUserController extends Controller
 
         $pageTitle = "User Details";
 
-        return view('backend.users.details', compact('pageTitle', 'user', 'plan', 'totalRef', 'userInterest', 'userCommission', 'withdrawTotal', 'totalDeposit', 'totalInvest', 'totalTicket'));
+        $businessPackInvestments = BusinessPackPayment::where('user_id', $user->id)->latest()->get();
+        $businessValueInvestments = BusinessValuePayment::where('user_id', $user->id)->latest()->get();
+
+        return view('backend.users.details', compact('pageTitle', 'user', 'plan', 'totalRef', 'userInterest', 'userCommission', 'withdrawTotal', 'totalDeposit', 'businessValueInvestments', 'businessPackInvestments', 'totalInvest', 'totalTicket'));
     }
 
     public function userUpdate(Request $request, User $user)
@@ -284,5 +290,71 @@ class ManageUserController extends Controller
         $user->save();
 
         return back()->with('success', 'Successfull');
+    }
+
+    public function deleteInterest(Request $request, $data)
+    {
+
+        switch ($request->wallet_type) {
+            case 'business_pack_wallet':
+                $query = BusinessPackPayment::query();
+                break;
+            case 'business_value_wallet':
+                $query = BusinessValuePayment::query();
+                break;
+
+            default:
+                return redirect()->route('admin.dashboard');
+                break;
+        }
+        // Seprate payment and user ids
+        $ids = decrypt($data);
+        $investId = explode("|", $ids)[0];
+        $userId = explode("|", $ids)[1];
+
+        $payment  = $query->where('id', $investId)->where('user_id', $userId)->first();
+        if ($payment) {
+            $payment->delete();
+            return back()->with('success', 'Plan removed successfully');
+        }
+        return back()->with('Error', 'Failed');
+    }
+
+    public function userDelete(Request $request)
+    {
+        $user = User::where('id', decrypt($request->user))->firstOrFail();
+
+        if ($user) {
+
+            DB::table("login_securities")->where('user_id', $user->id)->delete();
+            DB::table("comments")->where('user_id', $user->id)->delete();
+            DB::table("deposits")->where('user_id', $user->id)->delete();
+
+            // Delete all wallets
+            DB::table("current_wallets")->where('user_id', $user->id)->delete();
+            DB::table("saving_wallets")->where('user_id', $user->id)->delete();
+            DB::table("sharing_wallets")->where('user_id', $user->id)->delete();
+            DB::table("business_pack_wallets")->where('user_id', $user->id)->delete();
+            DB::table("business_value_wallets")->where('user_id', $user->id)->delete();
+
+            // Delete all apyments
+            DB::table("current_wallet_payments")->where('user_id', $user->id)->delete();
+            DB::table("saving_wallet_payments")->where('user_id', $user->id)->delete();
+            DB::table("sharing_wallet_payments")->where('user_id', $user->id)->delete();
+            DB::table("business_pack_payments")->where('user_id', $user->id)->delete();
+            DB::table("business_value_payments")->where('user_id', $user->id)->delete();
+
+            // Delete all other history
+            DB::table("user_interests")->where('user_id', $user->id)->delete();
+            DB::table("tickets")->where('user_id', $user->id)->delete();
+            DB::table("withdraws")->where('user_id', $user->id)->delete();
+            DB::table("transactions")->where('user_id', $user->id)->delete();
+            DB::table("wallet_transfers")->where('user_id', $user->id)->delete();
+
+            $user->delete();
+
+            return back()->with('success', 'Successfully deleted');
+        }
+        return back()->with('error', 'error occurred');
     }
 }
