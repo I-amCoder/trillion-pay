@@ -374,6 +374,7 @@ Route::name('user.')->group(function () {
 
 
             Route::get('commision', [UserController::class, 'Commision'])->name('commision');
+            Route::get('team', [UserController::class, 'team'])->name('team');
 
             Route::get('investmentplan', [SiteController::class, 'investmentPlan'])->name('investmentplan');
             Route::post('investmentplan/invest', [SiteController::class, 'investmentUsingBalannce'])->name('investmentplan.submit');

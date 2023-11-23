@@ -87,6 +87,22 @@ class PaymentController extends Controller
             return $redirect;
         }
 
+        $payment_status = 0;
+        $payment_type = 1;
+        $proof = [];
+        $user = auth()->user();
+        $user_balance = $request->has('use_current_balance') && $request->use_current_balance == "on";
+        if ($user_balance) {
+            if ($final_amount > $user->balance) {
+                return redirect()->back()->withError("Insufficient Current Balance");
+            }
+            $payment_status = 2;
+            $payment_type = 0;
+            $proof = ["deposit_source" => "Paid Using Current Balance"];
+            $user->balance -= $final_amount;
+            $user->save();
+        }
+
         if (isset($request->type) && $request->type == 'deposit' && $wallet_type) {
 
             $deposit = Deposit::create([
@@ -97,10 +113,11 @@ class PaymentController extends Controller
                 'rate' => $gateway->rate,
                 'charge' => $gateway->charge,
                 'final_amount' => $final_amount,
-                'payment_status' => 0,
-                'payment_type' => 1,
+                'payment_status' => $payment_status,
+                'payment_type' => $payment_type,
                 'wallet_type' => $wallet_type,
                 'plan_id' => $plan_id,
+                'payment_proof' => $proof,
             ]);
 
             session()->put('trx', $trx);
@@ -108,6 +125,10 @@ class PaymentController extends Controller
             session()->put('wallet', $wallet_type);
 
 
+            if ($user_balance) {
+                $notify[] = ['success', 'Your Payment is Successfully Recieved'];
+                return redirect()->route('user.dashboard')->with(['notify' => $notify, 'deposit' => $deposit]);
+            }
 
             return redirect()->route('user.gateway.details', $gateway->id);
         }
@@ -305,7 +326,7 @@ class PaymentController extends Controller
         }
 
         $notify[] = ['success', 'Your Payment is Successfully Recieved'];
-        return redirect()->route('user.dashboard')->with(['notify' => $notify,'deposit'=>$deposit]);
+        return redirect()->route('user.dashboard')->with(['notify' => $notify, 'deposit' => $deposit]);
     }
 
     public static function updateUserData($deposit, $fee_amount, $transaction)
@@ -368,7 +389,7 @@ class PaymentController extends Controller
             'Charge' => '0.00000000',
             'PaymentDate' => '2023-11-17',
         ];
-        $html = view($this->template.'invoice', compact('data'))->render();
+        $html = view($this->template . 'invoice', compact('data'))->render();
         return $html;
         // $path = public_path('invoice.png');
 

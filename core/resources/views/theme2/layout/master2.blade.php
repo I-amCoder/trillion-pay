@@ -25,10 +25,42 @@
     <link rel="stylesheet" href="{{ asset('asset/theme2/frontend/css/line-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('asset/theme2/frontend/css/iziToast.min.css') }}">
     <link href="{{ asset('asset/theme2/frontend/css/style.css') }}" rel="stylesheet">
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
+
 
     {{-- <link rel="stylesheet"
         href="{{ asset('asset/theme2/frontend/css/color.php?primary_color=' . str_replace('#', '', @$general->primary_color)) }}"> --}}
+    <style>
+        .goog-logo-link {
+            display: none !important;
+        }
 
+
+        .goog-te-gadget {
+            color: transparent !important;
+        }
+
+        .goog-te-gadget span {
+            display: none !important;
+        }
+
+        body>.skiptranslate {
+            display: none;
+        }
+
+        /* Style the custom dropdown */
+        .goog-te-combo {
+            border: 1px solid #ccc;
+            padding: 5px;
+            border-radius: 5px;
+            background-color: #fff;
+            font-size: 14px;
+            color: #333;
+            max-width: 140px;
+            /* Adjust the width as needed */
+        }
+    </style>
 
     @stack('style')
 
@@ -72,14 +104,15 @@
                 </h3>
             </div>
             <div class="header-right d-flex">
-                <select class="changeLang" aria-label="Default select example">
+                {{-- <select class="changeLang" aria-label="Default select example">
                     @foreach ($language_top as $top)
                         <option value="{{ $top->short_code }}"
                             {{ session('locale') == $top->short_code ? 'selected' : '' }}>
                             {{ __(ucwords($top->name)) }}
                         </option>
                     @endforeach
-                </select>
+                </select> --}}
+                <div id="google_translate_element"></div>
                 <div class="dropdown ms-3">
                     <button class="dropdown-toggle user-toggle-menu" type="button" id="dropdownMenuButton1"
                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -90,16 +123,14 @@
                         @endif
                         <span class="text-white ms-2">{{ auth()->user()->full_name }}</span>
                     </button>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item"
-                                href="{{ route('user.interest.log') }}">{{ __('Interest log') }}</a></li>
-                        <li><a class="dropdown-item"
-                                href="{{ route('user.transaction.log') }}">{{ __('Referral log') }}</a></li>
-                        <li><a class="dropdown-item"
-                                href="{{ route('user.commision') }}">{{ __('Transaction log') }}</a></li>
-                        <li><a class="dropdown-item" href="{{ route('user.2fa') }}">{{ __('2FA') }}</a></li>
-                        <li><a class="dropdown-item" href="{{ route('user.profile') }}">{{ __('Settings') }}</a></li>
-                        <li><a class="dropdown-item" href="{{ route('user.logout') }}">{{ __('Logout') }}</a></li>
+                    <ul class="dropdown-menu dropdown-menu-end " aria-labelledby="dropdownMenuButton1">
+
+                        <li><a class="dropdown-item text-dark" href="{{ route('user.2fa') }}">{{ __('2FA') }}</a>
+                        </li>
+                        <li><a class="dropdown-item text-dark"
+                                href="{{ route('user.profile') }}">{{ __('Settings') }}</a></li>
+                        <li><a class="dropdown-item text-dark"
+                                href="{{ route('user.logout') }}">{{ __('Logout') }}</a></li>
                     </ul>
                 </div>
             </div>
@@ -133,6 +164,15 @@
     <script src="{{ asset('asset/theme2/frontend/js/iziToast.min.js') }}"></script>
     <script src="{{ asset('asset/theme2/frontend/js/jquery.uploadPreview.min.js') }}"></script>
     <script src="{{ asset('asset/theme2/frontend/js/user_dashboard.js') }}"></script>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en'
+            }, 'google_translate_element');
+        }
+    </script>
+
 
     @stack('script')
     @if (@$general->twak_allow)

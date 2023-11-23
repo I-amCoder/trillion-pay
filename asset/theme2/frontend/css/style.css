@@ -252,7 +252,7 @@ img {
     bottom: 0;
     z-index: 9999;
     overflow: hidden;
-    background: #151515;
+    background: var(--bg-dark);
 }
 
 #preloader:before {
@@ -260,9 +260,9 @@ img {
     position: fixed;
     top: calc(50% - 0px);
     left: calc(50% - 30px);
-    border: 6px solid #ffc451;
-    border-top-color: #151515;
-    border-bottom-color: #151515;
+    border: 6px solid var(--bg-dark);
+    border-top-color: var(--body-bg);
+    border-bottom-color: var(--body-bg);
     border-radius: 50%;
     width: 60px;
     height: 60px;

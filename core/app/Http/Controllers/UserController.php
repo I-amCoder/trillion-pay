@@ -52,12 +52,12 @@ class UserController extends Controller
         $pendingInvest = Payment::where('user_id', Auth::id())->where('payment_status', 2)->sum('amount');
         $pendingWithdraw = Withdraw::where('user_id', Auth::id())->where('status', 0)->sum('withdraw_amount');
         $totalDeposit = Deposit::where('user_id', Auth::id())->where('payment_status', 1)->sum('final_amount');
-        $gateway = Gateway::where('is_created',1)->latest()->first();
+        $gateway = Gateway::where('is_created', 1)->latest()->first();
         $settings = WalletProfits::first();
         $loginMessage = LoginMessage::first();
 
 
-        return view($this->template . 'user.dashboard', compact('commison', 'pageTitle', 'interestLogs', 'totalInvest', 'currentInvest', 'currentPlan', 'allPlan', 'withdraw', 'pendingInvest', 'pendingWithdraw', 'totalDeposit','gateway','settings','loginMessage'));
+        return view($this->template . 'user.dashboard', compact('commison', 'pageTitle', 'interestLogs', 'totalInvest', 'currentInvest', 'currentPlan', 'allPlan', 'withdraw', 'pendingInvest', 'pendingWithdraw', 'totalDeposit', 'gateway', 'settings', 'loginMessage'));
     }
 
     public function profile()
@@ -296,6 +296,57 @@ class UserController extends Controller
         return view($this->template . 'user.withdraw.withdraw_log', compact('pageTitle', 'withdrawlogs'));
     }
 
+    public function team(Request $request)
+    {
+        $data['pageTitle'] = "Teams";
+
+        $rootUser = Auth::id();
+        $user = User::find($rootUser);
+        $usersUnderRootUsers = [];
+        $user->getAllUsersUnderRootUser($rootUser, $usersUnderRootUsers);
+        $total_team_count = 0;
+        $total_team_count_paid = 0;
+        $directR_paid_user = 0;
+        $search_count = 0;
+        $inpuEmail = '';
+
+
+        foreach ($usersUnderRootUsers as $key => $usersUnderRootUser) {
+            $paid_user = Transaction::where('user_id', $usersUnderRootUser->id)->where('payment_status', 1)->orderBy('id', 'desc')->first();
+            if (!empty($paid_user)) {
+                $total_team_count_paid += 1;
+            }
+            $total_team_count += 1;
+
+            if (!empty($request->type) && $request->type = 1) {
+                $inpuEmail = $request->input('email');
+                if ($usersUnderRootUser->email == $request->input('email')) {
+                    $search_count += 1;
+                }
+            }
+        }
+
+        $direct_refarral_all = User::where('reffered_by', Auth::id())->get();
+        $direct_refarral_nonpaid = $direct_refarral_all->count();
+
+        foreach ($direct_refarral_all as $key => $direct_refarral) {
+            $direcrRpaid_user = Transaction::where('user_id', $direct_refarral->id)->where('payment_status', 1)->orderBy('id', 'desc')->first();
+            if ($direcrRpaid_user) {
+                $directR_paid_user += 1;
+            }
+        }
+
+        $data['inpuEmail'] = $inpuEmail;
+        $data['search_count'] = $search_count;
+        $data['total_team_count_paid'] = $total_team_count_paid;
+        $data['total_team_count'] = $total_team_count;
+        $data['direct_refarral_nonpaid'] = $direct_refarral_nonpaid;
+        $data['directR_paid_user'] = $directR_paid_user;
+
+        return view($this->template . 'user.team')->with($data);
+    }
+
+
     public function commision(Request $request)
     {
 
@@ -333,7 +384,7 @@ class UserController extends Controller
 
         $data['interestLogs'] = UserInterest::when($request->date, function ($item) use ($request) {
             $item->whereDate('created_at', $request->date);
-        })->whereIn('type',['business_pack_wallets','business_value_wallets'])->where('user_id', Auth::id())->latest()->get();
+        })->whereIn('type', ['business_pack_wallets', 'business_value_wallets'])->where('user_id', Auth::id())->latest()->get();
 
 
         $data['pageTitle'] = 'Return interest Log';

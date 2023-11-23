@@ -102,7 +102,7 @@ class SiteController extends Controller
     {
 
         $request->validate([
-            'amount' => 'required|numeric'
+            'amount' => 'required|numeric',
         ]);
 
         $general = GeneralSetting::first();

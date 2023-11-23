@@ -1,19 +1,17 @@
-@extends(template() . 'layout.master2')
-
-@section('content2')
+<?php $__env->startSection('content2'); ?>
 
 
 
 
     <div class="dashboard-body-part">
         <div class="mt-4">
-            <label>{{ __('Your refferal link') }}</label>
+            <label><?php echo e(__('Your refferal link')); ?></label>
             <div class="input-group mb-3">
                 <input type="text" id="refer-link" class="form-control copy-text"
-                    value="{{ route('user.register', @Auth::user()->username) }}" placeholder="referallink.com/refer"
+                    value="<?php echo e(route('user.register', @Auth::user()->username)); ?>" placeholder="referallink.com/refer"
                     aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
                 <button type="button" class="input-group-text text-dark copy cmn-btn"
-                    id="basic-addon2">{{ __('Copy') }}</button>
+                    id="basic-addon2"><?php echo e(__('Copy')); ?></button>
             </div>
         </div>
         <div class="row gy-4">
@@ -23,13 +21,13 @@
                         <i class="fas fa-wallet"></i>
                     </div>
                     <div class="content">
-                        <span class="caption-title">{{ __('Current Balance') }}</span>
+                        <span class="caption-title"><?php echo e(__('Current Balance')); ?></span>
                         <h3 class="d-box-one-amount">
-                            {{ number_format(auth()->user()->balance, 3) . ' ' . $general->site_currency }}</h3>
+                            <?php echo e(number_format(auth()->user()->balance, 3) . ' ' . $general->site_currency); ?></h3>
                         <div class="d-flex flex-wrap">
-                            <a class="btn btn-outline-dark m-2" href="{{ route('user.transfer_money') }}">Transfer
+                            <a class="btn btn-outline-dark m-2" href="<?php echo e(route('user.transfer_money')); ?>">Transfer
                                 Money</a>
-                            <a class="btn btn-outline-dark m-2" href="{{ route('user.withdraw') }}">Withdraw</a>
+                            <a class="btn btn-outline-dark m-2" href="<?php echo e(route('user.withdraw')); ?>">Withdraw</a>
                         </div>
                     </div>
 
@@ -40,19 +38,19 @@
                         <ul class="dropdown-menu bg-white text-dark">
                             <li>
                                 <span class="dropdown-item">
-                                    <a href="{{ route('user.withdraw.all') }}" class="text-dark">Withdraw
+                                    <a href="<?php echo e(route('user.withdraw.all')); ?>" class="text-dark">Withdraw
                                         History</a>
                                 </span>
                             </li>
                             <li>
                                 <span class="dropdown-item">
-                                    <a href="{{ route('user.withdraw.pending') }}" class="text-dark">Pending
+                                    <a href="<?php echo e(route('user.withdraw.pending')); ?>" class="text-dark">Pending
                                         Withdraw</a>
                                 </span>
                             </li>
                             <li>
                                 <span class="dropdown-item">
-                                    <a href="{{ route('user.money.log') }}" class="text-dark"> Transfer History</a>
+                                    <a href="<?php echo e(route('user.money.log')); ?>" class="text-dark"> Transfer History</a>
                                 </span>
                             </li>
                         </ul>
@@ -65,11 +63,11 @@
                         <i class="fas fa-wallet"></i>
                     </div>
                     <div class="content">
-                        <span class="caption-title">{{ __('Profit Balance') }}</span>
+                        <span class="caption-title"><?php echo e(__('Profit Balance')); ?></span>
                         <h3 class="d-box-one-amount">
-                            {{ number_format(auth()->user()->profit_balance, 3) . ' ' . $general->site_currency }}</h3>
+                            <?php echo e(number_format(auth()->user()->profit_balance, 3) . ' ' . $general->site_currency); ?></h3>
                         <button class="btn btn-outline-dark  withdraw_now" data-wallet_type="profit_balance"
-                            data-href="{{ route('user.wallet.profit_transfer') }}">Transfer To Current Balance </button>
+                            data-href="<?php echo e(route('user.wallet.profit_transfer')); ?>">Transfer To Current Balance </button>
                     </div>
 
                     <div class="top-right dropdown ms-auto">
@@ -78,13 +76,13 @@
                         </a>
                         <ul class="dropdown-menu bg-white text-dark">
                             <li><a class="dropdown-item text-dark"
-                                    href="{{ route('user.interest.log') }}">{{ __('Interest History') }}</a></li>
+                                    href="<?php echo e(route('user.interest.log')); ?>"><?php echo e(__('Interest History')); ?></a></li>
                             <li><a class="dropdown-item text-dark"
-                                    href="{{ route('user.commision') }}">{{ __('Referral Commission History') }}</a></li>
+                                    href="<?php echo e(route('user.commision')); ?>"><?php echo e(__('Referral Commission History')); ?></a></li>
                             <li><a class="dropdown-item text-dark"
-                                    href="{{ route('user.team') }}">{{ __('Referral Team') }}</a></li>
+                                    href="<?php echo e(route('user.team')); ?>"><?php echo e(__('Referral Team')); ?></a></li>
                             <li><a class="dropdown-item text-dark"
-                                    href="{{ route('user.transaction.log') }}">{{ __('Transaction History') }}</a></li>
+                                    href="<?php echo e(route('user.transaction.log')); ?>"><?php echo e(__('Transaction History')); ?></a></li>
                         </ul>
                     </div>
 
@@ -106,13 +104,13 @@
                             <ul class="dropdown-menu bg-white text-dark">
                                 <li>
                                     <span class="dropdown-item">
-                                        <a href="{{ route('user.deposit.log', ['wallet' => 'current_wallet']) }}"
+                                        <a href="<?php echo e(route('user.deposit.log', ['wallet' => 'current_wallet'])); ?>"
                                             class="text-dark"> Deposit History</a>
                                     </span>
                                 </li>
                                 <li>
                                     <span class="dropdown-item">
-                                        <a href="{{ route('user.wallet.transfer_log', ['wallet' => 'current_wallet']) }}"
+                                        <a href="<?php echo e(route('user.wallet.transfer_log', ['wallet' => 'current_wallet'])); ?>"
                                             class="text-dark"> Transfer History</a>
                                     </span>
                                 </li>
@@ -122,10 +120,10 @@
                     <div class="card-body finance-card-body">
                         <div class="text-center">
                             <span
-                                class="finance-amount">{{ number_format(auth()->user()->current_wallet->amount, 3) . ' ' . $general->site_currency }}</span>
+                                class="finance-amount"><?php echo e(number_format(auth()->user()->current_wallet->amount, 3) . ' ' . $general->site_currency); ?></span>
                         </div>
                         <p class="text-center finance-timer">Pending Transfer:
-                            @php
+                            <?php
                                 $current_transfer = auth()
                                     ->user()
                                     ->wallet_transfer()
@@ -133,23 +131,25 @@
                                     ->where('status', 0)
                                     ->first();
 
-                            @endphp
-                            @if ($current_transfer)
-                                {{ $current_transfer->amount }}
-                            @else
+                            ?>
+                            <?php if($current_transfer): ?>
+                                <?php echo e($current_transfer->amount); ?>
+
+                            <?php else: ?>
                                 0
-                            @endif
-                            {{ $general->site_currency }}
+                            <?php endif; ?>
+                            <?php echo e($general->site_currency); ?>
+
                         </p>
                         <p class="text-center">
                             <span id="currentTimerPlaceholder" class="timer"></span>
                         </p>
                         <div class="text-center finance-buttons">
                             <button class="btn btn-success deposit_now"
-                                data-href="{{ route('user.paynow', $gateway->id) }}" data-wallet_type="current_wallet"
-                                data-id="{{ $gateway->id }}">Deposit</button>
+                                data-href="<?php echo e(route('user.paynow', $gateway->id)); ?>" data-wallet_type="current_wallet"
+                                data-id="<?php echo e($gateway->id); ?>">Deposit</button>
                             <button class="btn btn-danger ml-2 withdraw_now" data-wallet_type="current_wallet"
-                                data-href="{{ route('user.wallet.withdraw', 'current_wallet') }}">Transfer</button>
+                                data-href="<?php echo e(route('user.wallet.withdraw', 'current_wallet')); ?>">Transfer</button>
                         </div>
                     </div>
                 </div>
@@ -165,13 +165,13 @@
                             <ul class="dropdown-menu bg-white text-dark">
                                 <li>
                                     <span class="dropdown-item">
-                                        <a href="{{ route('user.deposit.log', ['wallet' => 'saving_wallet']) }}"
+                                        <a href="<?php echo e(route('user.deposit.log', ['wallet' => 'saving_wallet'])); ?>"
                                             class="text-dark"> Deposit History</a>
                                     </span>
                                 </li>
                                 <li>
                                     <span class="dropdown-item">
-                                        <a href="{{ route('user.wallet.transfer_log', ['wallet' => '']) }}"
+                                        <a href="<?php echo e(route('user.wallet.transfer_log', ['wallet' => ''])); ?>"
                                             class="text-dark"> Transfer History</a>
                                     </span>
                                 </li>
@@ -181,10 +181,10 @@
                     <div class="card-body finance-card-body">
                         <div class="text-center">
                             <span
-                                class="finance-amount">{{ number_format(auth()->user()->saving_wallet->amount, 3) . ' ' . $general->site_currency }}</span>
+                                class="finance-amount"><?php echo e(number_format(auth()->user()->saving_wallet->amount, 3) . ' ' . $general->site_currency); ?></span>
                         </div>
                         <p class="text-center finance-timer">Pending Transfer:
-                            @php
+                            <?php
                                 $saving_transfer = auth()
                                     ->user()
                                     ->wallet_transfer()
@@ -192,23 +192,25 @@
                                     ->where('status', 0)
                                     ->first();
 
-                            @endphp
-                            @if ($saving_transfer)
-                                {{ $saving_transfer->amount }}
-                            @else
+                            ?>
+                            <?php if($saving_transfer): ?>
+                                <?php echo e($saving_transfer->amount); ?>
+
+                            <?php else: ?>
                                 0
-                            @endif
-                            {{ $general->site_currency }}
+                            <?php endif; ?>
+                            <?php echo e($general->site_currency); ?>
+
                         </p>
                         <p class="text-center">
                             <span id="savingTimerPlaceholder" class="timer"></span>
                         </p>
                         <div class="text-center finance-buttons">
                             <button class="btn btn-success deposit_now"
-                                data-href="{{ route('user.paynow', $gateway->id) }}" data-wallet_type="saving_wallet"
-                                data-id="{{ $gateway->id }}">Deposit</button>
+                                data-href="<?php echo e(route('user.paynow', $gateway->id)); ?>" data-wallet_type="saving_wallet"
+                                data-id="<?php echo e($gateway->id); ?>">Deposit</button>
                             <button class="btn btn-danger ml-2 withdraw_now"
-                                data-href="{{ route('user.wallet.withdraw', 'saving_wallet') }}"
+                                data-href="<?php echo e(route('user.wallet.withdraw', 'saving_wallet')); ?>"
                                 data-wallet_type="saving_wallet">Transfer</button>
                         </div>
                     </div>
@@ -227,13 +229,13 @@
                             <ul class="dropdown-menu bg-white text-dark">
                                 <li>
                                     <span class="dropdown-item">
-                                        <a href="{{ route('user.deposit.log', ['wallet' => 'sharing_wallet']) }}"
+                                        <a href="<?php echo e(route('user.deposit.log', ['wallet' => 'sharing_wallet'])); ?>"
                                             class="text-dark"> Deposit History</a>
                                     </span>
                                 </li>
                                 <li>
                                     <span class="dropdown-item">
-                                        <a href="{{ route('user.wallet.transfer_log', ['wallet' => '']) }}"
+                                        <a href="<?php echo e(route('user.wallet.transfer_log', ['wallet' => ''])); ?>"
                                             class="text-dark"> Transfer History</a>
                                     </span>
                                 </li>
@@ -243,10 +245,10 @@
                     <div class="card-body finance-card-body">
                         <div class="text-center">
                             <span
-                                class="finance-amount">{{ number_format(auth()->user()->sharing_wallet->amount, 3) . ' ' . $general->site_currency }}</span>
+                                class="finance-amount"><?php echo e(number_format(auth()->user()->sharing_wallet->amount, 3) . ' ' . $general->site_currency); ?></span>
                         </div>
                         <p class="text-center finance-timer">Pending Transfer:
-                            @php
+                            <?php
                                 $sharing_transfer = auth()
                                     ->user()
                                     ->wallet_transfer()
@@ -254,23 +256,25 @@
                                     ->where('status', 0)
                                     ->first();
 
-                            @endphp
-                            @if ($sharing_transfer)
-                                {{ $sharing_transfer->amount }}
-                            @else
+                            ?>
+                            <?php if($sharing_transfer): ?>
+                                <?php echo e($sharing_transfer->amount); ?>
+
+                            <?php else: ?>
                                 0
-                            @endif
-                            {{ $general->site_currency }}
+                            <?php endif; ?>
+                            <?php echo e($general->site_currency); ?>
+
                         </p>
                         <p class="text-center">
                             <span id="sharingTimerPlaceholder" class="timer"></span>
                         </p>
                         <div class="text-center finance-buttons ">
                             <button class="btn btn-success deposit_now"
-                                data-href="{{ route('user.paynow', $gateway->id) }}" data-wallet_type="sharing_wallet"
-                                data-id="{{ $gateway->id }}">Deposit</button>
+                                data-href="<?php echo e(route('user.paynow', $gateway->id)); ?>" data-wallet_type="sharing_wallet"
+                                data-id="<?php echo e($gateway->id); ?>">Deposit</button>
                             <button class="btn btn-danger ml-2 withdraw_now"
-                                data-href="{{ route('user.wallet.withdraw', 'sharing_wallet') }}"
+                                data-href="<?php echo e(route('user.wallet.withdraw', 'sharing_wallet')); ?>"
                                 data-wallet_type="sharing_wallet">Transfer</button>
                         </div>
                     </div>
@@ -288,13 +292,13 @@
                             <ul class="dropdown-menu bg-white text-dark">
                                 <li>
                                     <span class="dropdown-item">
-                                        <a href="{{ route('user.deposit.log', ['wallet' => 'business_pack_wallet']) }}"
+                                        <a href="<?php echo e(route('user.deposit.log', ['wallet' => 'business_pack_wallet'])); ?>"
                                             class="text-dark"> Deposit History</a>
                                     </span>
                                 </li>
                                 <li>
                                     <span class="dropdown-item">
-                                        <a href="{{ route('user.invest.log', ['wallet' => 'business_pack_wallet']) }}"
+                                        <a href="<?php echo e(route('user.invest.log', ['wallet' => 'business_pack_wallet'])); ?>"
                                             class="text-dark">Next Payments</a>
                                     </span>
                                 </li>
@@ -304,14 +308,14 @@
                     <div class="card-body finance-card-body">
                         <div class="text-center">
                             <span
-                                class="finance-amount">{{ number_format(auth()->user()->business_pack_wallet->amount, 3) . ' ' . $general->site_currency }}</span>
+                                class="finance-amount"><?php echo e(number_format(auth()->user()->business_pack_wallet->amount, 3) . ' ' . $general->site_currency); ?></span>
                         </div>
                         <p>Investments Only</p>
                         <p class="text-center">
                             <span id="packTimerPlaceholder" class="timer"></span>
                         </p>
                         <div class="text-center finance-buttons">
-                            <a href="{{ route('user.investmentplan', ['wallet' => 'business_pack_wallet']) }}"
+                            <a href="<?php echo e(route('user.investmentplan', ['wallet' => 'business_pack_wallet'])); ?>"
                                 class="btn btn-success"> Plans</a>
                         </div>
                     </div>
@@ -329,13 +333,13 @@
                             <ul class="dropdown-menu bg-white text-dark">
                                 <li>
                                     <span class="dropdown-item">
-                                        <a href="{{ route('user.deposit.log', ['wallet' => 'business_value_wallet']) }}"
+                                        <a href="<?php echo e(route('user.deposit.log', ['wallet' => 'business_value_wallet'])); ?>"
                                             class="text-dark"> Deposit History</a>
                                     </span>
                                 </li>
                                 <li>
                                     <span class="dropdown-item">
-                                        <a href="{{ route('user.invest.log', ['wallet' => 'business_value_wallet']) }}"
+                                        <a href="<?php echo e(route('user.invest.log', ['wallet' => 'business_value_wallet'])); ?>"
                                             class="text-dark">Next Payments</a>
                                     </span>
                                 </li>
@@ -346,14 +350,14 @@
                     <div class="card-body finance-card-body">
                         <div class="text-center">
                             <span
-                                class="finance-amount">{{ number_format(auth()->user()->business_value_wallet->amount, 3) . ' ' . $general->site_currency }}</span>
+                                class="finance-amount"><?php echo e(number_format(auth()->user()->business_value_wallet->amount, 3) . ' ' . $general->site_currency); ?></span>
                         </div>
 
 
                         <p>Investments Only</p>
 
                         <div class="text-center finance-buttons">
-                            <a href="{{ route('user.investmentplan', ['wallet' => 'business_value_wallet']) }}"
+                            <a href="<?php echo e(route('user.investmentplan', ['wallet' => 'business_value_wallet'])); ?>"
                                 class="btn btn-success"> Plans</a>
                         </div>
                     </div>
@@ -364,70 +368,71 @@
 
 
 
-        @php
+        <?php
             $reference = auth()->user()->refferals;
-        @endphp
+        ?>
         <div class="row mt-3">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="mb-0">{{ __('Reference Tree') }}</h5>
+                        <h5 class="mb-0"><?php echo e(__('Reference Tree')); ?></h5>
                     </div>
                     <div class="card-body">
-                        @if ($reference->count() > 0)
+                        <?php if($reference->count() > 0): ?>
                             <ul class="sp-referral">
                                 <li class="single-child root-child">
                                     <p>
-                                        <img src="{{ getFile('user', auth()->user()->image) }}">
-                                        <span class="mb-0">{{ auth()->user()->full_name }}</span>
+                                        <img src="<?php echo e(getFile('user', auth()->user()->image)); ?>">
+                                        <span class="mb-0"><?php echo e(auth()->user()->full_name); ?></span>
                                     </p>
                                     <ul class="sub-child-list step-2">
-                                        @foreach ($reference as $user)
+                                        <?php $__currentLoopData = $reference; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <li class="single-child">
                                                 <p>
-                                                    <img src="{{ getFile('user', $user->image) }}">
-                                                    <span class="mb-0">{{ $user->full_name }}</span>
+                                                    <img src="<?php echo e(getFile('user', $user->image)); ?>">
+                                                    <span class="mb-0"><?php echo e($user->full_name); ?></span>
                                                 </p>
 
                                                 <ul class="sub-child-list step-3">
-                                                    @foreach ($user->refferals as $ref)
+                                                    <?php $__currentLoopData = $user->refferals; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ref): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                         <li class="single-child">
                                                             <p>
-                                                                <img src="{{ getFile('user', $ref->image) }}">
-                                                                <span class="mb-0">{{ $ref->full_name }}</span>
+                                                                <img src="<?php echo e(getFile('user', $ref->image)); ?>">
+                                                                <span class="mb-0"><?php echo e($ref->full_name); ?></span>
                                                             </p>
 
                                                             <ul class="sub-child-list step-4">
-                                                                @foreach ($ref->refferals as $ref2)
+                                                                <?php $__currentLoopData = $ref->refferals; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ref2): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                                     <li class="single-child">
                                                                         <p>
                                                                             <img
-                                                                                src="{{ getFile('user', $ref2->image) }}">
+                                                                                src="<?php echo e(getFile('user', $ref2->image)); ?>">
                                                                             <span
-                                                                                class="mb-0">{{ $ref2->full_name }}</span>
+                                                                                class="mb-0"><?php echo e($ref2->full_name); ?></span>
                                                                         </p>
                                                                     </li>
-                                                                @endforeach
+                                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                             </ul>
 
                                                         </li>
-                                                    @endforeach
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 </ul>
                                             </li>
-                                        @endforeach
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                                     </ul>
                                 </li>
                             </ul>
-                        @else
+                        <?php else: ?>
                             <div class="col-md-12 text-center mt-5">
                                 <i class="far fa-sad-tear display-1"></i>
                                 <p class="mt-2">
-                                    {{ __('No Reference User Found') }}
+                                    <?php echo e(__('No Reference User Found')); ?>
+
                                 </p>
 
                             </div>
-                        @endif
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -440,10 +445,10 @@
     <div class="modal fade" tabindex="-1" role="dialog" id="paynow">
         <div class="modal-dialog" role="document">
             <form action="" method="post">
-                @csrf
+                <?php echo csrf_field(); ?>
                 <div class="modal-content bg-body">
                     <div class="modal-header">
-                        <h5 class="modal-title">{{ __('Deposit Amount') }}</h5>
+                        <h5 class="modal-title"><?php echo e(__('Deposit Amount')); ?></h5>
                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true" class="text-light">&times;</span>
                         </button>
@@ -452,11 +457,11 @@
                         <div class="row">
                             <input type="hidden" name="id" value="">
                             <div class="form-group mb-3">
-                                <label for="">{{ __('Amount') }}</label>
+                                <label for=""><?php echo e(__('Amount')); ?></label>
                                 <input type="text" name="amount" class="form-control"
-                                    placeholder="{{ __('Enter Amount') }}">
+                                    placeholder="<?php echo e(__('Enter Amount')); ?>">
 
-                                <input type="hidden" name="user_id" class="form-control" value="{{ auth()->id() }}">
+                                <input type="hidden" name="user_id" class="form-control" value="<?php echo e(auth()->id()); ?>">
                                 <input type="hidden" name="type" class="form-control" value="deposit">
                                 <input type="hidden" name="wallet_type">
                             </div>
@@ -469,8 +474,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger"
-                            data-bs-dismiss="modal">{{ __('Close') }}</button>
-                        <button type="submit" class="cmn-btn">{{ __('Deposit Now') }}</button>
+                            data-bs-dismiss="modal"><?php echo e(__('Close')); ?></button>
+                        <button type="submit" class="cmn-btn"><?php echo e(__('Deposit Now')); ?></button>
                     </div>
                 </div>
             </form>
@@ -480,10 +485,10 @@
     <div class="modal fade" tabindex="-1" role="dialog" id="withdrawnow">
         <div class="modal-dialog" role="document">
             <form action="" method="post">
-                @csrf
+                <?php echo csrf_field(); ?>
                 <div class="modal-content bg-body">
                     <div class="modal-header">
-                        <h5 class="modal-title">{{ __('Transfer Amount to Current Balance') }}</h5>
+                        <h5 class="modal-title"><?php echo e(__('Transfer Amount to Current Balance')); ?></h5>
                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true" class="text-light">&times;</span>
                         </button>
@@ -491,33 +496,33 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="form-group mb-3">
-                                <label for="">{{ __('Amount') }}</label>
+                                <label for=""><?php echo e(__('Amount')); ?></label>
                                 <input required id="w_amount" type="number" step="any" name="amount"
-                                    class="form-control" placeholder="{{ __('Enter Amount') }}">
+                                    class="form-control" placeholder="<?php echo e(__('Enter Amount')); ?>">
 
 
                             </div>
                             <div class="form-group mb-3">
-                                <label for="">{{ __('Amount after tax') }} <span id="tax"></span>%</label>
+                                <label for=""><?php echo e(__('Amount after tax')); ?> <span id="tax"></span>%</label>
                                 <input id="total_amount" type="text" class="form-control"
-                                    placeholder="{{ __('Final Amount') }}" disabled>
+                                    placeholder="<?php echo e(__('Final Amount')); ?>" disabled>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger"
-                            data-bs-dismiss="modal">{{ __('Close') }}</button>
-                        <button type="submit" class="cmn-btn">{{ __('Transfer Now') }}</button>
+                            data-bs-dismiss="modal"><?php echo e(__('Close')); ?></button>
+                        <button type="submit" class="cmn-btn"><?php echo e(__('Transfer Now')); ?></button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 
-    @if (Session::has('deposit'))
-        @php
+    <?php if(Session::has('deposit')): ?>
+        <?php
             $deposit = Session::get('deposit');
-        @endphp
+        ?>
         <style>
             .invoice-container {
                 max-width: 400px;
@@ -569,49 +574,49 @@
                     </div>
                     <div class="modal-body d-flex justify-content-center">
                         <div id="invoice" class="invoice-container text-center">
-                            <img src="{{ getFile('logo', @$general->logo) }}" width="50%" alt="pp">
+                            <img src="<?php echo e(getFile('logo', @$general->logo)); ?>" width="50%" alt="pp">
                             <h2>Invoice</h2>
 
                             <div class="invoice-item">
                                 <span class="invoice-label">Transaction ID:</span>
-                                <span class="invoice-value">{{ $deposit->transaction_id }}</span>
+                                <span class="invoice-value"><?php echo e($deposit->transaction_id); ?></span>
                             </div>
 
                             <div class="invoice-item">
                                 <span class="invoice-label">User:</span>
                                 <span
-                                    class="invoice-value">{{ $deposit->user->fname . ' ' . $deposit->user->lname }}</span>
+                                    class="invoice-value"><?php echo e($deposit->user->fname . ' ' . $deposit->user->lname); ?></span>
                             </div>
                             <div class="invoice-item">
                                 <span class="invoice-label">Wallet:</span>
                                 <span
-                                    class="invoice-value text-uppercase">{{ str_replace('_', ' ', rtrim($deposit->wallet_type, 's')) }}</span>
+                                    class="invoice-value text-uppercase"><?php echo e(str_replace('_', ' ', rtrim($deposit->wallet_type, 's'))); ?></span>
                             </div>
 
                             <div class="invoice-item">
                                 <span class="invoice-label">Gateway:</span>
-                                <span class="invoice-value">{{ $deposit->gateway->gateway_name }}</span>
+                                <span class="invoice-value"><?php echo e($deposit->gateway->gateway_name); ?></span>
                             </div>
 
                             <div class="invoice-item">
                                 <span class="invoice-label">Amount:</span>
-                                <span class="invoice-value">{{ $deposit->amount }}</span>
+                                <span class="invoice-value"><?php echo e($deposit->amount); ?></span>
                             </div>
 
                             <div class="invoice-item">
                                 <span class="invoice-label">Currency:</span>
                                 <span
-                                    class="invoice-value">{{ $deposit->gateway->gateway_parameters->gateway_currency }}</span>
+                                    class="invoice-value"><?php echo e($deposit->gateway->gateway_parameters->gateway_currency); ?></span>
                             </div>
 
                             <div class="invoice-item">
                                 <span class="invoice-label">Charge:</span>
-                                <span class="invoice-value">{{ $deposit->gateway->charge }}</span>
+                                <span class="invoice-value"><?php echo e($deposit->gateway->charge); ?></span>
                             </div>
 
                             <div class="invoice-item">
                                 <span class="invoice-label">Payment Date:</span>
-                                <span class="invoice-value">{{ $deposit->created_at->format('Y-m-d') }}</span>
+                                <span class="invoice-value"><?php echo e($deposit->created_at->format('Y-m-d')); ?></span>
                             </div>
                             <div class="invoice-item">
                                 <span class="invoice-label">Status:</span>
@@ -630,9 +635,9 @@
                 </div>
             </div>
         </div>
-    @endif
+    <?php endif; ?>
 
-    @if ($loginMessage)
+    <?php if($loginMessage): ?>
         <!-- Modal -->
         <div class="modal fade" id="loginMessageModal" tabindex="-1" aria-labelledby="loginMessageModalLabel"
             aria-hidden="true">
@@ -644,9 +649,10 @@
                     </div>
                     <div class="modal-body">
                         <p>
-                            {{ $loginMessage->message }}
+                            <?php echo e($loginMessage->message); ?>
+
                         </p>
-                        <img src="{{ getFile('admins', $loginMessage->picture) }}" alt="alt">
+                        <img src="<?php echo e(getFile('admins', $loginMessage->picture)); ?>" alt="alt">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
@@ -654,11 +660,11 @@
                 </div>
             </div>
         </div>
-    @endif
+    <?php endif; ?>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('style')
+<?php $__env->startPush('style'); ?>
     <style>
         .sp-referral .single-child {
             padding: 6px 10px;
@@ -832,10 +838,10 @@
             color: aquamarine;
         }
     </style>
-@endpush
+<?php $__env->stopPush(); ?>
 
 
-@push('script')
+<?php $__env->startPush('script'); ?>
     <script>
         'use strict';
         var copyButton = document.querySelector('.copy');
@@ -849,22 +855,22 @@
             this.select();
         });
 
-        const current_wallet_tax = {{ $settings->current_wallet_tax }};
-        const saving_wallet_tax = {{ $settings->saving_wallet_tax }};
-        const sharing_wallet_tax = {{ $settings->sharing_wallet_tax }};
-        const profit_transfer_tax = {{ $general->profit_transfer_charge ?? 0 }};
+        const current_wallet_tax = <?php echo e($settings->current_wallet_tax); ?>;
+        const saving_wallet_tax = <?php echo e($settings->saving_wallet_tax); ?>;
+        const sharing_wallet_tax = <?php echo e($settings->sharing_wallet_tax); ?>;
+        const profit_transfer_tax = <?php echo e($general->profit_transfer_charge ?? 0); ?>;
         var tax = 0;
 
         $(document).ready(function() {
-            @if ($current_transfer)
-                getCountDown($("#currentTimerPlaceholder"), "{{ now()->diffInSeconds($current_transfer->time) }}");
-            @endif
-            @if ($saving_transfer)
-                getCountDown($("#savingTimerPlaceholder"), "{{ now()->diffInSeconds($saving_transfer->time) }}");
-            @endif
-            @if ($sharing_transfer)
-                getCountDown($("#sharingTimerPlaceholder"), "{{ now()->diffInSeconds($sharing_transfer->time) }}");
-            @endif
+            <?php if($current_transfer): ?>
+                getCountDown($("#currentTimerPlaceholder"), "<?php echo e(now()->diffInSeconds($current_transfer->time)); ?>");
+            <?php endif; ?>
+            <?php if($saving_transfer): ?>
+                getCountDown($("#savingTimerPlaceholder"), "<?php echo e(now()->diffInSeconds($saving_transfer->time)); ?>");
+            <?php endif; ?>
+            <?php if($sharing_transfer): ?>
+                getCountDown($("#sharingTimerPlaceholder"), "<?php echo e(now()->diffInSeconds($sharing_transfer->time)); ?>");
+            <?php endif; ?>
 
         });
 
@@ -920,17 +926,17 @@
 
 
 
-            @if (Session::has('deposit'))
+            <?php if(Session::has('deposit')): ?>
                 $("#invoiceModal").modal('show');
                 $else
-                @if ($loginMessage)
+                <?php if($loginMessage): ?>
                     $("#loginMessageModal").modal('show');
-                @endif
-            @endif
+                <?php endif; ?>
+            <?php endif; ?>
         })
 
 
-        @if (Session::has('deposit'))
+        <?php if(Session::has('deposit')): ?>
 
             async function printInvoice() {
 
@@ -960,7 +966,7 @@
                 }
 
             }
-        @endif
+        <?php endif; ?>
 
 
 
@@ -987,7 +993,7 @@
 
         function firePayment(elementId) {
             $.ajax({
-                // url: "{{ route('returninterest') }}",
+                // url: "<?php echo e(route('returninterest')); ?>",
                 // method: "GET",
                 // success: function(response) {
                 //     if (response) {
@@ -996,9 +1002,11 @@
                 //         return
                 //     }
 
-                //     window.location.href = "{{ url()->current() }}"
+                //     window.location.href = "<?php echo e(url()->current()); ?>"
                 // }
             })
         }
     </script>
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make(template() . 'layout.master2', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Junaid Ali\Desktop\www\invest4sale\core\resources\views/theme2/user/dashboard.blade.php ENDPATH**/ ?>
