@@ -750,8 +750,7 @@
         /* Custom Styling */
 
         .finance-card.bg-1 {
-            background-color: #1b2845;
-            background: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114));
+            background-color: #FF5733;
             box-shadow: 1px 4px 5px rgb(252, 251, 121);
         }
 
