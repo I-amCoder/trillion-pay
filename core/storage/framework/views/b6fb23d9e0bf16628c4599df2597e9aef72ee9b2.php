@@ -65,6 +65,8 @@
                         <div class="bottom-part">
                             <a class="cmn-btn w-100 mb-3"
                                     href="<?php echo e(route('user.gateways', $plan->id)); ?>"><?php echo e(__('Invest Now')); ?></a>
+                                    <button class="cmn-btn w-100 balance mt-3" data-plan="<?php echo e($plan); ?>"
+                                    data-url=""><?php echo e(__('Invest Using Balance')); ?></button>
                         </div>
                     </div>
                 </div>

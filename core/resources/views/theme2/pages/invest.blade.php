@@ -59,6 +59,8 @@
                         <div class="bottom-part">
                             <a class="cmn-btn w-100 mb-3"
                                     href="{{ route('user.gateways', $plan->id) }}">{{ __('Invest Now') }}</a>
+                                    <button class="cmn-btn w-100 balance mt-3" data-plan="{{ $plan }}"
+                                    data-url="">{{ __('Invest Using Balance') }}</button>
                         </div>
                     </div>
                 </div>

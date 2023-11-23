@@ -1,8 +1,4 @@
 <?php $__env->startSection('content2'); ?>
-
-
-
-
     <div class="dashboard-body-part">
         <div class="mt-4">
             <label><?php echo e(__('Your refferal link')); ?></label>
@@ -128,7 +124,7 @@
                                     ->user()
                                     ->wallet_transfer()
                                     ->where('wallet_type', 'current_wallet')
-                                    ->where('status', 0)
+                                    ->where('status', 0)->latest()
                                     ->first();
 
                             ?>
@@ -189,7 +185,8 @@
                                     ->user()
                                     ->wallet_transfer()
                                     ->where('wallet_type', 'saving_wallet')
-                                    ->where('status', 0)
+                                    ->where('status', 0)->latest()
+
                                     ->first();
 
                             ?>
@@ -253,7 +250,7 @@
                                     ->user()
                                     ->wallet_transfer()
                                     ->where('wallet_type', 'sharing_wallet')
-                                    ->where('status', 0)
+                                    ->where('status', 0)->latest()
                                     ->first();
 
                             ?>
@@ -593,7 +590,6 @@
             </div>
         </div>
     <?php endif; ?>
-
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startPush('style'); ?>

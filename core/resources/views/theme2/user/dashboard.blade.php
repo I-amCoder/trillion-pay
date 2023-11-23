@@ -1,10 +1,6 @@
 @extends(template() . 'layout.master2')
 
 @section('content2')
-
-
-
-
     <div class="dashboard-body-part">
         <div class="mt-4">
             <label>{{ __('Your refferal link') }}</label>
@@ -130,7 +126,7 @@
                                     ->user()
                                     ->wallet_transfer()
                                     ->where('wallet_type', 'current_wallet')
-                                    ->where('status', 0)
+                                    ->where('status', 0)->latest()
                                     ->first();
 
                             @endphp
@@ -189,7 +185,8 @@
                                     ->user()
                                     ->wallet_transfer()
                                     ->where('wallet_type', 'saving_wallet')
-                                    ->where('status', 0)
+                                    ->where('status', 0)->latest()
+
                                     ->first();
 
                             @endphp
@@ -251,7 +248,7 @@
                                     ->user()
                                     ->wallet_transfer()
                                     ->where('wallet_type', 'sharing_wallet')
-                                    ->where('status', 0)
+                                    ->where('status', 0)->latest()
                                     ->first();
 
                             @endphp
@@ -588,7 +585,6 @@
             </div>
         </div>
     @endif
-
 @endsection
 
 @push('style')
