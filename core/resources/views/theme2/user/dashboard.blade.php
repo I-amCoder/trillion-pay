@@ -8,8 +8,7 @@
                 <input type="text" id="refer-link" class="form-control copy-text"
                     value="{{ route('user.register', @Auth::user()->username) }}" placeholder="referallink.com/refer"
                     aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
-                <button type="button" class="input-group-text  copy cmn-btn"
-                    id="basic-addon2">{{ __('Copy') }}</button>
+                <button type="button" class="input-group-text  copy cmn-btn" id="basic-addon2">{{ __('Copy') }}</button>
             </div>
         </div>
         <div class="row gy-4">
@@ -89,7 +88,7 @@
             </div>
         </div>
         <hr>
-        <h1 >My Wallets</h1>
+        <h1>My Wallets</h1>
         <div class="row gy-4 ">
             <div class="col-md-6">
                 <div class="card finance-card bg-1">
@@ -526,11 +525,11 @@
 
                             <div class="invoice-item">
                                 <span class="invoice-label">Amount:</span>
-                                <span class="invoice-value">{{ number_format($deposit->amount,2) }}</span>
+                                <span class="invoice-value">{{ number_format($deposit->amount, 2) }}</span>
                             </div>
                             <div class="invoice-item">
                                 <span class="invoice-label">Point Value:</span>
-                                <span class="invoice-value">{{ number_format($deposit->amount/5,2) }}</span>
+                                <span class="invoice-value">{{ number_format($deposit->amount / 5, 2) }}</span>
                             </div>
 
                             <div class="invoice-item">
@@ -574,7 +573,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h6 class="modal-title text-dark text-center" id="loginMessageModalLabel">News update</h6>
+                        <h6 class="modal-title  text-center" id="loginMessageModalLabel">News update</h6>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -684,7 +683,7 @@
         /* Custom Styling */
 
         .finance-card.bg-1 {
-            background-color: #138d79;
+            background-color: #0c975e;
             box-shadow: 1px 4px 5px rgb(252, 251, 121);
         }
 
@@ -855,10 +854,8 @@
 
             @if (Session::has('deposit'))
                 $("#invoiceModal").modal('show');
-                $else
-                @if ($loginMessage)
-                    $("#loginMessageModal").modal('show');
-                @endif
+            @elseif ($loginMessage)
+                $("#loginMessageModal").modal('show');
             @endif
 
 

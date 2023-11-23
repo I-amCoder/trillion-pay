@@ -12,9 +12,9 @@
 
     --main-color: #38ef7d;
     --secondary-color: #0e2125;
-    --body-bg: #138d79;
-    --body-gradient-bg: #138d79;
-    --bg-dark: #138d79;
+    --body-bg: #0c975e;
+    --body-gradient-bg: #0c975e;
+    --bg-dark: #0c975e;
     --purple-color: #38ef7d;
     --font-color: #dce5ea;
  
@@ -59,7 +59,7 @@ h1, h2, h3, h4, h5, h6 {
 .cmn-btn {
     font-weight: 500;
     padding: 12px 30px;
-    background-color: var(--main-color);
+    background-color: var(--bg-dark);
     color: var(--font-color);
     border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -67,10 +67,13 @@ h1, h2, h3, h4, h5, h6 {
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
     text-align: center;
-    border: none;
+    border: 1px solid ;
+    border-color: var(--font-color);
+    transition: 0.2s ease all;
 }
 .cmn-btn:hover {
-    color: var(--body-bg);
+    background-color: var(--font-color);
+    color: black;
 }
 
 .btn-sm {
