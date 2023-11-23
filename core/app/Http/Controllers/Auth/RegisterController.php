@@ -47,6 +47,10 @@ class RegisterController extends Controller
             'lname' => 'required',
             'username' => 'required|unique:users',
             'phone' => 'required|unique:users',
+            'country' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'zip' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed',
             'g-recaptcha-response' => Rule::requiredIf($general->allow_recaptcha == 1)
@@ -93,6 +97,14 @@ class RegisterController extends Controller
 
     public function create($request, $signupBonus, $referid)
     {
+
+        $data = [
+            'country' => $request->country,
+            'city' => $request->city,
+            'zip' => $request->zip,
+            'state' => $request->state,
+        ];
+
         $user = User::create([
             'fname' => $request->fname,
             'balance' => $signupBonus,
@@ -100,6 +112,7 @@ class RegisterController extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'phone' => $request->phone,
+            'address'=>$data,
             'status' => 1,
             'password' => bcrypt($request->password),
             'reffered_by' => $referid ?? ''

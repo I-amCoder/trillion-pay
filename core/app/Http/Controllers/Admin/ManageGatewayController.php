@@ -1381,7 +1381,6 @@ class ManageGatewayController extends Controller
 
             $payment->deposit_id = $booking->id;
 
-            refferMoney($booking->user_id, $booking->user->refferedBy, 'invest', $booking->amount,$type);
 
         }
 
@@ -1415,9 +1414,10 @@ class ManageGatewayController extends Controller
             $payment->how_many_time = $request->how_many_time;
 
             $payment->next_payment_time = Carbon::now()->addHours($booking->plan->time->time);
-            refferMoney($booking->user_id, $booking->user->refferedBy, 'invest', $booking->amount,$type);
+
         }
 
+        refferMoney($booking->user_id, $booking->user->refferedBy, 'invest', $booking->amount,$type);
 
 
         // Save All

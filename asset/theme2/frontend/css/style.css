@@ -11,11 +11,11 @@
     --bg-dark: #0f0c29; */
 
     --main-color: #38ef7d;
-    --secondary-color: white;
-    --body-bg: #FF5733;
-    --body-gradient-bg: #FF5733;
-    --bg-dark: #FF5733;
-
+    --secondary-color: #0e2125;
+    --body-bg: #138d79;
+    --body-gradient-bg: #138d79;
+    --bg-dark: #138d79;
+    --purple-color: #38ef7d;
  
 
     --h-font: "Syne", sans-serif;
@@ -24,7 +24,7 @@
 
 body {
     background-color: var(--body-gradient-bg);
-    color: 	#36454F;
+    color: 	#dce5ea;
     font-family: var(--p-font);
     line-height: 1.7;
     display: flex;
@@ -252,7 +252,7 @@ img {
     bottom: 0;
     z-index: 9999;
     overflow: hidden;
-    background: var(--bg-dark);
+    background: var(--secondary-color);
 }
 
 #preloader:before {
@@ -260,9 +260,9 @@ img {
     position: fixed;
     top: calc(50% - 0px);
     left: calc(50% - 30px);
-    border: 6px solid var(--bg-dark);
-    border-top-color: var(--body-bg);
-    border-bottom-color: var(--body-bg);
+    border: 6px solid var(--secondary-color);
+    border-top-color: var(--main-color);
+    border-bottom-color: var(--main-color);
     border-radius: 50%;
     width: 60px;
     height: 60px;
@@ -2273,18 +2273,18 @@ img {
 .view-btn {
     width: 30px;
     height: 30px;
-    background-color: #6777ef47;
+    background-color: var(--purple-color)47;
     border-radius: 3px;
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    color: #6777ef !important;
-    border: 1px solid #6777ef;
+    color: var(--purple-color) !important;
+    border: 1px solid var(--purple-color);
     font-size: 14px;
     transition: all 0.3s;
 }
 .view-btn:hover {
-    background-color: #6777ef;
+    background-color: var(--purple-color);
     color: #fff !important;
 }
 
@@ -2410,8 +2410,8 @@ td[data-caption]::before {
 }
 
 .btn-primary {
-    background-color: #6777ef;
-    border-color: #6777ef;
+    background-color: var(--purple-color);
+    border-color: var(--purple-color);
 }
 .btn-primary:hover {
     background-color: #4759df;
@@ -2457,28 +2457,28 @@ td[data-caption]::before {
 .view-btn {
     width: 30px;
     height: 30px;
-    background-color: #6777ef47;
+    background-color: var(--purple-color)47;
     border-radius: 3px;
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    color: #6777ef !important;
-    border: 1px solid #6777ef;
+    color: var(--purple-color) !important;
+    border: 1px solid var(--purple-color);
     font-size: 14px;
     transition: all 0.3s;
 }
 .view-btn:hover {
-    background-color: #6777ef;
+    background-color: var(--purple-color);
     color: #fff !important;
 }
 
 .view-btn-primary {
-    color: #6777ef !important;
-    border: 1px solid #6777ef;
-    background-color: #6777ef47;
+    color: var(--purple-color) !important;
+    border: 1px solid var(--purple-color);
+    background-color: var(--purple-color)47;
 }
 .view-btn-primary:hover {
-    background-color: #6777ef;
+    background-color: var(--purple-color);
 }
 
 .view-btn-info {
@@ -2693,10 +2693,10 @@ input[type="file"].form-control {
 }
 
 .badge-primary {
-    color: #6777EF;
+    color: var(--purple-color);
 }
 .badge-primary::before {
-    background-color: #6777EF;
+    background-color: var(--purple-color);
 }
 
 .badge-info {

@@ -307,6 +307,7 @@ function refferMoney($id, $user, $refferal_type, $amount, $wallet_type = null)
         $wallet = rtrim(strtoupper(str_replace("_"," ",$wallet_type)),'S');
     }
 
+
     for ($i = 0; $i < $counter; $i++) {
 
         if ($user) {

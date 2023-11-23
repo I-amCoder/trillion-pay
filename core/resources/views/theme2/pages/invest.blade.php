@@ -6,13 +6,13 @@
         <div class="row gy-4">
             @forelse ($plans as $plan)
                 <div class="col-xxl-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="0.5s">
-                    <div class="pricing-item bg-secondary">
+                    <div class="pricing-item ">
                         <div class="top-part">
                             <div class="icon">
                                 <i class="las la-gem"></i>
                             </div>
                             <div class="plan-name">
-                                <span>{{ $plan->plan_name }}</span>
+                                <span class="text-light">{{ $plan->plan_name }}</span>
                             </div>
                             @if ($plan->amount_type == 0)
                                 <h4 class="plan-price">
@@ -58,9 +58,9 @@
                             </ul>
                         </div>
                         <div class="bottom-part">
-                            <a class="cmn-btn w-100 mb-3"
+                            <a class="btn btn-outline-light w-100 mb-3"
                                 href="{{ route('user.gateways', $plan->id) }}">{{ __('Invest Now') }}</a>
-                            <button class="cmn-btn w-100 balance mt-3" data-plan="{{ $plan }}"
+                            <button class="btn btn-outline-light w-100 balance mt-3" data-plan="{{ $plan }}"
                                 data-url="">{{ __('Invest Using Balance') }}</button>
                         </div>
                     </div>

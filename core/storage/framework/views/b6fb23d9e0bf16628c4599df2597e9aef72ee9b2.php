@@ -4,13 +4,13 @@
         <div class="row gy-4">
             <?php $__empty_1 = true; $__currentLoopData = $plans; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $plan): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                 <div class="col-xxl-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="0.5s">
-                    <div class="pricing-item bg-secondary">
+                    <div class="pricing-item ">
                         <div class="top-part">
                             <div class="icon">
                                 <i class="las la-gem"></i>
                             </div>
                             <div class="plan-name">
-                                <span><?php echo e($plan->plan_name); ?></span>
+                                <span class="text-light"><?php echo e($plan->plan_name); ?></span>
                             </div>
                             <?php if($plan->amount_type == 0): ?>
                                 <h4 class="plan-price">
@@ -64,9 +64,9 @@
                             </ul>
                         </div>
                         <div class="bottom-part">
-                            <a class="cmn-btn w-100 mb-3"
+                            <a class="btn btn-outline-light w-100 mb-3"
                                 href="<?php echo e(route('user.gateways', $plan->id)); ?>"><?php echo e(__('Invest Now')); ?></a>
-                            <button class="cmn-btn w-100 balance mt-3" data-plan="<?php echo e($plan); ?>"
+                            <button class="btn btn-outline-light w-100 balance mt-3" data-plan="<?php echo e($plan); ?>"
                                 data-url=""><?php echo e(__('Invest Using Balance')); ?></button>
                         </div>
                     </div>

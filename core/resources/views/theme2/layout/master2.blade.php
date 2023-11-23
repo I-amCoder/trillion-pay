@@ -125,11 +125,11 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end " aria-labelledby="dropdownMenuButton1">
 
-                        <li><a class="dropdown-item text-dark" href="{{ route('user.2fa') }}">{{ __('2FA') }}</a>
+                        <li><a class="dropdown-item" href="{{ route('user.2fa') }}">{{ __('2FA') }}</a>
                         </li>
-                        <li><a class="dropdown-item text-dark"
+                        <li><a class="dropdown-item"
                                 href="{{ route('user.profile') }}">{{ __('Settings') }}</a></li>
-                        <li><a class="dropdown-item text-dark"
+                        <li><a class="dropdown-item"
                                 href="{{ route('user.logout') }}">{{ __('Logout') }}</a></li>
                     </ul>
                 </div>

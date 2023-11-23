@@ -23,9 +23,9 @@
                         <h3 class="d-box-one-amount">
                             {{ number_format(auth()->user()->balance, 3) . ' ' . $general->site_currency }}</h3>
                         <div class="d-flex flex-wrap">
-                            <a class="btn btn-outline-dark m-2" href="{{ route('user.transfer_money') }}">Transfer
+                            <a class="btn btn-outline-light m-2" href="{{ route('user.transfer_money') }}">Transfer
                                 Money</a>
-                            <a class="btn btn-outline-dark m-2" href="{{ route('user.withdraw') }}">Withdraw</a>
+                            <a class="btn btn-outline-light m-2" href="{{ route('user.withdraw') }}">Withdraw</a>
                         </div>
                     </div>
 
@@ -64,7 +64,7 @@
                         <span class="caption-title">{{ __('Profit Balance') }}</span>
                         <h3 class="d-box-one-amount">
                             {{ number_format(auth()->user()->profit_balance, 3) . ' ' . $general->site_currency }}</h3>
-                        <button class="btn btn-outline-dark  withdraw_now" data-wallet_type="profit_balance"
+                        <button class="btn btn-outline-light  withdraw_now" data-wallet_type="profit_balance"
                             data-href="{{ route('user.wallet.profit_transfer') }}">Transfer To Current Balance </button>
                     </div>
 
@@ -89,7 +89,7 @@
             </div>
         </div>
         <hr>
-        <h1 class="text-dark">My Wallets</h1>
+        <h1 >My Wallets</h1>
         <div class="row gy-4 ">
             <div class="col-md-6">
                 <div class="card finance-card bg-1">
@@ -142,10 +142,10 @@
                             <span id="currentTimerPlaceholder" class="timer"></span>
                         </p>
                         <div class="text-center finance-buttons">
-                            <button class="btn btn-success deposit_now"
+                            <button class="btn btn-outline-light deposit_now"
                                 data-href="{{ route('user.paynow', $gateway->id) }}" data-wallet_type="current_wallet"
                                 data-id="{{ $gateway->id }}">Deposit</button>
-                            <button class="btn btn-primary ml-2 withdraw_now" data-wallet_type="current_wallet"
+                            <button class="btn btn-outline-light ml-2 withdraw_now" data-wallet_type="current_wallet"
                                 data-href="{{ route('user.wallet.withdraw', 'current_wallet') }}">Transfer</button>
                         </div>
                     </div>
@@ -203,10 +203,10 @@
                             <span id="savingTimerPlaceholder" class="timer"></span>
                         </p>
                         <div class="text-center finance-buttons">
-                            <button class="btn btn-success deposit_now"
+                            <button class="btn btn-outline-light deposit_now"
                                 data-href="{{ route('user.paynow', $gateway->id) }}" data-wallet_type="saving_wallet"
                                 data-id="{{ $gateway->id }}">Deposit</button>
-                            <button class="btn btn-primary ml-2 withdraw_now"
+                            <button class="btn btn-outline-light ml-2 withdraw_now"
                                 data-href="{{ route('user.wallet.withdraw', 'saving_wallet') }}"
                                 data-wallet_type="saving_wallet">Transfer</button>
                         </div>
@@ -266,10 +266,10 @@
                             <span id="sharingTimerPlaceholder" class="timer"></span>
                         </p>
                         <div class="text-center finance-buttons ">
-                            <button class="btn btn-success deposit_now"
+                            <button class="btn btn-outline-light deposit_now"
                                 data-href="{{ route('user.paynow', $gateway->id) }}" data-wallet_type="sharing_wallet"
                                 data-id="{{ $gateway->id }}">Deposit</button>
-                            <button class="btn btn-primary ml-2 withdraw_now"
+                            <button class="btn btn-outline-light ml-2 withdraw_now"
                                 data-href="{{ route('user.wallet.withdraw', 'sharing_wallet') }}"
                                 data-wallet_type="sharing_wallet">Transfer</button>
                         </div>
@@ -310,7 +310,7 @@
 
                         <div class="text-center finance-buttons">
                             <a href="{{ route('user.investmentplan', ['wallet' => 'business_pack_wallet']) }}"
-                                class="btn btn-success"> Plans</a>
+                                class="btn btn-outline-light"> Plans</a>
                         </div>
                     </div>
                 </div>
@@ -352,7 +352,7 @@
 
                         <div class="text-center finance-buttons">
                             <a href="{{ route('user.investmentplan', ['wallet' => 'business_value_wallet']) }}"
-                                class="btn btn-success"> Plans</a>
+                                class="btn btn-outline-light"> Plans</a>
                         </div>
                     </div>
                 </div>
@@ -399,7 +399,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary"
+                        <button type="button" class="btn btn-outline-light"
                             data-bs-dismiss="modal">{{ __('Close') }}</button>
                         <button type="submit" class="cmn-btn">{{ __('Deposit Now') }}</button>
                     </div>
@@ -436,7 +436,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary"
+                        <button type="button" class="btn btn-outline-light"
                             data-bs-dismiss="modal">{{ __('Close') }}</button>
                         <button type="submit" class="cmn-btn">{{ __('Transfer Now') }}</button>
                     </div>
@@ -560,7 +560,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="button" id="download-invoice" onclick="printInvoice()"
-                            class="btn btn-primary ">Download</button>
+                            class="btn btn-outline-light ">Download</button>
                     </div>
                 </div>
             </div>
@@ -684,7 +684,7 @@
         /* Custom Styling */
 
         .finance-card.bg-1 {
-            background-color: #FF5733;
+            background-color: #138d79;
             box-shadow: 1px 4px 5px rgb(252, 251, 121);
         }
 

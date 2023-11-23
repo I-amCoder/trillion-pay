@@ -116,11 +116,11 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end " aria-labelledby="dropdownMenuButton1">
 
-                        <li><a class="dropdown-item text-dark" href="<?php echo e(route('user.2fa')); ?>"><?php echo e(__('2FA')); ?></a>
+                        <li><a class="dropdown-item" href="<?php echo e(route('user.2fa')); ?>"><?php echo e(__('2FA')); ?></a>
                         </li>
-                        <li><a class="dropdown-item text-dark"
+                        <li><a class="dropdown-item"
                                 href="<?php echo e(route('user.profile')); ?>"><?php echo e(__('Settings')); ?></a></li>
-                        <li><a class="dropdown-item text-dark"
+                        <li><a class="dropdown-item"
                                 href="<?php echo e(route('user.logout')); ?>"><?php echo e(__('Logout')); ?></a></li>
                     </ul>
                 </div>
