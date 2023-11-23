@@ -192,17 +192,17 @@
 const fields = `
 <div class="col-md-12 form-group">
                                 <label for="form-label">Sponser Profit</label>
-                                <input type="number" name="sponser_profit" id="sponser_profit" required
+                                <input type="number" step="any" name="sponser_profit" id="sponser_profit" required
                                     class="form-control">
                             </div>
                             <div class="col-md-12 form-group">
                                 <label for="form-label">Return Interest</label>
-                                <input type="number" name="return_interest" id="return_interest" required
+                                <input type="number" step="any" name="return_interest" id="return_interest" required
                                     class="form-control">
                             </div>
                             <div class="col-md-12 form-group">
                                 <label for="form-label">Amount</label>
-                                <input type="number" name="amount" id="amount" required class="form-control">
+                                <input type="number" step="any" name="amount" id="amount" required class="form-control">
                             </div>
                             <div class="col-md-12 form-group">
                                 <label for="form-label">How Many Times</label>
@@ -222,9 +222,9 @@ const fields = `
                     let wallet = $(this).data('wallet');
                     let plan = $(this).data('plan');
                     let deposit = $(this).data('deposit');
-                    console.log(plan);
-                    console.log(wallet);
-                    console.log(deposit);
+                    // console.log(plan);
+                    // console.log(wallet);
+                    // console.log(deposit);
                     $("#business_value_fields").html(fields);
                     modal.find("input[name=sponser_profit]").val(Number(deposit.sponser_profit).toFixed(3));
                     modal.find("input[name=return_interest]").val(Number(plan.return_interest).toFixed(3));
