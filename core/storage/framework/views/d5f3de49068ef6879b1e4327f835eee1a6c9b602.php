@@ -91,7 +91,7 @@
             </div>
         </div>
         <hr>
-        <h1 class="text-success">My Wallets</h1>
+        <h1 class="text-dark">My Wallets</h1>
         <div class="row gy-4 ">
             <div class="col-md-6">
                 <div class="card finance-card bg-1">
@@ -148,7 +148,7 @@
                             <button class="btn btn-success deposit_now"
                                 data-href="<?php echo e(route('user.paynow', $gateway->id)); ?>" data-wallet_type="current_wallet"
                                 data-id="<?php echo e($gateway->id); ?>">Deposit</button>
-                            <button class="btn btn-danger ml-2 withdraw_now" data-wallet_type="current_wallet"
+                            <button class="btn btn-primary ml-2 withdraw_now" data-wallet_type="current_wallet"
                                 data-href="<?php echo e(route('user.wallet.withdraw', 'current_wallet')); ?>">Transfer</button>
                         </div>
                     </div>
@@ -209,7 +209,7 @@
                             <button class="btn btn-success deposit_now"
                                 data-href="<?php echo e(route('user.paynow', $gateway->id)); ?>" data-wallet_type="saving_wallet"
                                 data-id="<?php echo e($gateway->id); ?>">Deposit</button>
-                            <button class="btn btn-danger ml-2 withdraw_now"
+                            <button class="btn btn-primary ml-2 withdraw_now"
                                 data-href="<?php echo e(route('user.wallet.withdraw', 'saving_wallet')); ?>"
                                 data-wallet_type="saving_wallet">Transfer</button>
                         </div>
@@ -273,7 +273,7 @@
                             <button class="btn btn-success deposit_now"
                                 data-href="<?php echo e(route('user.paynow', $gateway->id)); ?>" data-wallet_type="sharing_wallet"
                                 data-id="<?php echo e($gateway->id); ?>">Deposit</button>
-                            <button class="btn btn-danger ml-2 withdraw_now"
+                            <button class="btn btn-primary ml-2 withdraw_now"
                                 data-href="<?php echo e(route('user.wallet.withdraw', 'sharing_wallet')); ?>"
                                 data-wallet_type="sharing_wallet">Transfer</button>
                         </div>
@@ -368,75 +368,7 @@
 
 
 
-        <?php
-            $reference = auth()->user()->refferals;
-        ?>
-        <div class="row mt-3">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="mb-0"><?php echo e(__('Reference Tree')); ?></h5>
-                    </div>
-                    <div class="card-body">
-                        <?php if($reference->count() > 0): ?>
-                            <ul class="sp-referral">
-                                <li class="single-child root-child">
-                                    <p>
-                                        <img src="<?php echo e(getFile('user', auth()->user()->image)); ?>">
-                                        <span class="mb-0"><?php echo e(auth()->user()->full_name); ?></span>
-                                    </p>
-                                    <ul class="sub-child-list step-2">
-                                        <?php $__currentLoopData = $reference; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <li class="single-child">
-                                                <p>
-                                                    <img src="<?php echo e(getFile('user', $user->image)); ?>">
-                                                    <span class="mb-0"><?php echo e($user->full_name); ?></span>
-                                                </p>
 
-                                                <ul class="sub-child-list step-3">
-                                                    <?php $__currentLoopData = $user->refferals; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ref): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                        <li class="single-child">
-                                                            <p>
-                                                                <img src="<?php echo e(getFile('user', $ref->image)); ?>">
-                                                                <span class="mb-0"><?php echo e($ref->full_name); ?></span>
-                                                            </p>
-
-                                                            <ul class="sub-child-list step-4">
-                                                                <?php $__currentLoopData = $ref->refferals; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ref2): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                                    <li class="single-child">
-                                                                        <p>
-                                                                            <img
-                                                                                src="<?php echo e(getFile('user', $ref2->image)); ?>">
-                                                                            <span
-                                                                                class="mb-0"><?php echo e($ref2->full_name); ?></span>
-                                                                        </p>
-                                                                    </li>
-                                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                            </ul>
-
-                                                        </li>
-                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                </ul>
-                                            </li>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-                                    </ul>
-                                </li>
-                            </ul>
-                        <?php else: ?>
-                            <div class="col-md-12 text-center mt-5">
-                                <i class="far fa-sad-tear display-1"></i>
-                                <p class="mt-2">
-                                    <?php echo e(__('No Reference User Found')); ?>
-
-                                </p>
-
-                            </div>
-                        <?php endif; ?>
-                    </div>
-                </div>
-            </div>
-        </div>
 
 
     </div>
@@ -473,7 +405,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger"
+                        <button type="button" class="btn btn-primary"
                             data-bs-dismiss="modal"><?php echo e(__('Close')); ?></button>
                         <button type="submit" class="cmn-btn"><?php echo e(__('Deposit Now')); ?></button>
                     </div>
@@ -510,7 +442,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger"
+                        <button type="button" class="btn btn-primary"
                             data-bs-dismiss="modal"><?php echo e(__('Close')); ?></button>
                         <button type="submit" class="cmn-btn"><?php echo e(__('Transfer Now')); ?></button>
                     </div>

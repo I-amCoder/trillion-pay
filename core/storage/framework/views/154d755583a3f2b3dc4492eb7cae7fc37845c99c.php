@@ -19,7 +19,7 @@
                     <div class="card">
                         <div class="card-body">
                         <h6 class="card-title" style="text-align: center"></h6>
-                        <p class="card-text">Total paid member: <?php echo e($total_team_count_paid); ?></p>
+                        <p class="card-text text-white">Paid Members: <?php echo e($total_team_count_paid); ?></p>
 
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                     <div class="card">
                         <div class="card-body">
                         <h6 class="card-title" style="text-align: center"></h6>
-                        <p class="card-text">Total non-paid member: <?php echo e($total_team_count); ?></p>
+                        <p class="card-text text-white">Non-paid Members: <?php echo e($total_team_count); ?></p>
                         </div>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
                     <div class="card">
                         <div class="card-body">
                         <h6 class="card-title" style="text-align: center"></h6>
-                        <p class="card-text">Total Direct Referral paid member: <?php echo e($directR_paid_user); ?></p>
+                        <p class="card-text text-white">Direct Paid Members: <?php echo e($directR_paid_user); ?></p>
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                     <div class="card">
                         <div class="card-body">
                         <h6 class="card-title" style="text-align: center"></h6>
-                        <p class="card-text">Total Direct Referral non-paid member: <?php echo e($direct_refarral_nonpaid); ?></p>
+                        <p class="card-text text-white">Direct Non-paid Members: <?php echo e($direct_refarral_nonpaid); ?></p>
                         </div>
                     </div>
                 </div>

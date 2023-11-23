@@ -1,12 +1,10 @@
-@extends('backend.layout.master')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
     <link rel="stylesheet"
-        href="{{ asset('asset/admin/modules/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css') }}" />
+        href="<?php echo e(asset('asset/admin/modules/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css')); ?>" />
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>{{ __($pageTitle) }}</h1>
+                <h1><?php echo e(__($pageTitle)); ?></h1>
             </div>
 
 
@@ -17,90 +15,90 @@
 
                             <form action="" method="post" enctype="multipart/form-data">
 
-                                @csrf
+                                <?php echo csrf_field(); ?>
 
                                 <div class="row">
 
 
                                     <div class="form-group col-md-2">
-                                        <label for="sitename">{{ __('Site Name') }}</label>
-                                        <input type="text" name="sitename" placeholder="@lang('site name')"
-                                            class="form-control form_control" value="{{ @$general->sitename }}">
+                                        <label for="sitename"><?php echo e(__('Site Name')); ?></label>
+                                        <input type="text" name="sitename" placeholder="<?php echo app('translator')->get('site name'); ?>"
+                                            class="form-control form_control" value="<?php echo e(@$general->sitename); ?>">
                                     </div>
 
                                     <div class="form-group col-md-2">
-                                        <label for="site_currency">{{ __('Site Currency') }}</label>
+                                        <label for="site_currency"><?php echo e(__('Site Currency')); ?></label>
                                         <input type="text" name="site_currency" class="form-control"
-                                            placeholder="Enter Site Currency" value="{{ @$general->site_currency ?? '' }}">
+                                            placeholder="Enter Site Currency" value="<?php echo e(@$general->site_currency ?? ''); ?>">
                                     </div>
 
                                     <div class="form-group col-md-2">
-                                        <label for="primary_color">{{ __('Primary Color') }}</label>
+                                        <label for="primary_color"><?php echo e(__('Primary Color')); ?></label>
                                         <div id="cp1" class="input-group" title="Using input value">
                                             <span class="input-group-append">
                                                 <span class="input-group-text colorpicker-input-addon"><i></i></span>
                                             </span>
                                             <input type="text" name="primary_color" class="form-control input-lg" data-color="hsl(56, 93%, 63%)"
-                                                value="{{ @$general->primary_color }}" />
+                                                value="<?php echo e(@$general->primary_color); ?>" />
                                         </div>
                                     </div>
 
                                     <div class="form-group col-md-3">
-                                        <label for="signup_bonus">{{ __('Sign Up Bonus') }}</label>
-                                        <input type="text" name="signup_bonus" placeholder="@lang('Sign Up Bonus')"
+                                        <label for="signup_bonus"><?php echo e(__('Sign Up Bonus')); ?></label>
+                                        <input type="text" name="signup_bonus" placeholder="<?php echo app('translator')->get('Sign Up Bonus'); ?>"
                                             class="form-control form_control"
-                                            value="{{ number_format(@$general->signup_bonus, 2) }}">
+                                            value="<?php echo e(number_format(@$general->signup_bonus, 2)); ?>">
                                     </div>
 
 
                                     <div class="form-group col-md-3">
-                                        <label for="timezone">{{ __('Timezone') }}</label>
+                                        <label for="timezone"><?php echo e(__('Timezone')); ?></label>
                                         <select name="timezone" id="" class="form-control">
-                                            @foreach ($timezone as $zone)
-                                                <option value="{{$zone}}" {{env('APP_TIMEZONE') == $zone ? 'selected' : ''}}>{{$zone}}</option>
-                                            @endforeach
+                                            <?php $__currentLoopData = $timezone; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $zone): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <option value="<?php echo e($zone); ?>" <?php echo e(env('APP_TIMEZONE') == $zone ? 'selected' : ''); ?>><?php echo e($zone); ?></option>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </select>
                                     </div>
 
 
                                     <div class="form-group col-md-6">
 
-                                        <label for="">{{ __('Nexmo Key') }} <a href="https://www.nexmo.com/"
-                                                target="_blank">{{ __('API Link') }}</a></label>
+                                        <label for=""><?php echo e(__('Nexmo Key')); ?> <a href="https://www.nexmo.com/"
+                                                target="_blank"><?php echo e(__('API Link')); ?></a></label>
                                         <input type="text" name="sms_username" class="form-control"
-                                            placeholder="Sms API KEY" value="{{ env('NEXMO_KEY') }}">
+                                            placeholder="Sms API KEY" value="<?php echo e(env('NEXMO_KEY')); ?>">
 
                                     </div>
 
 
                                     <div class="form-group col-md-6">
 
-                                        <label for="">{{ __('Nexmo Secret') }}</label>
+                                        <label for=""><?php echo e(__('Nexmo Secret')); ?></label>
                                         <input type="text" name="sms_password" class="form-control"
-                                            placeholder="Sms API Secret" value="{{ env('NEXMO_SECRET') }}">
+                                            placeholder="Sms API Secret" value="<?php echo e(env('NEXMO_SECRET')); ?>">
 
                                     </div>
                                     <div class="form-group col-md-3">
-                                        <label for="">{{ __('Profit Transfer Charge') }} %</label>
-                                        <input type="number" step="any" name="profit_transfer_charge" class="form-control" value="{{ number_format($general->profit_transfer_charge,3) }}">
+                                        <label for=""><?php echo e(__('Profit Transfer Charge')); ?> %</label>
+                                        <input type="number" step="any" name="profit_transfer_charge" class="form-control" value="<?php echo e(number_format($general->profit_transfer_charge,3)); ?>">
                                     </div>
 
 
                                     <div class="form-group col-md-3">
-                                        <label for="">{{ __('Transfer Limit Per Day') }}</label>
-                                        <input type="number" name="trans_limit" class="form-control" value="{{ $general->trans_limit }}">
+                                        <label for=""><?php echo e(__('Transfer Limit Per Day')); ?></label>
+                                        <input type="number" name="trans_limit" class="form-control" value="<?php echo e($general->trans_limit); ?>">
                                     </div>
 
                                     <div class="form-group col-md-3">
-                                        <label for="">{{ __('Transfer Charge') }}</label>
+                                        <label for=""><?php echo e(__('Transfer Charge')); ?></label>
 
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <input step="any" type="number" name="trans_charge" class="form-control" value="{{ number_format($general->trans_charge,3) }}">
+                                                <input step="any" type="number" name="trans_charge" class="form-control" value="<?php echo e(number_format($general->trans_charge,3)); ?>">
                                             </div>
                                             <select class="form-control" id="inputGroupSelect01" name="trans_type">
-                                                <option value="fixed" {{ $general->trans_type === 'fixed' ? 'selected' : '' }}>{{ __('Fixed') }}</option>
-                                                <option value="percent" {{ $general->trans_type === 'fixed' ? '' : 'selected' }}>{{ __('Percent') }}</option>
+                                                <option value="fixed" <?php echo e($general->trans_type === 'fixed' ? 'selected' : ''); ?>><?php echo e(__('Fixed')); ?></option>
+                                                <option value="percent" <?php echo e($general->trans_type === 'fixed' ? '' : 'selected'); ?>><?php echo e(__('Percent')); ?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -109,78 +107,78 @@
 
 
                                     <div class="form-group col-md-3">
-                                        <label for="">{{ __('Transfer Min Amount') }}</label>
-                                        <input type="number" name="min_amount" class="form-control" value="{{ $general->min_amount }}">
+                                        <label for=""><?php echo e(__('Transfer Min Amount')); ?></label>
+                                        <input type="number" name="min_amount" class="form-control" value="<?php echo e($general->min_amount); ?>">
                                     </div>
 
                                     <div class="form-group col-md-3">
-                                        <label for="">{{ __('Transfer Max Amount') }}</label>
-                                        <input type="number" name="max_amount" class="form-control" value="{{ $general->max_amount }}">
+                                        <label for=""><?php echo e(__('Transfer Max Amount')); ?></label>
+                                        <input type="number" name="max_amount" class="form-control" value="<?php echo e($general->max_amount); ?>">
                                     </div>
 
 
 
                                     <div class="form-group col-md-4">
-                                        <label for="sitename">{{ __('Copyright Text') }}</label>
-                                        <input type="text" name="copyright" placeholder="@lang('Copyright Text')"
-                                            class="form-control form_control" value="{{ @$general->copyright }}">
+                                        <label for="sitename"><?php echo e(__('Copyright Text')); ?></label>
+                                        <input type="text" name="copyright" placeholder="<?php echo app('translator')->get('Copyright Text'); ?>"
+                                            class="form-control form_control" value="<?php echo e(@$general->copyright); ?>">
                                     </div>
 
                                     <div class="col-md-4">
-                                        <label>{{ __('Withdraw Limit') }}</label>
+                                        <label><?php echo e(__('Withdraw Limit')); ?></label>
                                         <div class="input-group">
-                                            <input type="text" name="withdraw_limit" placeholder="@lang('Withdraw Limit')"
+                                            <input type="text" name="withdraw_limit" placeholder="<?php echo app('translator')->get('Withdraw Limit'); ?>"
                                                 class="form-control form_control"
-                                                value="{{ @$general->withdraw_limit }}">
+                                                value="<?php echo e(@$general->withdraw_limit); ?>">
                                             <div class="input-group-append">
                                                 <span class="input-group-text"
-                                                    id="basic-addon2">{{ __('Times per day') }}</span>
+                                                    id="basic-addon2"><?php echo e(__('Times per day')); ?></span>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group col-md-12">
-                                        <label for="sitename">{{ __('Map Link') }}</label>
-                                        <input type="text" name="map_link" placeholder="@lang('Map Link')"
-                                            class="form-control form_control" value="{{ @$general->map_link }}">
+                                        <label for="sitename"><?php echo e(__('Map Link')); ?></label>
+                                        <input type="text" name="map_link" placeholder="<?php echo app('translator')->get('Map Link'); ?>"
+                                            class="form-control form_control" value="<?php echo e(@$general->map_link); ?>">
                                     </div>
 
                                     <div class="form-group col-md-3">
-                                        <label for="" class="w-100">{{ __('Email Verification On') }} </label>
+                                        <label for="" class="w-100"><?php echo e(__('Email Verification On')); ?> </label>
                                         <div class="custom-switch custom-switch-label-onoff">
                                             <input class="custom-switch-input" id="ev" type="checkbox"
                                                 name="is_email_verification_on"
-                                                {{ @$general->is_email_verification_on ? 'checked' : '' }}>
+                                                <?php echo e(@$general->is_email_verification_on ? 'checked' : ''); ?>>
                                             <label class="custom-switch-btn" for="ev"></label>
                                         </div>
                                     </div>
 
                                     <div class="form-group col-md-3">
-                                        <label for="" class="w-100">{{ __('SMS Verification On') }} </label>
+                                        <label for="" class="w-100"><?php echo e(__('SMS Verification On')); ?> </label>
                                         <div class="custom-switch custom-switch-label-onoff">
                                             <input class="custom-switch-input" id="sv" type="checkbox"
                                                 name="is_sms_verification_on"
-                                                {{ @$general->is_sms_verification_on ? 'checked' : '' }}>
+                                                <?php echo e(@$general->is_sms_verification_on ? 'checked' : ''); ?>>
                                             <label class="custom-switch-btn" for="sv"></label>
                                         </div>
                                     </div>
 
 
                                     <div class="form-group col-md-3">
-                                        <label for="" class="w-100">{{ __('User Registration') }} </label>
+                                        <label for="" class="w-100"><?php echo e(__('User Registration')); ?> </label>
                                         <div class="custom-switch custom-switch-label-onoff">
                                             <input class="custom-switch-input" id="ug_r" type="checkbox"
-                                                name="user_reg" {{ @$general->user_reg ? 'checked' : '' }}>
+                                                name="user_reg" <?php echo e(@$general->user_reg ? 'checked' : ''); ?>>
                                             <label class="custom-switch-btn" for="ug_r"></label>
                                         </div>
                                     </div>
 
 
                                     <div class="form-group col-md-3">
-                                        <label for="" class="w-100">{{ __('User KYC') }} </label>
+                                        <label for="" class="w-100"><?php echo e(__('User KYC')); ?> </label>
                                         <div class="custom-switch custom-switch-label-onoff">
                                             <input class="custom-switch-input" id="ug_kyc" type="checkbox"
-                                                name="user_kyc" {{ @$general->user_kyc ? 'checked' : '' }}>
+                                                name="user_kyc" <?php echo e(@$general->user_kyc ? 'checked' : ''); ?>>
                                             <label class="custom-switch-btn" for="ug_kyc"></label>
                                         </div>
                                     </div>
@@ -189,76 +187,76 @@
 
 
                                     <div class="form-group col-md-4 mb-3">
-                                        <label class="col-form-label">{{ __('logo') }}</label>
+                                        <label class="col-form-label"><?php echo e(__('logo')); ?></label>
 
                                         <div id="image-preview" class="image-preview"
-                                            style="background-image:url({{ getFile('logo', @$general->logo) }});">
-                                            <label for="image-upload" id="image-label">{{ __('Choose File') }}</label>
+                                            style="background-image:url(<?php echo e(getFile('logo', @$general->logo)); ?>);">
+                                            <label for="image-upload" id="image-label"><?php echo e(__('Choose File')); ?></label>
                                             <input type="file" name="logo" id="image-upload" />
                                         </div>
 
                                     </div>
 
                                     <div class="form-group col-md-4 mb-3">
-                                        <label class="col-form-label">{{ __('Black logo') }}</label>
+                                        <label class="col-form-label"><?php echo e(__('Black logo')); ?></label>
 
                                         <div id="image-preview-whitelogo" class="image-preview"
-                                            style="background-image:url({{ getFile('logo', @$general->whitelogo) }});">
-                                            <label for="image-upload-whitelogo" id="image-label-whitelogo">{{ __('Choose File') }}</label>
+                                            style="background-image:url(<?php echo e(getFile('logo', @$general->whitelogo)); ?>);">
+                                            <label for="image-upload-whitelogo" id="image-label-whitelogo"><?php echo e(__('Choose File')); ?></label>
                                             <input type="file" name="whitelogo" id="image-upload-whitelogo" />
                                         </div>
 
                                     </div>
 
                                     <div class="form-group col-md-4 mb-3">
-                                        <label class="col-form-label">{{ __('Icon') }}</label>
+                                        <label class="col-form-label"><?php echo e(__('Icon')); ?></label>
                                         <div id="image-preview-icon" class="image-preview"
-                                            style="background-image:url({{ getFile('icon', @$general->favicon) }});">
+                                            style="background-image:url(<?php echo e(getFile('icon', @$general->favicon)); ?>);">
                                             <label for="image-upload-icon"
-                                                id="image-label-icon">{{ __('Choose File') }}</label>
+                                                id="image-label-icon"><?php echo e(__('Choose File')); ?></label>
                                             <input type="file" name="icon" id="image-upload-icon" />
                                         </div>
                                     </div>
 
                                     <div class="form-group col-md-4 mb-3">
-                                        <label class="col-form-label">{{ __('Login Image') }}</label>
+                                        <label class="col-form-label"><?php echo e(__('Login Image')); ?></label>
                                         <div id="image-preview-login" class="image-preview"
-                                            style="background-image:url({{ getFile('login', @$general->login_image) }});">
+                                            style="background-image:url(<?php echo e(getFile('login', @$general->login_image)); ?>);">
                                             <label for="image-upload-login"
-                                                id="image-label-login">{{ __('Choose File') }}</label>
+                                                id="image-label-login"><?php echo e(__('Choose File')); ?></label>
                                             <input type="file" name="login_image" id="image-upload-login" />
                                         </div>
                                     </div>
 
 
                                     <div class="form-group col-md-4 mb-3">
-                                        <label class="col-form-label">{{ __('Frontend Login Image') }}</label>
+                                        <label class="col-form-label"><?php echo e(__('Frontend Login Image')); ?></label>
                                         <div id="image-preview-login_image" class="image-preview"
-                                            style="background-image:url({{ getFile('frontendlogin', @$general->frontend_login_image) }});">
+                                            style="background-image:url(<?php echo e(getFile('frontendlogin', @$general->frontend_login_image)); ?>);">
                                             <label for="image-upload-login_image"
-                                                id="image-label-login_image">{{ __('Choose File') }}</label>
+                                                id="image-label-login_image"><?php echo e(__('Choose File')); ?></label>
                                             <input type="file" name="frontend_login_image"
                                                 id="image-upload-login_image" />
                                         </div>
                                     </div>
 
                                     <div class="form-group col-md-4 mb-3">
-                                        <label class="col-form-label">{{ __('Frontend Breadcrumbs Image') }}</label>
+                                        <label class="col-form-label"><?php echo e(__('Frontend Breadcrumbs Image')); ?></label>
                                         <div id="image-preview-breadcrumbs" class="image-preview"
-                                            style="background-image:url({{ getFile('breadcrumbs', @$general->breadcrumbs) }});">
+                                            style="background-image:url(<?php echo e(getFile('breadcrumbs', @$general->breadcrumbs)); ?>);">
                                             <label for="image-upload-breadcrumbs"
-                                                id="image-label-breadcrumbs">{{ __('Choose File') }}</label>
+                                                id="image-label-breadcrumbs"><?php echo e(__('Choose File')); ?></label>
                                             <input type="file" name="breadcrumbs" id="image-upload-breadcrumbs" />
                                         </div>
                                     </div>
 
 
                                     <div class="form-group col-md-4 mb-3">
-                                        <label class="col-form-label">{{ __('Frontend Main Background Image') }}</label>
+                                        <label class="col-form-label"><?php echo e(__('Frontend Main Background Image')); ?></label>
                                         <div id="image-preview-main" class="image-preview"
-                                            style="background-image:url({{ getFile('main', @$general->frontend_main_background_image) }});">
+                                            style="background-image:url(<?php echo e(getFile('main', @$general->frontend_main_background_image)); ?>);">
                                             <label for="image-upload-main"
-                                                id="image-label-main">{{ __('Choose File') }}</label>
+                                                id="image-label-main"><?php echo e(__('Choose File')); ?></label>
                                             <input type="file" name="main" id="image-upload-main" />
                                         </div>
                                     </div>
@@ -269,7 +267,7 @@
                                     <div class="form-group col-md-12">
 
                                         <button type="submit"
-                                            class="btn btn-primary float-right">{{ __('Update General Setting') }}</button>
+                                            class="btn btn-primary float-right"><?php echo e(__('Update General Setting')); ?></button>
 
                                     </div>
 
@@ -282,12 +280,12 @@
             </div>
         </section>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
 
 
 
-@push('style')
+<?php $__env->startPush('style'); ?>
     <style>
         .sp-replacer {
             padding: 0;
@@ -326,10 +324,10 @@
             height: 43px;
         }
     </style>
-@endpush
+<?php $__env->stopPush(); ?>
 
-@push('script')
-    <script src="{{ asset('asset/admin/modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js') }}"></script>
+<?php $__env->startPush('script'); ?>
+    <script src="<?php echo e(asset('asset/admin/modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js')); ?>"></script>
     <script>
         $(function() {
 
@@ -409,4 +407,6 @@
             });
         })
     </script>
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('backend.layout.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Junaid Ali\Desktop\www\invest4sale\core\resources\views/backend/setting/general_setting.blade.php ENDPATH**/ ?>

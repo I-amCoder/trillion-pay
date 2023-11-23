@@ -93,7 +93,7 @@
             </div>
         </div>
         <hr>
-        <h1 class="text-success">My Wallets</h1>
+        <h1 class="text-dark">My Wallets</h1>
         <div class="row gy-4 ">
             <div class="col-md-6">
                 <div class="card finance-card bg-1">
@@ -148,7 +148,7 @@
                             <button class="btn btn-success deposit_now"
                                 data-href="{{ route('user.paynow', $gateway->id) }}" data-wallet_type="current_wallet"
                                 data-id="{{ $gateway->id }}">Deposit</button>
-                            <button class="btn btn-danger ml-2 withdraw_now" data-wallet_type="current_wallet"
+                            <button class="btn btn-primary ml-2 withdraw_now" data-wallet_type="current_wallet"
                                 data-href="{{ route('user.wallet.withdraw', 'current_wallet') }}">Transfer</button>
                         </div>
                     </div>
@@ -207,7 +207,7 @@
                             <button class="btn btn-success deposit_now"
                                 data-href="{{ route('user.paynow', $gateway->id) }}" data-wallet_type="saving_wallet"
                                 data-id="{{ $gateway->id }}">Deposit</button>
-                            <button class="btn btn-danger ml-2 withdraw_now"
+                            <button class="btn btn-primary ml-2 withdraw_now"
                                 data-href="{{ route('user.wallet.withdraw', 'saving_wallet') }}"
                                 data-wallet_type="saving_wallet">Transfer</button>
                         </div>
@@ -269,7 +269,7 @@
                             <button class="btn btn-success deposit_now"
                                 data-href="{{ route('user.paynow', $gateway->id) }}" data-wallet_type="sharing_wallet"
                                 data-id="{{ $gateway->id }}">Deposit</button>
-                            <button class="btn btn-danger ml-2 withdraw_now"
+                            <button class="btn btn-primary ml-2 withdraw_now"
                                 data-href="{{ route('user.wallet.withdraw', 'sharing_wallet') }}"
                                 data-wallet_type="sharing_wallet">Transfer</button>
                         </div>
@@ -364,74 +364,7 @@
 
 
 
-        @php
-            $reference = auth()->user()->refferals;
-        @endphp
-        <div class="row mt-3">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="mb-0">{{ __('Reference Tree') }}</h5>
-                    </div>
-                    <div class="card-body">
-                        @if ($reference->count() > 0)
-                            <ul class="sp-referral">
-                                <li class="single-child root-child">
-                                    <p>
-                                        <img src="{{ getFile('user', auth()->user()->image) }}">
-                                        <span class="mb-0">{{ auth()->user()->full_name }}</span>
-                                    </p>
-                                    <ul class="sub-child-list step-2">
-                                        @foreach ($reference as $user)
-                                            <li class="single-child">
-                                                <p>
-                                                    <img src="{{ getFile('user', $user->image) }}">
-                                                    <span class="mb-0">{{ $user->full_name }}</span>
-                                                </p>
 
-                                                <ul class="sub-child-list step-3">
-                                                    @foreach ($user->refferals as $ref)
-                                                        <li class="single-child">
-                                                            <p>
-                                                                <img src="{{ getFile('user', $ref->image) }}">
-                                                                <span class="mb-0">{{ $ref->full_name }}</span>
-                                                            </p>
-
-                                                            <ul class="sub-child-list step-4">
-                                                                @foreach ($ref->refferals as $ref2)
-                                                                    <li class="single-child">
-                                                                        <p>
-                                                                            <img
-                                                                                src="{{ getFile('user', $ref2->image) }}">
-                                                                            <span
-                                                                                class="mb-0">{{ $ref2->full_name }}</span>
-                                                                        </p>
-                                                                    </li>
-                                                                @endforeach
-                                                            </ul>
-
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            </li>
-                                        @endforeach
-
-                                    </ul>
-                                </li>
-                            </ul>
-                        @else
-                            <div class="col-md-12 text-center mt-5">
-                                <i class="far fa-sad-tear display-1"></i>
-                                <p class="mt-2">
-                                    {{ __('No Reference User Found') }}
-                                </p>
-
-                            </div>
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </div>
 
 
     </div>
@@ -468,7 +401,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger"
+                        <button type="button" class="btn btn-primary"
                             data-bs-dismiss="modal">{{ __('Close') }}</button>
                         <button type="submit" class="cmn-btn">{{ __('Deposit Now') }}</button>
                     </div>
@@ -505,7 +438,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger"
+                        <button type="button" class="btn btn-primary"
                             data-bs-dismiss="modal">{{ __('Close') }}</button>
                         <button type="submit" class="cmn-btn">{{ __('Transfer Now') }}</button>
                     </div>

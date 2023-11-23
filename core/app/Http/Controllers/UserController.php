@@ -433,13 +433,13 @@ class UserController extends Controller
 
 
 
-        $payment = Payment::where('user_id', auth()->id())->where('payment_status', 1)->count();
+        // $payment = Payment::where('user_id', auth()->id())->where('payment_status', 1)->count();
 
-        if ($payment <= 0) {
-            $notify[] = ['error', 'You have to invest on a plan to use Signup Balance'];
+        // if ($payment <= 0) {
+        //     $notify[] = ['error', 'You have to invest on a plan to use Signup Balance'];
 
-            return back()->withNotify($notify);
-        }
+        //     return back()->withNotify($notify);
+        // }
 
 
 
