@@ -16,6 +16,7 @@
     --body-gradient-bg: #138d79;
     --bg-dark: #138d79;
     --purple-color: #38ef7d;
+    --font-color: #dce5ea;
  
 
     --h-font: "Syne", sans-serif;
@@ -24,7 +25,7 @@
 
 body {
     background-color: var(--body-gradient-bg);
-    color: 	#dce5ea;
+    color: 	var(--font-color);
     font-family: var(--p-font);
     line-height: 1.7;
     display: flex;
@@ -59,7 +60,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 500;
     padding: 12px 30px;
     background-color: var(--main-color);
-    color: var(--body-bg);
+    color: var(--font-color);
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;

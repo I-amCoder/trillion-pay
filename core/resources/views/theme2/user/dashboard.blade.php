@@ -8,7 +8,7 @@
                 <input type="text" id="refer-link" class="form-control copy-text"
                     value="{{ route('user.register', @Auth::user()->username) }}" placeholder="referallink.com/refer"
                     aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
-                <button type="button" class="input-group-text text-dark copy cmn-btn"
+                <button type="button" class="input-group-text  copy cmn-btn"
                     id="basic-addon2">{{ __('Copy') }}</button>
             </div>
         </div>
