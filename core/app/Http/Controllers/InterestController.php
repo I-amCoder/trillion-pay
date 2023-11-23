@@ -64,28 +64,33 @@ class InterestController extends Controller
 
                         $nextInvest = CurrentWalletPayment::where('id', $invest->id)->first();
 
-                        if ($nextInvest) {
-                            // Update next profit time
-                            $updatePaymentDate = $invest->next_payment_time->addHour(24);
 
-                            $nextInvest->next_payment_time = $updatePaymentDate;
-                            $nextInvest->interest_amount += $returnAmount;
+                        // Update next profit time
+                        $updatePaymentDate = $invest->next_payment_time->addHour(24);
+
+                        $nextInvest->next_payment_time = $updatePaymentDate;
+                        $nextInvest->interest_amount += $returnAmount;
 
 
-                            $user->save();
-                            $nextInvest->save();
+                        $user->save();
+                        $nextInvest->save();
 
-                            $type = (new CurrentWallet())->getTable();
+                        $type = (new CurrentWallet())->getTable();
 
-                            UserInterest::create([
-                                'user_id' => $user->id,
-                                'payment_id' => $invest->id,
-                                'type' => $type,
-                                'interest_amount' => $returnAmount,
-                                'purpouse' => 'Invest Return Commission'
-                            ]);
-                            refferMoney($user->id, $user->refferedBy, 'interest', $returnAmount, $type);
-                        }
+                        UserInterest::create([
+                            'user_id' => $user->id,
+                            'payment_id' => $invest->id,
+                            'type' => $type,
+                            'interest_amount' => $returnAmount,
+                            'purpouse' => 'Invest Return Commission'
+                        ]);
+                        sendMail('RETURN_INTEREST', [
+                            'plan' => "Current Wallet Interest",
+                            'amount' => $returnAmount,
+                            'currency' => @$general->site_currency
+                        ], $invest->user);
+                        refferMoney($user->id, $user->refferedBy, 'interest', $returnAmount, $type);
+
 
                         // return true;
                     }
@@ -97,6 +102,7 @@ class InterestController extends Controller
 
     public function savingWalletInterest()
     {
+        $general = GeneralSetting::first();
         $invests = SavingWalletPayment::with('user', 'wallet')->latest()->get();
 
         foreach ($invests as $invest) {
@@ -118,26 +124,32 @@ class InterestController extends Controller
 
                         $nextInvest = SavingWalletPayment::where('id', $invest->id)->first();
 
-                        if ($nextInvest) {
-                            // Update next profit time
-                            $updatePaymentDate = $invest->next_payment_time->addHour(24);
 
-                            $nextInvest->next_payment_time = $updatePaymentDate;
-                            $nextInvest->interest_amount += $returnAmount;
-                            $nextInvest->save();
-                            $user->save();
-                            $type = (new SavingWallet())->getTable();
+                        // Update next profit time
+                        $updatePaymentDate = $invest->next_payment_time->addHour(24);
 
-                            UserInterest::create([
-                                'user_id' => $user->id,
-                                'payment_id' => $invest->id,
-                                'type' => $type,
-                                'interest_amount' => $returnAmount,
-                                'purpouse' => 'Invest Return Commission'
-                            ]);
+                        $nextInvest->next_payment_time = $updatePaymentDate;
+                        $nextInvest->interest_amount += $returnAmount;
+                        $nextInvest->save();
+                        $user->save();
+                        $type = (new SavingWallet())->getTable();
 
-                            refferMoney($user->id, $user->refferedBy, 'interest', $returnAmount, $type);
-                        }
+                        UserInterest::create([
+                            'user_id' => $user->id,
+                            'payment_id' => $invest->id,
+                            'type' => $type,
+                            'interest_amount' => $returnAmount,
+                            'purpouse' => 'Invest Return Commission'
+                        ]);
+
+                        sendMail('RETURN_INTEREST', [
+                            'plan' => "Saving Wallet Interest",
+                            'amount' => $returnAmount,
+                            'currency' => @$general->site_currency
+                        ], $invest->user);
+
+                        refferMoney($user->id, $user->refferedBy, 'interest', $returnAmount, $type);
+
 
                         // return true;
                     }
@@ -148,6 +160,7 @@ class InterestController extends Controller
 
     public function sharingWalletInterest()
     {
+        $general = GeneralSetting::first();
         $invests = SharingWalletPayment::with('user', 'wallet')->latest()->get();
 
         foreach ($invests as $invest) {
@@ -188,27 +201,31 @@ class InterestController extends Controller
 
 
                         $nextInvest = SharingWalletPayment::where('id', $invest->id)->first();
-                        if ($nextInvest) {
-                            // Update next profit time
-                            $updatePaymentDate = $invest->next_payment_time->addHour(24);
+                        // Update next profit time
+                        $updatePaymentDate = $invest->next_payment_time->addHour(24);
 
-                            $nextInvest->next_payment_time = $updatePaymentDate;
-                            $nextInvest->interest_amount += $returnAmount;
-                            $nextInvest->save();
-                            $user->save();
-                            $wallet->save();
-                            $type = (new SharingWallet())->getTable();
+                        $nextInvest->next_payment_time = $updatePaymentDate;
+                        $nextInvest->interest_amount += $returnAmount;
+                        $nextInvest->save();
+                        $user->save();
+                        $wallet->save();
+                        $type = (new SharingWallet())->getTable();
 
-                            UserInterest::create([
-                                'user_id' => $user->id,
-                                'payment_id' => $invest->id,
-                                'type' => $type,
-                                'interest_amount' => $returnAmount,
-                                'purpouse' => 'Invest Return Commission'
-                            ]);
+                        UserInterest::create([
+                            'user_id' => $user->id,
+                            'payment_id' => $invest->id,
+                            'type' => $type,
+                            'interest_amount' => $returnAmount,
+                            'purpouse' => 'Invest Return Commission'
+                        ]);
 
-                            refferMoney($user->id, $user->refferedBy, 'interest', $returnAmount, $type);
-                        }
+                        sendMail('RETURN_INTEREST', [
+                            'plan' => "Sharing Wallet Interest",
+                            'amount' => $self_profit,
+                            'currency' => @$general->site_currency
+                        ], $invest->user);
+                        refferMoney($user->id, $user->refferedBy, 'interest', $returnAmount, $type);
+
 
                         // return true;
                     }
