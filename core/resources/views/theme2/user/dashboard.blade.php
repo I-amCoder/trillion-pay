@@ -168,7 +168,7 @@
                                 </li>
                                 <li>
                                     <span class="dropdown-item">
-                                        <a href="{{ route('user.wallet.transfer_log', ['wallet' => '']) }}"
+                                        <a href="{{ route('user.wallet.transfer_log', ['wallet' => 'saving_wallet']) }}"
                                             class="text-dark"> Transfer History</a>
                                     </span>
                                 </li>
@@ -232,7 +232,7 @@
                                 </li>
                                 <li>
                                     <span class="dropdown-item">
-                                        <a href="{{ route('user.wallet.transfer_log', ['wallet' => '']) }}"
+                                        <a href="{{ route('user.wallet.transfer_log', ['wallet' => 'sharing_wallet']) }}"
                                             class="text-dark"> Transfer History</a>
                                     </span>
                                 </li>
@@ -256,7 +256,7 @@
 
                             @endphp
                             @if ($sharing_transfer)
-                                {{ number_number($sharing_transfer->amount, 3) }}
+                                {{ number_format($sharing_transfer->amount, 3) }}
                             @else
                                 0
                             @endif
@@ -526,7 +526,11 @@
 
                             <div class="invoice-item">
                                 <span class="invoice-label">Amount:</span>
-                                <span class="invoice-value">{{ $deposit->amount }}</span>
+                                <span class="invoice-value">{{ number_format($deposit->amount,2) }}</span>
+                            </div>
+                            <div class="invoice-item">
+                                <span class="invoice-label">Point Value:</span>
+                                <span class="invoice-value">{{ number_format($deposit->amount/5,2) }}</span>
                             </div>
 
                             <div class="invoice-item">

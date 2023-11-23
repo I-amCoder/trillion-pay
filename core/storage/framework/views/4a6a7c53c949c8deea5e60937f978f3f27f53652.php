@@ -104,6 +104,10 @@
                             <span class="invoice-label">Amount:</span>
                             <span class="invoice-value" id="amount"></span>
                         </div>
+                        <div class="invoice-item">
+                            <span class="invoice-label">Point Value:</span>
+                            <span class="invoice-value" id="point_value"></span>
+                        </div>
 
                         <div class="invoice-item">
                             <span class="invoice-label">Currency:</span>
@@ -196,6 +200,7 @@
                 $('#user').html(`${deposit.user.fname} ${deposit.user.lname}`);
                 $('#gateway').html(deposit.gateway.gateway_name);
                 $('#amount').html(Number(deposit.amount).toFixed(2));
+                $('#point_value').html(Number(deposit.amount/5).toFixed(2));
                 $('#currency').html(deposit.gateway.gateway_parameters.gateway_currency);
                 $('#charge').html(deposit.gateway.charge);
                 $('#wallet_type').html($(this).data('wallet_type').replaceAll("_"," "));

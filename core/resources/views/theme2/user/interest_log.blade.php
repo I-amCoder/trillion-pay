@@ -40,7 +40,8 @@
                                     {{ isset($log->business_pack_payment->next_payment_time) ? $log->business_pack_payment->next_payment_time : 'Plan Expired' }}
                                 </td>
                             </tr>
-                        @elseif ($log->type == 'business_value_wallets')
+                        @endif
+                        @if ($log->type == 'business_value_wallets')
                             <tr>
                                 <td data-caption="{{ __('Plan Name') }}">
                                     {{ $log->business_value_payment->plan->plan_name }}</td>
@@ -53,6 +54,51 @@
                                 <td data-caption="{{ __('Payment Date') }}">{{ $log->created_at }}</td>
                                 <td data-caption="{{ __('Next Payment Date') }}">
                                     {{ isset($log->business_value_payment->next_payment_time) ? $log->business_value_payment->next_payment_time : 'Plan Expired' }}
+                                </td>
+                            </tr>
+                        @endif
+                        @if ($log->type == 'current_wallets')
+                            <tr>
+                                <td data-caption="{{ __('Plan Name') }}">N/A</td>
+                                <td data-caption="{{ __('Interest') }}">{{ number_format($log->interest_amount, 3) }}
+                                    {{ @$general->site_currency }}</td>
+                                <td>Current Wallet</td>
+                                <td data-caption="{{ __('Invest Amount') }}">
+                                    {{ number_format($log->user->current_wallet->amount ?? 0, 3) }}
+                                    {{ @$general->site_currency }}</td>
+                                <td data-caption="{{ __('Payment Date') }}">{{ $log->created_at }}</td>
+                                <td data-caption="{{ __('Next Payment Date') }}">
+                                    Every 24 Hours
+                                </td>
+                            </tr>
+                        @endif
+                        @if ($log->type == 'saving_wallets')
+                            <tr>
+                                <td data-caption="{{ __('Plan Name') }}">N/A</td>
+                                <td data-caption="{{ __('Interest') }}">{{ number_format($log->interest_amount, 3) }}
+                                    {{ @$general->site_currency }}</td>
+                                <td>Saving Wallet</td>
+                                <td data-caption="{{ __('Invest Amount') }}">
+                                    {{ number_format($log->user->saving_wallet->amount ?? 0, 3) }}
+                                    {{ @$general->site_currency }}</td>
+                                <td data-caption="{{ __('Payment Date') }}">{{ $log->created_at }}</td>
+                                <td data-caption="{{ __('Next Payment Date') }}">
+                                    Every 24 Hours
+                                </td>
+                            </tr>
+                        @endif
+                        @if ($log->type == 'sharing_wallets')
+                            <tr>
+                                <td data-caption="{{ __('Plan Name') }}">N/A</td>
+                                <td data-caption="{{ __('Interest') }}">{{ number_format($log->interest_amount, 3) }}
+                                    {{ @$general->site_currency }}</td>
+                                <td>Sharing Wallet</td>
+                                <td data-caption="{{ __('Invest Amount') }}">
+                                    {{ number_format($log->user->sharing_wallet->amount ?? 0, 3) }}
+                                    {{ @$general->site_currency }}</td>
+                                <td data-caption="{{ __('Payment Date') }}">{{ $log->created_at }}</td>
+                                <td data-caption="{{ __('Next Payment Date') }}">
+                                    Every 24 Hours
                                 </td>
                             </tr>
                         @endif

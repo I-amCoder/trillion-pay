@@ -12,6 +12,7 @@ use Auth;
 use App;
 use App\Models\BusinessPackPayment;
 use App\Models\BusinessValuePayment;
+use App\Models\Gateway;
 use App\Models\GeneralSetting;
 use App\Models\MoneyTransfer;
 use App\Models\Transaction;
@@ -95,7 +96,8 @@ class SiteController extends Controller
                 $query;
             }
         })->get();
-        return view($this->template . 'pages.invest', compact('pageTitle', 'plans'));
+        $gateway = Gateway::where('is_created', 1)->latest()->first();
+        return view($this->template . 'pages.invest', compact('pageTitle', 'plans','gateway'));
     }
 
     public function investmentUsingBalannce(Request $request)

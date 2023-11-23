@@ -53,13 +53,23 @@ class PaymentController extends Controller
             'wallet_type' => 'required',
         ]);
 
+
+
         $gateway = Gateway::where('status', 1)->findOrFail($request->id);
         $trx = strtoupper(Str::random());
         $final_amount = ($request->amount * $gateway->rate) + $gateway->charge;
 
+        // Defaults
         $plan_id = null;
         $wallet_type = null;
         $redirect = null;
+        $payment_status = 0;
+        $payment_type = 1;
+        $proof = [];
+        $user = auth()->user();
+        $self_profit = null;
+        $sponser_profit = null;
+
         switch ($request->wallet_type) {
             case 'current_wallet':
                 $wallet_type = (new CurrentWallet)->getTable();
@@ -87,15 +97,28 @@ class PaymentController extends Controller
             return $redirect;
         }
 
-        $payment_status = 0;
-        $payment_type = 1;
-        $proof = [];
-        $user = auth()->user();
-        $user_balance = $request->has('use_current_balance') && $request->use_current_balance == "on";
-        if ($user_balance) {
+
+        $use_balance = $request->has('use_current_balance') && $request->use_current_balance == "on";
+        if ($use_balance) {
+            // Further Validations
             if ($final_amount > $user->balance) {
                 return redirect()->back()->withError("Insufficient Current Balance");
             }
+
+            if ($wallet_type == 'business_value_wallets') {
+                $plan = Plan::findOrFail($plan_id);
+                $request->validate([
+                    'sponser_profit' => 'required'
+                ]);
+                if ($request->sponser_profit > $plan->return_interest) {
+                    return redirect()->back()->withErrors([
+                        'sponser_profit' => 'Sponser profit should be less than total profit'
+                    ]);
+                }
+                $sponser_profit = $request->sponser_profit;
+                $self_profit = $plan->return_interest - $request->sponser_profit;
+            }
+
             $payment_status = 2;
             $payment_type = 0;
             $proof = ["deposit_source" => "Paid Using Current Balance"];
@@ -118,6 +141,8 @@ class PaymentController extends Controller
                 'wallet_type' => $wallet_type,
                 'plan_id' => $plan_id,
                 'payment_proof' => $proof,
+                'sponser_profit' => $sponser_profit,
+                'self_profit' => $self_profit,
             ]);
 
             session()->put('trx', $trx);
@@ -125,7 +150,10 @@ class PaymentController extends Controller
             session()->put('wallet', $wallet_type);
 
 
-            if ($user_balance) {
+            if ($use_balance) {
+                session()->forget('trx');
+                session()->forget('type');
+                session()->forget('wallet');
                 $notify[] = ['success', 'Your Payment is Successfully Recieved'];
                 return redirect()->route('user.dashboard')->with(['notify' => $notify, 'deposit' => $deposit]);
             }

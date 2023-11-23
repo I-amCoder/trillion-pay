@@ -168,7 +168,7 @@
                                 </li>
                                 <li>
                                     <span class="dropdown-item">
-                                        <a href="<?php echo e(route('user.wallet.transfer_log', ['wallet' => ''])); ?>"
+                                        <a href="<?php echo e(route('user.wallet.transfer_log', ['wallet' => 'saving_wallet'])); ?>"
                                             class="text-dark"> Transfer History</a>
                                     </span>
                                 </li>
@@ -234,7 +234,7 @@
                                 </li>
                                 <li>
                                     <span class="dropdown-item">
-                                        <a href="<?php echo e(route('user.wallet.transfer_log', ['wallet' => ''])); ?>"
+                                        <a href="<?php echo e(route('user.wallet.transfer_log', ['wallet' => 'sharing_wallet'])); ?>"
                                             class="text-dark"> Transfer History</a>
                                     </span>
                                 </li>
@@ -258,7 +258,7 @@
 
                             ?>
                             <?php if($sharing_transfer): ?>
-                                <?php echo e(number_number($sharing_transfer->amount, 3)); ?>
+                                <?php echo e(number_format($sharing_transfer->amount, 3)); ?>
 
                             <?php else: ?>
                                 0
@@ -530,7 +530,11 @@
 
                             <div class="invoice-item">
                                 <span class="invoice-label">Amount:</span>
-                                <span class="invoice-value"><?php echo e($deposit->amount); ?></span>
+                                <span class="invoice-value"><?php echo e(number_format($deposit->amount,2)); ?></span>
+                            </div>
+                            <div class="invoice-item">
+                                <span class="invoice-label">Point Value:</span>
+                                <span class="invoice-value"><?php echo e(number_format($deposit->amount/5,2)); ?></span>
                             </div>
 
                             <div class="invoice-item">
@@ -861,9 +865,7 @@
                     $("#loginMessageModal").modal('show');
                 <?php endif; ?>
             <?php endif; ?>
-            <?php if($loginMessage): ?>
-                $("#loginMessageModal").modal('show');
-            <?php endif; ?>
+
 
         })
 

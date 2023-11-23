@@ -41,7 +41,8 @@
 
                                 </td>
                             </tr>
-                        <?php elseif($log->type == 'business_value_wallets'): ?>
+                        <?php endif; ?>
+                        <?php if($log->type == 'business_value_wallets'): ?>
                             <tr>
                                 <td data-caption="<?php echo e(__('Plan Name')); ?>">
                                     <?php echo e($log->business_value_payment->plan->plan_name); ?></td>
@@ -57,6 +58,57 @@
                                 <td data-caption="<?php echo e(__('Next Payment Date')); ?>">
                                     <?php echo e(isset($log->business_value_payment->next_payment_time) ? $log->business_value_payment->next_payment_time : 'Plan Expired'); ?>
 
+                                </td>
+                            </tr>
+                        <?php endif; ?>
+                        <?php if($log->type == 'current_wallets'): ?>
+                            <tr>
+                                <td data-caption="<?php echo e(__('Plan Name')); ?>">N/A</td>
+                                <td data-caption="<?php echo e(__('Interest')); ?>"><?php echo e(number_format($log->interest_amount, 3)); ?>
+
+                                    <?php echo e(@$general->site_currency); ?></td>
+                                <td>Current Wallet</td>
+                                <td data-caption="<?php echo e(__('Invest Amount')); ?>">
+                                    <?php echo e(number_format($log->user->current_wallet->amount ?? 0, 3)); ?>
+
+                                    <?php echo e(@$general->site_currency); ?></td>
+                                <td data-caption="<?php echo e(__('Payment Date')); ?>"><?php echo e($log->created_at); ?></td>
+                                <td data-caption="<?php echo e(__('Next Payment Date')); ?>">
+                                    Every 24 Hours
+                                </td>
+                            </tr>
+                        <?php endif; ?>
+                        <?php if($log->type == 'saving_wallets'): ?>
+                            <tr>
+                                <td data-caption="<?php echo e(__('Plan Name')); ?>">N/A</td>
+                                <td data-caption="<?php echo e(__('Interest')); ?>"><?php echo e(number_format($log->interest_amount, 3)); ?>
+
+                                    <?php echo e(@$general->site_currency); ?></td>
+                                <td>Saving Wallet</td>
+                                <td data-caption="<?php echo e(__('Invest Amount')); ?>">
+                                    <?php echo e(number_format($log->user->saving_wallet->amount ?? 0, 3)); ?>
+
+                                    <?php echo e(@$general->site_currency); ?></td>
+                                <td data-caption="<?php echo e(__('Payment Date')); ?>"><?php echo e($log->created_at); ?></td>
+                                <td data-caption="<?php echo e(__('Next Payment Date')); ?>">
+                                    Every 24 Hours
+                                </td>
+                            </tr>
+                        <?php endif; ?>
+                        <?php if($log->type == 'sharing_wallets'): ?>
+                            <tr>
+                                <td data-caption="<?php echo e(__('Plan Name')); ?>">N/A</td>
+                                <td data-caption="<?php echo e(__('Interest')); ?>"><?php echo e(number_format($log->interest_amount, 3)); ?>
+
+                                    <?php echo e(@$general->site_currency); ?></td>
+                                <td>Sharing Wallet</td>
+                                <td data-caption="<?php echo e(__('Invest Amount')); ?>">
+                                    <?php echo e(number_format($log->user->sharing_wallet->amount ?? 0, 3)); ?>
+
+                                    <?php echo e(@$general->site_currency); ?></td>
+                                <td data-caption="<?php echo e(__('Payment Date')); ?>"><?php echo e($log->created_at); ?></td>
+                                <td data-caption="<?php echo e(__('Next Payment Date')); ?>">
+                                    Every 24 Hours
                                 </td>
                             </tr>
                         <?php endif; ?>

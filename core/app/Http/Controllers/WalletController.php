@@ -169,16 +169,25 @@ class WalletController extends Controller
             return back()->withError("Insufficient Balance in wallet");
         }
 
+        $hours = $settings[$type . "_time"];
+
         $transfer = new WalletTransfer();
         $transfer->amount = $final;
         $transfer->user_id = $user->id;
         $transfer->wallet_id = $wallet->id;
         $transfer->wallet_type = $type;
-        $transfer->time = now()->addHours($settings[$type . "_time"]);
-        $transfer->save();
+        $transfer->time = $hours == 0 ? now()->subHours(1) : now()->addHours($hours);
 
         $wallet->amount -= $final;
+
+        $transfer->save();
         $wallet->save();
+
+        // Trigger transfer Instantly
+        if ($hours == 0) {
+            $trigger = new InterestController();
+            $trigger->walletWithdrawReturn();
+        }
         return back()->withSuccess("Requested Successfully");
     }
 

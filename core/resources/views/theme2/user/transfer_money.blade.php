@@ -15,11 +15,11 @@
 
                         <div class="d-flex flex-wrap justify-content-between">
 
-                            <p class="text-info">Min Transfer Amount :
+                            <p class="text-white">Min Transfer Amount :
                                 {{ $general->min_amount . ' ' . $general->site_currency }}</p>
-                            <p class="text-info">Max Transfer Amount :
+                            <p class="text-white">Max Transfer Amount :
                                 {{ $general->max_amount . ' ' . $general->site_currency }}</p>
-                            <p class="text-info">Transfer Charge :
+                            <p class="text-white">Transfer Charge :
                                 {{ $general->trans_charge . ' ' . ($general->trans_type === 'fixed' ? $general->site_currency : '%') }}
                             </p>
                         </div>
@@ -84,10 +84,10 @@
                     commission = parseFloat(charge)
                 }
 
-                total = parseFloat($(this).val()) + commission;
+                total = parseFloat($(this).val()) - commission;
 
 
-                $('#totalAmount').text('Total Amount with Charge - ' + total)
+                $('#totalAmount').text('Total Amount after Charge : ' + total)
 
 
 

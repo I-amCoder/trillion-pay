@@ -384,7 +384,7 @@ class UserController extends Controller
 
         $data['interestLogs'] = UserInterest::when($request->date, function ($item) use ($request) {
             $item->whereDate('created_at', $request->date);
-        })->whereIn('type', ['business_pack_wallets', 'business_value_wallets'])->where('user_id', Auth::id())->latest()->get();
+        })->where('user_id', Auth::id())->latest()->get();
 
 
         $data['pageTitle'] = 'Return interest Log';
@@ -433,13 +433,13 @@ class UserController extends Controller
 
 
 
-        // $payment = Payment::where('user_id', auth()->id())->where('payment_status', 1)->count();
+        $deposits = Deposit::where('user_id', auth()->id())->where('payment_status', 1)->count();
 
-        // if ($payment <= 0) {
-        //     $notify[] = ['error', 'You have to invest on a plan to use Signup Balance'];
+        if ($deposits <= 0) {
+            $notify[] = ['error', 'You have to deposit in website to complete this transfer'];
 
-        //     return back()->withNotify($notify);
-        // }
+            return back()->withNotify($notify);
+        }
 
 
 
@@ -460,10 +460,10 @@ class UserController extends Controller
 
         $commison = $general->trans_type === 'percent' ? ($request->amount * $general->trans_charge) / 100 :  $general->trans_charge;
 
-        $totalSendAmount = $commison + $request->amount;
+        $totalSendAmount = $request->amount - $commison;
 
 
-        if (auth()->user()->balance < $totalSendAmount) {
+        if (auth()->user()->balance < $request->amount) {
 
             $notify[] = ['error', 'Insufficient Balance'];
 
@@ -475,7 +475,7 @@ class UserController extends Controller
 
         $user = auth()->user();
 
-        $user->balance = $user->balance - $totalSendAmount;
+        $user->balance = $user->balance - $request->amount;
 
         $user->save();
 
@@ -510,7 +510,7 @@ class UserController extends Controller
 
 
 
-        $receiver->balance = $receiver->balance + $request->amount;
+        $receiver->balance = $receiver->balance + $totalSendAmount;
 
         $receiver->save();
 
