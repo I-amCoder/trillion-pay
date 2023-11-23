@@ -161,7 +161,7 @@ class ManageUserController extends Controller
         $users = User::query();
 
         if ($request->status == 'active') {
-            $ids = Payment::pluck('user_id');
+            $ids = Deposit::pluck('user_id');
             $users->where('status', 1)->whereIn('id', $ids);
         } elseif ($request->status == 'deactive') {
             $users->where('status', 0);
