@@ -190,26 +190,26 @@ class UserController extends Controller
         ]);
 
 
-        // $payment = Payment::where('user_id', auth()->id())->where('payment_status', 1)->count();
+        $payment = Deposit::where('user_id', auth()->id())->where('payment_status', 1)->count();
 
-        // if ($payment <= 0) {
-        //     $notify[] = ['error', 'You have to invest on a plan to withdraw'];
+        if ($payment <= 0) {
+            $notify[] = ['error', 'You have to deposit  on a plan to withdraw'];
 
-        //     return back()->withNotify($notify);
-        // }
+            return back()->withNotify($notify);
+        }
 
 
 
 
         $withdraw = WithdrawGateway::findOrFail($request->method);
 
-        if (auth()->user()->balance < $request->final_amo) {
+        if (auth()->user()->balance < $request->amount) {
             $notify[] = ['error', 'Insuficient Balance'];
 
             return back()->withNotify($notify);
         }
 
-        if ($request->final_amo < $withdraw->min_amount || $request->final_amo > $withdraw->max_amount) {
+        if ($request->amount < $withdraw->min_amount || $request->amount > $withdraw->max_amount) {
             $notify[] = ['error', 'Please follow the withdraw limits'];
 
             return back()->withNotify($notify);
@@ -222,11 +222,13 @@ class UserController extends Controller
             $total = $request->amount - $withdraw->charge;
         }
 
+
         if ($total != $request->final_amo) {
             $notify[] = ['error', 'Invalid Amount'];
 
             return back()->withNotify($notify);
         }
+
 
 
 

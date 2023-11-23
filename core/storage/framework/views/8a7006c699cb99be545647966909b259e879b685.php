@@ -11,7 +11,7 @@
 <?php $__env->startSection('content2'); ?>
 
     <div class="dashboard-body-part">
-        
+
         <div class="text-center">
             <div class="tab-btn-group">
                 <a class="tab-btn <?php echo e(Request::routeIs('user.withdraw.all') ? 'active' : ''); ?>"
@@ -54,10 +54,7 @@
                             <td data-caption="<?php echo e(__('Method Name')); ?>"><?php echo e(__($withdrawlog->withdrawMethod->name)); ?></td>
                             <td data-caption="<?php echo e(__('Getable Amount')); ?>"><?php echo e($general->currency_icon .
                                 '  ' .
-                                $withdrawlog->withdraw_amount +
-                                ($withdrawlog->withdrawMethod->charge_type === 'percent'
-                                    ? ($withdrawlog->withdraw_amount * $withdrawlog->withdraw_charge) / 100
-                                    : $withdrawlog->withdraw_amount)); ?>
+                                number_format($withdrawlog->withdraw_amount,2)); ?>
 
                             </td>
                             <td>
@@ -73,12 +70,12 @@
                             </td>
                             <td data-caption="<?php echo e(__('Charge')); ?>">
                                 <?php if($withdrawlog->withdrawMethod->charge_type == 'percent'): ?>
-                                    
+
                                 <?php echo e($withdrawlog->withdraw_amount * $withdrawlog->withdraw_charge / 100 .' '.$general->site_currency); ?>
 
-                             
+
                              <?php else: ?>
-                             
+
                              <?php echo e(number_format($withdrawlog->withdraw_charge, 2).' '.@$general->site_currency); ?>
 
                              <?php endif; ?>

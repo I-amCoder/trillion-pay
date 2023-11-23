@@ -13,7 +13,7 @@
 @section('content2')
 
     <div class="dashboard-body-part">
-        
+
         <div class="text-center">
             <div class="tab-btn-group">
                 <a class="tab-btn {{ Request::routeIs('user.withdraw.all') ? 'active' : '' }}"
@@ -56,10 +56,7 @@
                             <td data-caption="{{ __('Method Name') }}">{{ __($withdrawlog->withdrawMethod->name) }}</td>
                             <td data-caption="{{__('Getable Amount')}}">{{ $general->currency_icon .
                                 '  ' .
-                                $withdrawlog->withdraw_amount +
-                                ($withdrawlog->withdrawMethod->charge_type === 'percent'
-                                    ? ($withdrawlog->withdraw_amount * $withdrawlog->withdraw_charge) / 100
-                                    : $withdrawlog->withdraw_amount) }}
+                                number_format($withdrawlog->withdraw_amount,2)  }}
                             </td>
                             <td>
 
@@ -72,11 +69,11 @@
                             </td>
                             <td data-caption="{{ __('Charge') }}">
                                 @if($withdrawlog->withdrawMethod->charge_type == 'percent')
-                                    
+
                                 {{ $withdrawlog->withdraw_amount * $withdrawlog->withdraw_charge / 100 .' '.$general->site_currency}}
-                             
+
                              @else
-                             
+
                              {{ number_format($withdrawlog->withdraw_charge, 2).' '.@$general->site_currency }}
                              @endif
                             </td>
