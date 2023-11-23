@@ -124,12 +124,13 @@
                                     ->user()
                                     ->wallet_transfer()
                                     ->where('wallet_type', 'current_wallet')
-                                    ->where('status', 0)->latest()
+                                    ->where('status', 0)
+                                    ->latest()
                                     ->first();
 
                             ?>
                             <?php if($current_transfer): ?>
-                                <?php echo e($current_transfer->amount); ?>
+                                <?php echo e(number_format($current_transfer->amount, 3)); ?>
 
                             <?php else: ?>
                                 0
@@ -185,13 +186,14 @@
                                     ->user()
                                     ->wallet_transfer()
                                     ->where('wallet_type', 'saving_wallet')
-                                    ->where('status', 0)->latest()
+                                    ->where('status', 0)
+                                    ->latest()
 
                                     ->first();
 
                             ?>
                             <?php if($saving_transfer): ?>
-                                <?php echo e($saving_transfer->amount); ?>
+                                <?php echo e(number_format($saving_transfer->amount, 3)); ?>
 
                             <?php else: ?>
                                 0
@@ -250,12 +252,13 @@
                                     ->user()
                                     ->wallet_transfer()
                                     ->where('wallet_type', 'sharing_wallet')
-                                    ->where('status', 0)->latest()
+                                    ->where('status', 0)
+                                    ->latest()
                                     ->first();
 
                             ?>
                             <?php if($sharing_transfer): ?>
-                                <?php echo e($sharing_transfer->amount); ?>
+                                <?php echo e(number_number($sharing_transfer->amount, 3)); ?>
 
                             <?php else: ?>
                                 0
@@ -308,9 +311,7 @@
                                 class="finance-amount"><?php echo e(number_format(auth()->user()->business_pack_wallet->amount, 3) . ' ' . $general->site_currency); ?></span>
                         </div>
                         <p>Investments Only</p>
-                        <p class="text-center">
-                            <span id="packTimerPlaceholder" class="timer"></span>
-                        </p>
+
                         <div class="text-center finance-buttons">
                             <a href="<?php echo e(route('user.investmentplan', ['wallet' => 'business_pack_wallet'])); ?>"
                                 class="btn btn-success"> Plans</a>
@@ -573,7 +574,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h6 class="modal-title text-dark" id="loginMessageModalLabel">Message</h6>
+                        <h6 class="modal-title text-dark text-center" id="loginMessageModalLabel">News update</h6>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -860,6 +861,10 @@
                     $("#loginMessageModal").modal('show');
                 <?php endif; ?>
             <?php endif; ?>
+            <?php if($loginMessage): ?>
+                $("#loginMessageModal").modal('show');
+            <?php endif; ?>
+
         })
 
 

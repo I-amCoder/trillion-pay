@@ -28,21 +28,22 @@
                 @empty
                 @endforelse
               </ul>
-              <select class="changeLang" aria-label="Default select example">
+              {{-- <select class="changeLang" aria-label="Default select example">
                   @foreach ($language_top as $top)
                       <option value="{{ $top->short_code }}"
                           {{ session('locale') == $top->short_code ? 'selected' : '' }}>
                           {{ __(ucwords($top->name)) }}
                       </option>
                   @endforeach
-              </select>
+              </select> --}}
+              <div id="google_translate_element"></div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="header-bottom"> 
+  <div class="header-bottom">
     <div class="container">
       <nav class="navbar navbar-expand-xl p-0 align-items-center">
         <a class="site-logo site-title" href="{{ route('home') }}">
@@ -71,6 +72,6 @@
         </div>
       </nav>
     </div>
-  </div><!-- header__bottom end --> 
+  </div><!-- header__bottom end -->
 </header>
 <!-- header-section end  -->

@@ -126,12 +126,13 @@
                                     ->user()
                                     ->wallet_transfer()
                                     ->where('wallet_type', 'current_wallet')
-                                    ->where('status', 0)->latest()
+                                    ->where('status', 0)
+                                    ->latest()
                                     ->first();
 
                             @endphp
                             @if ($current_transfer)
-                                {{ $current_transfer->amount }}
+                                {{ number_format($current_transfer->amount, 3) }}
                             @else
                                 0
                             @endif
@@ -185,13 +186,14 @@
                                     ->user()
                                     ->wallet_transfer()
                                     ->where('wallet_type', 'saving_wallet')
-                                    ->where('status', 0)->latest()
+                                    ->where('status', 0)
+                                    ->latest()
 
                                     ->first();
 
                             @endphp
                             @if ($saving_transfer)
-                                {{ $saving_transfer->amount }}
+                                {{ number_format($saving_transfer->amount, 3) }}
                             @else
                                 0
                             @endif
@@ -248,12 +250,13 @@
                                     ->user()
                                     ->wallet_transfer()
                                     ->where('wallet_type', 'sharing_wallet')
-                                    ->where('status', 0)->latest()
+                                    ->where('status', 0)
+                                    ->latest()
                                     ->first();
 
                             @endphp
                             @if ($sharing_transfer)
-                                {{ $sharing_transfer->amount }}
+                                {{ number_number($sharing_transfer->amount, 3) }}
                             @else
                                 0
                             @endif
@@ -304,9 +307,7 @@
                                 class="finance-amount">{{ number_format(auth()->user()->business_pack_wallet->amount, 3) . ' ' . $general->site_currency }}</span>
                         </div>
                         <p>Investments Only</p>
-                        <p class="text-center">
-                            <span id="packTimerPlaceholder" class="timer"></span>
-                        </p>
+
                         <div class="text-center finance-buttons">
                             <a href="{{ route('user.investmentplan', ['wallet' => 'business_pack_wallet']) }}"
                                 class="btn btn-success"> Plans</a>
@@ -569,7 +570,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h6 class="modal-title text-dark" id="loginMessageModalLabel">Message</h6>
+                        <h6 class="modal-title text-dark text-center" id="loginMessageModalLabel">News update</h6>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -855,6 +856,8 @@
                     $("#loginMessageModal").modal('show');
                 @endif
             @endif
+
+
         })
 
 

@@ -30,10 +30,44 @@
     <link rel="stylesheet" href="{{ asset('asset/theme2/frontend/css/line-awesome.min.css') }}">
     <link href="{{ asset('asset/theme2/frontend/css/style.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('asset/theme2/frontend/css/iziToast.min.css') }}">
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
+
+    <style>
+        .goog-logo-link {
+            display: none !important;
+        }
+
+
+        .goog-te-gadget {
+            color: transparent !important;
+        }
+
+        .goog-te-gadget span {
+            display: none !important;
+        }
+
+        body>.skiptranslate {
+            display: none;
+        }
+
+        /* Style the custom dropdown */
+        .goog-te-combo {
+            border: 1px solid #ccc;
+            padding: 5px;
+            border-radius: 5px;
+            background-color: #fff;
+            font-size: 14px;
+            color: #333;
+            max-width: 140px;
+            /* Adjust the width as needed */
+        }
+    </style>
 
     @stack('style')
 
-   <link rel="stylesheet" href="{{ asset('asset/theme2/frontend/css/color.php?primary_color=' . str_replace('#', '', @$general->primary_color)) }}">
+    <link rel="stylesheet"
+        href="{{ asset('asset/theme2/frontend/css/color.php?primary_color=' . str_replace('#', '', @$general->primary_color)) }}">
 </head>
 
 
@@ -63,14 +97,14 @@
         </script>
     @endif
 
-    @include(template().'layout.header')
+    @include(template() . 'layout.header')
     <main id="main" class="main-img">
 
         @yield('content')
 
     </main>
 
-    @include(template().'layout.footer')
+    @include(template() . 'layout.footer')
 
     {{-- back to to btn jobas --}}
 
@@ -145,15 +179,21 @@
             "use strict";
             @foreach ($errors->all() as $error)
                 iziToast.error({
-                message: "{{ __($error) }}",
-                position: "topRight"
+                    message: "{{ __($error) }}",
+                    position: "topRight"
                 });
             @endforeach
         </script>
     @endif
 
 
-
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en'
+            }, 'google_translate_element');
+        }
+    </script>
 
 
     <script>
