@@ -244,7 +244,7 @@ function sendMail($key, array $data, $user)
             $mail->Body    = $message;
             $mail->send();
         } catch (Exception $e) {
-            throw new Exception($e);
+            // throw new Exception($e);
         }
     }
 }

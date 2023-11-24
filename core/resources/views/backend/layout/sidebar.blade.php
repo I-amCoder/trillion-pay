@@ -196,6 +196,9 @@
                             <a class="nav-link"
                                 href="{{ route('admin.withdraw.accepted') }}">{{ __('Accepted Withdraws') }}</a>
                         </li>
+                        <li class="{{ @$subNavWithdrawMethodActiveClass }}">
+                            <a class="nav-link" href="{{ route('admin.sponser.commision.create') }}">{{ __('Sponser Commision') }}</a>
+                        </li>
                         <li class="{{ @$subNavWithdrawRejectedActiveClass }}">
                             <a class="nav-link"
                                 href="{{ route('admin.withdraw.rejected') }}">{{ __('Rejected Withdraws') }}</a>

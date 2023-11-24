@@ -15,12 +15,12 @@ class ReferralController extends Controller
     {
         $pageTitle = 'Manage Referral';
 
-        $invest_referral = Refferal::where('type','invest')->latest()->first();
-        $interest_referral = Refferal::where('type','interest')->latest()->first();
-        $plan_interest_referral = Refferal::where('type','plan_interest')->latest()->first();
+        $invest_referral = Refferal::where('type', 'invest')->latest()->first();
+        $interest_referral = Refferal::where('type', 'interest')->latest()->first();
+        $plan_interest_referral = Refferal::where('type', 'plan_interest')->latest()->first();
 
 
-        return view('backend.referral.index', compact('pageTitle','interest_referral','invest_referral','plan_interest_referral'));
+        return view('backend.referral.index', compact('pageTitle', 'interest_referral', 'invest_referral', 'plan_interest_referral'));
     }
 
 
@@ -28,8 +28,8 @@ class ReferralController extends Controller
     public function investStore(Request $request)
     {
         Refferal::updateOrCreate([
-            'id'=>2
-        ],[
+            'id' => 2
+        ], [
             'type' => $request->type,
             'level' => $request->level,
             'commision' => $request->commision,
@@ -43,8 +43,8 @@ class ReferralController extends Controller
     public function interestStore(Request $request)
     {
         Refferal::updateOrCreate([
-            'id'=>3
-        ],[
+            'id' => 3
+        ], [
             'type' => $request->type,
             'level' => $request->level,
             'commision' => $request->commision,
@@ -59,8 +59,8 @@ class ReferralController extends Controller
     public function interestPlanStore(Request $request)
     {
         Refferal::updateOrCreate([
-            'id'=>4
-        ],[
+            'id' => 4
+        ], [
             'type' => $request->type,
             'level' => $request->level,
             'commision' => $request->commision,
@@ -141,7 +141,7 @@ class ReferralController extends Controller
 
         $commison = RefferedCommission::query();
 
-        if($user){
+        if ($user) {
             $commison->where('reffered_by', $user->id);
         }
 
@@ -149,6 +149,17 @@ class ReferralController extends Controller
 
         $pageTitle = 'Commission Log';
 
-        return view('backend.report.commission',compact('commison','pageTitle'));
+        return view('backend.report.commission', compact('commison', 'pageTitle'));
+    }
+
+    public function deleteCommision($id)
+    {
+        $log = RefferedCommission::find($id);
+        if ($log) {
+            $log->delete();
+
+            return redirect()->back()->withSuccess('Commision Deleted Successfully');
+        }
+        return redirect()->back()->withError('Commision Not found');
     }
 }

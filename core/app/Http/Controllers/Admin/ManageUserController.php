@@ -357,4 +357,13 @@ class ManageUserController extends Controller
         }
         return back()->with('error', 'error occurred');
     }
+
+    public function deleteInterestLog($id){
+        $log = UserInterest::find($id);
+        if($log){
+            $log->delete();
+            return redirect()->back()->withSuccess('Interest Deleted Successfully');
+        }
+        return redirect()->back()->withError('Interest Not found');
+    }
 }

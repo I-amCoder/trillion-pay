@@ -37,5 +37,32 @@
             </table>
             {{ $commison->links('backend.partial.paginate') }}
         </div>
+        <div class="row mt-3">
+            <h3>Withdraw Commission</h3>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table cmn-table">
+                <thead>
+                    <tr class="bg-yellow">
+                        <th scope="col">{{ __('Amount') }}</th>
+                        <th scope="col">{{ __('Date') }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($sponsers as $item)
+                        <tr>
+                            <td data-caption="To">{{ number_format($item->amounts, 5) }} {{ @$general->site_currency }}</td>
+                            <td data-caption="{{__('date')}}">{{ $item->created_at->format('d-M-Y') }}</td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td data-caption="Data" class="text-center" colspan="100%">{{ __('No Data Found') }}</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+            {{ $sponsers->links('backend.partial.paginate') }}
+        </div>
     </div>
 @endsection

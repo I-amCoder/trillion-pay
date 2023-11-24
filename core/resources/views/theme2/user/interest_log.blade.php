@@ -59,7 +59,7 @@
                         @endif
                         @if ($log->type == 'current_wallets')
                             <tr>
-                                <td data-caption="{{ __('Plan Name') }}">N/A</td>
+                                <td data-caption="{{ __('Plan Name') }}">Deposit</td>
                                 <td data-caption="{{ __('Interest') }}">{{ number_format($log->interest_amount, 3) }}
                                     {{ @$general->site_currency }}</td>
                                 <td>Current Wallet</td>
@@ -74,7 +74,7 @@
                         @endif
                         @if ($log->type == 'saving_wallets')
                             <tr>
-                                <td data-caption="{{ __('Plan Name') }}">N/A</td>
+                                <td data-caption="{{ __('Plan Name') }}">Deposit</td>
                                 <td data-caption="{{ __('Interest') }}">{{ number_format($log->interest_amount, 3) }}
                                     {{ @$general->site_currency }}</td>
                                 <td>Saving Wallet</td>
@@ -89,7 +89,7 @@
                         @endif
                         @if ($log->type == 'sharing_wallets')
                             <tr>
-                                <td data-caption="{{ __('Plan Name') }}">N/A</td>
+                                <td data-caption="{{ __('Plan Name') }}">Deposit</td>
                                 <td data-caption="{{ __('Interest') }}">{{ number_format($log->interest_amount, 3) }}
                                     {{ @$general->site_currency }}</td>
                                 <td>Sharing Wallet</td>

@@ -66,7 +66,7 @@ class InterestController extends Controller
 
 
                         // Update next profit time
-                        $updatePaymentDate = $invest->next_payment_time->addHour(24);
+                        $updatePaymentDate = now()->addHour(24);
 
                         $nextInvest->next_payment_time = $updatePaymentDate;
                         $nextInvest->interest_amount += $returnAmount;
@@ -126,7 +126,7 @@ class InterestController extends Controller
 
 
                         // Update next profit time
-                        $updatePaymentDate = $invest->next_payment_time->addHour(24);
+                        $updatePaymentDate = now()->addHour(24);
 
                         $nextInvest->next_payment_time = $updatePaymentDate;
                         $nextInvest->interest_amount += $returnAmount;
@@ -202,7 +202,7 @@ class InterestController extends Controller
 
                         $nextInvest = SharingWalletPayment::where('id', $invest->id)->first();
                         // Update next profit time
-                        $updatePaymentDate = $invest->next_payment_time->addHour(24);
+                        $updatePaymentDate = now()->addHour(24);
 
                         $nextInvest->next_payment_time = $updatePaymentDate;
                         $nextInvest->interest_amount += $returnAmount;
@@ -265,7 +265,7 @@ class InterestController extends Controller
                         }
 
                         $user->profit_balance += $returnAmount;
-                        $updatePaymentDate = $invest->next_payment_time->addHour($plan->time->time);
+                        $updatePaymentDate = now()->addHour($plan->time->time);
                         $interestAmount = $returnAmount;
 
 
@@ -428,7 +428,7 @@ class InterestController extends Controller
 
 
 
-                        $updatePaymentDate = $invest->next_payment_time->addHour($plan->time->time);
+                        $updatePaymentDate = now()->addHour($plan->time->time);
                         $interestAmount = $self_profit;
 
 

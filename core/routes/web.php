@@ -205,6 +205,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('withdraw/rejected', [ManageWithdrawController::class, 'rejected'])->name('withdraw.rejected');
             Route::post('withdraw/accept/{withdraw}', [ManageWithdrawController::class, 'withdrawAccept'])->name('withdraw.accept');
             Route::post('withdraw/reject/{withdraw}', [ManageWithdrawController::class, 'withdrawReject'])->name('withdraw.reject');
+
+            Route::post('withdraw/bulk/accept', [ManageWithdrawController::class, 'bulkWithdrawAccept'])->name('withdraw.bulk.accept');
+            Route::post('withdraw/bulk/reject', [ManageWithdrawController::class, 'bulkWithdrawReject'])->name('withdraw.bulk.reject');
+
+
+            Route::get('withdraw/sponser/commision/create', [ManageWithdrawController::class, 'createSponserCommision'])->name('sponser.commision.create');
+            Route::post('withdraw/sponser/commision/update', [ManageWithdrawController::class, 'updateSponserCommision'])->name('sponser.commision.update');
+            Route::get('admin/sponser/commision/delete/{id}', [ManageWithdrawController::class, 'deleteSponserCommision'])->name('sponser.commision.delete');
         });
 
         Route::middleware('permission:manage-frontend,admin')->group(function () {
@@ -268,6 +276,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::middleware('permission:manage-logs,admin')->group(function () {
             Route::get('user/interest/log/{user?}', [ManageUserController::class, 'interestLog'])->name('user.interestlog');
             Route::get('commision/{user?}', [ReferralController::class, 'Commision'])->name('commision');
+            Route::post('user/interest/log/{id}', [ManageUserController::class, 'deleteInterestLog'])->name('user.interestlog.delete');
+            Route::post('commision/{id}', [ReferralController::class, 'deleteCommision'])->name('commision.delete');
         });
 
 

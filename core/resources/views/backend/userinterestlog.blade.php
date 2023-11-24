@@ -19,6 +19,7 @@
                                 <th>{{ __('Interest Amount') }}</th>
                                 <th>{{ __('How Many Time get Paid') }}</th>
                                 <th>{{ __('Date') }}</th>
+                                <th>{{ __('Action') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -33,6 +34,12 @@
                                         {{ @$interestLog->payment->plan->how_many_time }} {{ __('Times') }}
                                     </td>
                                     <td>{{ $interestLog->created_at }}</td>
+                                    <td>
+                                        <form action="{{ route('admin.user.interestlog.delete',$interestLog->id) }}" method="POST">
+                                            @csrf
+                                            <button class="btn btn-danger" type="submit">Delete</button>
+                                        </form>
+                                    </td>
                                 </tr>
 
                             @empty

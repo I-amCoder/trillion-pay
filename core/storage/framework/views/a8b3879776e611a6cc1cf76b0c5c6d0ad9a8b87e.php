@@ -126,11 +126,6 @@
                                    <textarea class="form-control" name="account_information" row="5"></textarea>
                                 </div>
 
-                                <div class="col-md-12 mb-3">
-                                    <label for=""><?php echo e(__('Additional Note')); ?></label>
-                                   <textarea class="form-control" name="note" row="5"></textarea>
-                                </div>
-
                                 <div class="col-md-12">
                                    <button class="cmn-btn w-100" type="submit"><?php echo e(__('Withdraw Now')); ?></button>
                                 </div>

@@ -16,6 +16,8 @@ use App\Models\Ranking;
 use App\Models\RefferedCommission;
 use App\Models\User;
 use App\Models\MoneyTransfer;
+use App\Models\SponserAmount;
+use App\Models\SponserCommision;
 use App\Models\UserRanking;
 use App\Models\WalletProfits;
 use Illuminate\Http\Request;
@@ -217,7 +219,10 @@ class UserController extends Controller
 
         if ($withdraw->charge_type == 'percent') {
 
-            $total = $request->amount - ($withdraw->charge * $request->amount) / 100;
+            $tax = $withdraw->charge;
+            $requestAmount = $request->amount;
+            $taxAmount = $tax * ($requestAmount / 100);
+            $total = $request->amount - $taxAmount;
         } else {
             $total = $request->amount - $withdraw->charge;
         }
@@ -229,6 +234,30 @@ class UserController extends Controller
             return back()->withNotify($notify);
         }
 
+
+        $reffaral_id = User::select('reffered_by', 'id')->where('id', auth()->user()->id)->first();
+
+
+
+        if ($reffaral_id->reffered_by > 0) {
+
+            $reffral_commision = SponserCommision::select('percent')->first();
+            $sponser_amount = $reffral_commision->percent * ($taxAmount / 100);
+
+            $admin_final_amount = $taxAmount - $sponser_amount;
+            $sponser = User::where('id', $reffaral_id->reffered_by)->first();
+
+            $sponser->balance += $sponser_amount;
+
+            SponserAmount::create([
+                'user_id' => $reffaral_id->reffered_by,
+                'from_id' => $reffaral_id->id,
+                'amounts' => $sponser_amount
+            ]);
+            $sponser->update();
+        } else {
+            $admin_final_amount = 0;
+        }
 
 
 
@@ -357,8 +386,8 @@ class UserController extends Controller
         $commison = RefferedCommission::when($request->date, function ($item) use ($request) {
             $item->whereDate('created_at', $request->date);
         })->where('reffered_by', Auth::id())->latest()->paginate(10, ['*'], 'commison');
-
-        return view($this->template . 'user.commision_log', compact('pageTitle', 'commison'));
+        $sponsers = SponserAmount::where('user_id',Auth::id())->latest()->paginate(10);
+        return view($this->template . 'user.commision_log', compact('pageTitle', 'commison','sponsers'));
     }
 
 

@@ -20,6 +20,7 @@
                                             <th scope="col">{{ __('Commison To') }}</th>
                                             <th scope="col">{{ __('Amount') }}</th>
                                             <th scope="col">{{ __('Commision Date') }}</th>
+                                            <th scope="col">{{ __('Action') }}</th>
                                         </tr>
 
                                     </thead>
@@ -33,6 +34,12 @@
                                                     {{ @$general->site_currency }}</td>
                                                 <td data-caption="{{ __('date') }}">
                                                     {{ $item->created_at->format('y-m-d') }}</td>
+                                                    <td>
+                                                        <form action="{{ route('admin.commision.delete',$item->id) }}" method="POST">
+                                                            @csrf
+                                                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</button>
+                                                        </form>
+                                                    </td>
                                             </tr>
                                         @empty
                                             <tr>
@@ -43,7 +50,7 @@
                                     </tbody>
 
 
-                                   
+
 
                                 </table>
 
@@ -86,7 +93,7 @@
         .pagination .page-item.active .page-link:hover {
             background-color: rgb(95, 116, 235);
         }
-        
+
          th,td{
             text-align: center !important;
         }

@@ -1,16 +1,14 @@
-@extends('backend.layout.master')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
     <div class="main-content">
         <div class="row withdraw-all-row">
-            @if(isset($pending) && $pending)
+            <?php if(isset($pending) && $pending): ?>
             <div class="col-12 my-3">
                 <button class="btn btn-success checkall">Check All</button>
                 <button class="btn btn-danger uncheckall">Uncheck All</button>
                 <button class="btn btn-success mx-2 float-right approve-selected">Approve Selected</button>
                 <button class="btn btn-danger float-right reject-selected">Reject Selected</button>
             </div>
-            @endif
+            <?php endif; ?>
 
             <div class="col-12 col-md-12 col-lg-12">
                 <div class="card">
@@ -19,95 +17,101 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        @if(isset($pending) && $pending)
-                                        <th>{{ __('Select') }}</th>
-                                        @endif
-                                        <th>{{ __('User') }}</th>
-                                        <th>{{ __('Withdraw Amount') }}</th>
-                                        <th>{{ __('User Will Get') }}</th>
-                                        <th>{{ __('Charge Type') }}</th>
-                                        <th>{{ __('Charge') }}</th>
-                                        <th>{{ __('status') }}</th>
-                                        <th>{{ __('Action') }}</th>
+                                        <?php if(isset($pending) && $pending): ?>
+                                        <th><?php echo e(__('Select')); ?></th>
+                                        <?php endif; ?>
+                                        <th><?php echo e(__('User')); ?></th>
+                                        <th><?php echo e(__('Withdraw Amount')); ?></th>
+                                        <th><?php echo e(__('User Will Get')); ?></th>
+                                        <th><?php echo e(__('Charge Type')); ?></th>
+                                        <th><?php echo e(__('Charge')); ?></th>
+                                        <th><?php echo e(__('status')); ?></th>
+                                        <th><?php echo e(__('Action')); ?></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($withdrawlogs as $key => $withdrawlog)
+                                    <?php $__empty_1 = true; $__currentLoopData = $withdrawlogs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $withdrawlog): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                                         <tr>
-                                            @if(isset($pending) && $pending)
+                                            <?php if(isset($pending) && $pending): ?>
                                             <td class="text-center">
-                                                <input type="checkbox" name="bulkAction[]" value="{{ $withdrawlog->id }}"
+                                                <input type="checkbox" name="bulkAction[]" value="<?php echo e($withdrawlog->id); ?>"
                                                     class="form-check-input  bulk-select"
-                                                    id="exampleCheck{{ $withdrawlog->id }}">
+                                                    id="exampleCheck<?php echo e($withdrawlog->id); ?>">
                                             </td>
-                                            @endif
+                                            <?php endif; ?>
                                             <td>
 
-                                                <a href="{{ route('admin.user.details', $withdrawlog->user->id) }}">
+                                                <a href="<?php echo e(route('admin.user.details', $withdrawlog->user->id)); ?>">
 
                                                     <span class="ml-2">
-                                                        {{ $withdrawlog->user->username }}
+                                                        <?php echo e($withdrawlog->user->username); ?>
+
                                                     </span>
                                                 </a>
 
                                             </td>
 
-                                            <td>{{ $general->currency_icon .
+                                            <td><?php echo e($general->currency_icon .
                                                 '  ' .
                                                 $withdrawlog->withdraw_amount +
                                                 ($withdrawlog->withdrawMethod->charge_type === 'percent'
                                                     ? ($withdrawlog->withdraw_amount * $withdrawlog->withdraw_charge) / 100
-                                                    : $withdrawlog->withdraw_amount) }}
+                                                    : $withdrawlog->withdraw_amount)); ?>
+
                                             </td>
                                             <td>
 
 
-                                                {{ $withdrawlog->withdraw_amount }}
+                                                <?php echo e($withdrawlog->withdraw_amount); ?>
+
 
                                             </td>
                                             <td>
-                                                {{ ucwords($withdrawlog->withdrawMethod->charge_type) }}
+                                                <?php echo e(ucwords($withdrawlog->withdrawMethod->charge_type)); ?>
+
                                             </td>
                                             <td>
-                                                {{ number_format($withdrawlog->withdraw_charge, 2) }}
+                                                <?php echo e(number_format($withdrawlog->withdraw_charge, 2)); ?>
+
                                             </td>
                                             <td>
-                                                @if ($withdrawlog->status == 1)
-                                                    <span class="badge badge-success">{{ __('Success') }}</span>
-                                                @elseif($withdrawlog->status == 2)
-                                                    <span class="badge badge-danger">{{ __('Rejected') }}</span>
-                                                @else
-                                                    <span class="badge badge-warning">{{ __('Pending') }}</span>
-                                                @endif
+                                                <?php if($withdrawlog->status == 1): ?>
+                                                    <span class="badge badge-success"><?php echo e(__('Success')); ?></span>
+                                                <?php elseif($withdrawlog->status == 2): ?>
+                                                    <span class="badge badge-danger"><?php echo e(__('Rejected')); ?></span>
+                                                <?php else: ?>
+                                                    <span class="badge badge-warning"><?php echo e(__('Pending')); ?></span>
+                                                <?php endif; ?>
                                             </td>
                                             <td>
                                                 <button class="btn btn-md btn-info details"
-                                                    data-user_data="{{ json_encode($withdrawlog->user_withdraw_prof) }}"
-                                                    data-transaction="{{ $withdrawlog->transaction_id }}"
-                                                    data-provider="{{ $withdrawlog->user->fullname }}"
-                                                    data-email="{{ $withdrawlog->user->email }}"
-                                                    data-method_name="{{ $withdrawlog->withdrawMethod->name }}"
-                                                    data-date="{{ __($withdrawlog->created_at->format('d F Y')) }}">{{ __('Details') }}</button>
-                                                @if ($withdrawlog->status == 0)
+                                                    data-user_data="<?php echo e(json_encode($withdrawlog->user_withdraw_prof)); ?>"
+                                                    data-transaction="<?php echo e($withdrawlog->transaction_id); ?>"
+                                                    data-provider="<?php echo e($withdrawlog->user->fullname); ?>"
+                                                    data-email="<?php echo e($withdrawlog->user->email); ?>"
+                                                    data-method_name="<?php echo e($withdrawlog->withdrawMethod->name); ?>"
+                                                    data-date="<?php echo e(__($withdrawlog->created_at->format('d F Y'))); ?>"><?php echo e(__('Details')); ?></button>
+                                                <?php if($withdrawlog->status == 0): ?>
                                                     <button class="btn btn-md btn-primary accept"
-                                                        data-url="{{ route('admin.withdraw.accept', $withdrawlog) }}">{{ __('Accept') }}</button>
+                                                        data-url="<?php echo e(route('admin.withdraw.accept', $withdrawlog)); ?>"><?php echo e(__('Accept')); ?></button>
                                                     <button class="btn btn-md btn-danger reject"
-                                                        data-url="{{ route('admin.withdraw.reject', $withdrawlog) }}">{{ __('Reject') }}</button>
-                                                @endif
+                                                        data-url="<?php echo e(route('admin.withdraw.reject', $withdrawlog)); ?>"><?php echo e(__('Reject')); ?></button>
+                                                <?php endif; ?>
                                             </td>
                                         </tr>
-                                    @empty
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                                         <tr>
-                                            <td class="text-center" colspan="100%">{{ __('No Data Found') }}</td>
+                                            <td class="text-center" colspan="100%"><?php echo e(__('No Data Found')); ?></td>
                                         </tr>
-                                    @endforelse
+                                    <?php endif; ?>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    @if ($withdrawlogs->hasPages())
-                        {{ $withdrawlogs->links('backend.partial.paginate') }}
-                    @endif
+                    <?php if($withdrawlogs->hasPages()): ?>
+                        <?php echo e($withdrawlogs->links('backend.partial.paginate')); ?>
+
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -122,7 +126,7 @@
 
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{ __('Withdraw Details') }}</h5>
+                    <h5 class="modal-title"><?php echo e(__('Withdraw Details')); ?></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -133,7 +137,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('Close') }}</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><?php echo e(__('Close')); ?></button>
 
                 </div>
             </div>
@@ -146,22 +150,22 @@
         <div class="modal-dialog" role="document">
 
             <form action="" method="post">
-                @csrf
+                <?php echo csrf_field(); ?>
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">{{ __('Withdraw Accept') }}</h5>
+                        <h5 class="modal-title"><?php echo e(__('Withdraw Accept')); ?></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid">
-                            <p>{{ __('Are you sure to Accept this withdraw request') }}?</p>
+                            <p><?php echo e(__('Are you sure to Accept this withdraw request')); ?>?</p>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('Close') }}</button>
-                        <button type="submit" class="btn btn-primary">{{ __('Accept') }}</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><?php echo e(__('Close')); ?></button>
+                        <button type="submit" class="btn btn-primary"><?php echo e(__('Accept')); ?></button>
 
                     </div>
                 </div>
@@ -174,10 +178,10 @@
         <div class="modal-dialog modal-lg" role="document">
 
             <form action="" method="post">
-                @csrf
+                <?php echo csrf_field(); ?>
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">{{ __('Withdraw Reject') }}</h5>
+                        <h5 class="modal-title"><?php echo e(__('Withdraw Reject')); ?></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -186,7 +190,7 @@
                         <div class="container-fluid">
                             <div class="form-group col-md-12">
 
-                                <label for="">{{ __('Reason Of Reject') }}</label>
+                                <label for=""><?php echo e(__('Reason Of Reject')); ?></label>
                                 <textarea name="reason_of_reject" id="" cols="30" rows="10" class="form-control"> </textarea>
 
                             </div>
@@ -194,8 +198,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary"
-                            data-dismiss="modal">{{ __('Close') }}</button>
-                        <button type="submit" class="btn btn-danger">{{ __('Reject') }}</button>
+                            data-dismiss="modal"><?php echo e(__('Close')); ?></button>
+                        <button type="submit" class="btn btn-danger"><?php echo e(__('Reject')); ?></button>
 
                     </div>
                 </div>
@@ -208,23 +212,23 @@
         <div class="modal-dialog" role="document">
 
             <form action="" method="post">
-                @csrf
+                <?php echo csrf_field(); ?>
                 <input type="hidden" name="bulk_ids">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">{{ __('Withdraw Accept') }}</h5>
+                        <h5 class="modal-title"><?php echo e(__('Withdraw Accept')); ?></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid">
-                            <p>{{ __('Are you sure to Accept this withdraw request') }}?</p>
+                            <p><?php echo e(__('Are you sure to Accept this withdraw request')); ?>?</p>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">{{ __('Close') }}</button>
-                        <button type="submit" class="btn btn-primary">{{ __('Accept') }}</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><?php echo e(__('Close')); ?></button>
+                        <button type="submit" class="btn btn-primary"><?php echo e(__('Accept')); ?></button>
 
                     </div>
                 </div>
@@ -237,10 +241,10 @@
         <div class="modal-dialog modal-lg" role="document">
 
             <form action="" method="post">
-                @csrf
+                <?php echo csrf_field(); ?>
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">{{ __('Withdraw Reject') }}</h5>
+                        <h5 class="modal-title"><?php echo e(__('Withdraw Reject')); ?></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -249,7 +253,7 @@
                         <div class="container-fluid">
                             <div class="form-group col-md-12">
 
-                                <label for="">{{ __('Reason Of Reject') }}</label>
+                                <label for=""><?php echo e(__('Reason Of Reject')); ?></label>
                                 <textarea name="reason_of_reject" id="" cols="30" rows="10" class="form-control"> </textarea>
                                 <input type="hidden" name="bulk_ids">
                             </div>
@@ -257,28 +261,28 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary"
-                            data-dismiss="modal">{{ __('Close') }}</button>
-                        <button type="submit" class="btn btn-danger">{{ __('Reject') }}</button>
+                            data-dismiss="modal"><?php echo e(__('Close')); ?></button>
+                        <button type="submit" class="btn btn-danger"><?php echo e(__('Reject')); ?></button>
 
                     </div>
                 </div>
             </form>
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
 
-@push('style')
+<?php $__env->startPush('style'); ?>
     <style>
         .image-rounded {
             width: 50px;
             height: 50px;
         }
     </style>
-@endpush
+<?php $__env->stopPush(); ?>
 
 
-@push('script')
+<?php $__env->startPush('script'); ?>
     <script>
         $(function() {
             'use strict'
@@ -290,38 +294,46 @@
 
                     <ul class="list-group">
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                               {{ __('Withdraw Method Email') }}
+                               <?php echo e(__('Withdraw Method Email')); ?>
+
                                 <span>${$(this).data('user_data').email}</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                {{ __('Withdraw Account Information') }}
+                                <?php echo e(__('Withdraw Account Information')); ?>
+
                                 <span>${$(this).data('user_data').account_information}</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                {{ __('Transaction Id') }}
+                                <?php echo e(__('Transaction Id')); ?>
+
                                 <span>${$(this).data('transaction')}</span>
                             </li>
 
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                {{ __('User Name') }}
+                                <?php echo e(__('User Name')); ?>
+
                                 <span>${$(this).data('provider')}</span>
                             </li>
 
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                {{ __('User Email') }}
+                                <?php echo e(__('User Email')); ?>
+
                                 <span>${$(this).data('email')}</span>
                             </li>
 
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                {{ __('Withdraw Method') }}
+                                <?php echo e(__('Withdraw Method')); ?>
+
                                 <span>${$(this).data('method_name')}</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                {{ __('Withdraw Date') }}
+                                <?php echo e(__('Withdraw Date')); ?>
+
                                 <span>${$(this).data('date')}</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                {{ __('Note For Withdraw') }}
+                                <?php echo e(__('Note For Withdraw')); ?>
+
                                 <span>${$(this).data('user_data').note}</span>
                             </li>
 
@@ -372,12 +384,12 @@
                     // Perform bulk action based on the selected action
                     if (action === 'approve') {
                         const modal = $('#bulk_accept');
-                        modal.find('form').attr('action', '{{ route('admin.withdraw.bulk.accept') }}');
+                        modal.find('form').attr('action', '<?php echo e(route('admin.withdraw.bulk.accept')); ?>');
                         modal.find('input[name=bulk_ids]').val(JSON.stringify(selectedIds));
                         modal.modal('show');
                     } else if (action === 'reject') {
                         const modal = $('#bulk_reject');
-                        modal.find('form').attr('action', '{{ route('admin.withdraw.bulk.reject') }}');
+                        modal.find('form').attr('action', '<?php echo e(route('admin.withdraw.bulk.reject')); ?>');
                         modal.find('input[name=bulk_ids]').val(JSON.stringify(selectedIds));
                         modal.modal('show');
                     }
@@ -405,4 +417,6 @@
 
         })
     </script>
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('backend.layout.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Junaid Ali\Desktop\www\invest4sale\core\resources\views/backend/withdraw/withdraw_all.blade.php ENDPATH**/ ?>

@@ -196,6 +196,9 @@
                             <a class="nav-link"
                                 href="<?php echo e(route('admin.withdraw.accepted')); ?>"><?php echo e(__('Accepted Withdraws')); ?></a>
                         </li>
+                        <li class="<?php echo e(@$subNavWithdrawMethodActiveClass); ?>">
+                            <a class="nav-link" href="<?php echo e(route('admin.sponser.commision.create')); ?>"><?php echo e(__('Sponser Commision')); ?></a>
+                        </li>
                         <li class="<?php echo e(@$subNavWithdrawRejectedActiveClass); ?>">
                             <a class="nav-link"
                                 href="<?php echo e(route('admin.withdraw.rejected')); ?>"><?php echo e(__('Rejected Withdraws')); ?></a>

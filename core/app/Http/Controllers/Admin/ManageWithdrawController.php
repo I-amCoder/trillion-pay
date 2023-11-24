@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\GeneralSetting;
+use App\Models\SponserCommision;
 use App\Models\Transaction;
 use App\Models\Withdraw;
 use App\Models\WithdrawGateway;
@@ -19,12 +20,14 @@ class ManageWithdrawController extends Controller
 
         $search = $request->search;
 
-        $data['withdraws'] = WithdrawGateway::when($search, function($q) use($search){$q->where('name','LIKE','%'.$search.'%');})->latest()->paginate(10);
+        $data['withdraws'] = WithdrawGateway::when($search, function ($q) use ($search) {
+            $q->where('name', 'LIKE', '%' . $search . '%');
+        })->latest()->paginate(10);
 
         return view('backend.withdraw.index')->with($data);
     }
 
-    public function withdrawMethodCreate (Request $request)
+    public function withdrawMethodCreate(Request $request)
     {
 
 
@@ -52,10 +55,10 @@ class ManageWithdrawController extends Controller
         return redirect()->back()->withNotify($notify);
     }
 
-    public function withdrawMethodUpdate (Request $request, WithdrawGateway $method)
+    public function withdrawMethodUpdate(Request $request, WithdrawGateway $method)
     {
         $request->validate([
-            'name' => 'required|unique:withdraw_gateways,name,'.$method->id,
+            'name' => 'required|unique:withdraw_gateways,name,' . $method->id,
             'min_amount' => 'required|numeric|min:0',
             'max_amount' => 'required|numeric|gt:min_amount',
             'charge_type' => 'required|in:fixed,percent',
@@ -64,7 +67,7 @@ class ManageWithdrawController extends Controller
             'withdraw_instruction' => 'sometimes'
         ]);
 
-       $method->update([
+        $method->update([
             'name' => $request->name,
             'min_amount' => $request->min_amount,
             'max_amount' => $request->max_amount,
@@ -80,9 +83,9 @@ class ManageWithdrawController extends Controller
 
     public function withdrawMethodDelete(WithdrawGateway $method)
     {
-        $ifPending = $method->withdrawLogs()->where('status',0)->count();
+        $ifPending = $method->withdrawLogs()->where('status', 0)->count();
 
-        if($ifPending > 0){
+        if ($ifPending > 0) {
             $notify[] = ['error', 'Withdraw request is pending under this method.'];
             return redirect()->back()->withNotify($notify);
         }
@@ -91,7 +94,6 @@ class ManageWithdrawController extends Controller
 
         $notify[] = ['success', 'Withdraw Method Deleted Successfully'];
         return redirect()->back()->withNotify($notify);
-
     }
 
     public function accepted()
@@ -100,7 +102,7 @@ class ManageWithdrawController extends Controller
         $data['navManageWithdrawActiveClass'] = 'active';
         $data['subNavWithdrawAcceptedActiveClass'] = 'active';
 
-        $data['withdrawlogs'] = Withdraw::whereHas('withdrawMethod')->where('status', 1)->latest()->with('withdrawMethod','user')->paginate(10);
+        $data['withdrawlogs'] = Withdraw::whereHas('withdrawMethod')->where('status', 1)->latest()->with('withdrawMethod', 'user')->paginate(10);
 
         return view('backend.withdraw.withdraw_all')->with($data);
     }
@@ -110,8 +112,8 @@ class ManageWithdrawController extends Controller
         $data['navManageWithdrawActiveClass'] = 'active';
         $data['subNavWithdrawPendingActiveClass'] = 'active';
 
-        $data['withdrawlogs'] = Withdraw::whereHas('withdrawMethod')->where('status', 0)->latest()->with('withdrawMethod','user')->paginate(10);
-
+        $data['withdrawlogs'] = Withdraw::whereHas('withdrawMethod')->where('status', 0)->latest()->with('withdrawMethod', 'user')->paginate(10);
+        $data['pending'] = true;
         return view('backend.withdraw.withdraw_all')->with($data);
     }
     public function rejected()
@@ -120,7 +122,7 @@ class ManageWithdrawController extends Controller
         $data['navManageWithdrawActiveClass'] = 'active';
         $data['subNavWithdrawRejectedActiveClass'] = 'active';
 
-        $data['withdrawlogs'] = Withdraw::whereHas('withdrawMethod')->where('status', 2)->latest()->with('withdrawMethod','user')->paginate(10);
+        $data['withdrawlogs'] = Withdraw::whereHas('withdrawMethod')->where('status', 2)->latest()->with('withdrawMethod', 'user')->paginate(10);
 
         return view('backend.withdraw.withdraw_all')->with($data);
     }
@@ -140,12 +142,12 @@ class ManageWithdrawController extends Controller
             'amount' => $withdraw->withdraw_amount,
             'currency' => $general->site_currency ?? 'USD',
             'charge' => $withdraw->withdraw_charge,
-            'details' => 'Withdraw via '.$withdraw->withdrawMethod->name,
+            'details' => 'Withdraw via ' . $withdraw->withdrawMethod->name,
             'type' => '-'
         ]);
 
 
-        sendMail('WITHDRAW_ACCEPTED',['amount'=>$withdraw->withdraw_amount, 'method' => $withdraw->withdrawMethod->name,'currency' => $general->site_currency], $withdraw->user);
+        sendMail('WITHDRAW_ACCEPTED', ['amount' => $withdraw->withdraw_amount, 'method' => $withdraw->withdrawMethod->name, 'currency' => $general->site_currency], $withdraw->user);
 
         $notify[] = ['success', 'Withdraw Accepted Successfully'];
         return redirect()->back()->withNotify($notify);
@@ -154,7 +156,7 @@ class ManageWithdrawController extends Controller
 
     public function withdrawReject(Request $request, Withdraw $withdraw)
     {
-       $request->validate(['reason_of_reject' => 'required']);
+        $request->validate(['reason_of_reject' => 'required']);
 
         $general = GeneralSetting::first();
         $withdraw->status = 2;
@@ -172,14 +174,118 @@ class ManageWithdrawController extends Controller
             'amount' => $withdraw->withdraw_amount,
             'currency' => $general->site_currency ?? 'USD',
             'charge' => $withdraw->withdraw_charge,
-            'details' => 'Rejected Withdraw via '.$withdraw->withdrawMethod->name,
+            'details' => 'Rejected Withdraw via ' . $withdraw->withdrawMethod->name,
             'type' => '-'
         ]);
 
-        sendMail('WITHDRAW_REJECTED',['amount'=>$withdraw->withdraw_amount, 'method' => $withdraw->withdrawMethod->name,'currency' => $general->site_currency,'reason' => $withdraw->reason_of_reject], $withdraw->user);
+        sendMail('WITHDRAW_REJECTED', ['amount' => $withdraw->withdraw_amount, 'method' => $withdraw->withdrawMethod->name, 'currency' => $general->site_currency, 'reason' => $withdraw->reason_of_reject], $withdraw->user);
 
         $notify[] = ['success', 'Withdraw Rejected Successfully'];
         return redirect()->back()->withNotify($notify);
+    }
 
+    public function createSponserCommision()
+    {
+        $data['pageTitle'] = 'Create Sponser Commision';
+        $data['commision_data'] = SponserCommision::first();
+
+
+        return view('backend.commision.commision_create')->with($data);
+    }
+
+    public function updateSponserCommision(Request $request)
+    {
+        $request->validate([
+            'percent' => 'required',
+        ]);
+        $percent = SponserCommision::first();
+
+
+        if ($percent) {
+            $percent->update([
+                'percent' => $request->percent,
+            ]);
+            $notify[] = ['success', 'Sponser Commision Percentage Update'];
+            return redirect()->back()->withNotify($notify);
+        } else {
+            SponserCommision::create([
+                'percent' => $request->percent,
+
+            ]);
+
+            $notify[] = ['success', 'Sponser Commision Percentage Added'];
+            return redirect()->back()->withNotify($notify);
+        }
+    }
+    public function deleteSponserCommision($id)
+    {
+
+        $percent = SponserCommision::first();
+        $percent->delete();
+        $notify[] = ['success', 'Sponser Commision Percentage Delete'];
+        return redirect()->back()->withNotify($notify);
+    }
+
+    public function bulkWithdrawAccept(Request $request)
+    {
+
+
+        $general = GeneralSetting::first();
+        $ids = json_decode($request->bulk_ids);
+        $withdrawals = Withdraw::whereIn('id', $ids)->latest()->get();
+        foreach ($withdrawals as $withdraw) {
+            $withdraw->status = 1;
+            $withdraw->save();
+            Transaction::create([
+                'trx' => $withdraw->transaction_id,
+                'user_id' => $withdraw->user->id,
+                'gateway_id' => $withdraw->withdrawMethod->id,
+                'amount' => $withdraw->withdraw_amount,
+                'currency' => $general->site_currency ?? 'USD',
+                'charge' => $withdraw->withdraw_charge,
+                'details' => 'Withdraw via ' . $withdraw->withdrawMethod->name,
+                'type' => '-'
+            ]);
+
+
+            sendMail('WITHDRAW_ACCEPTED', ['amount' => $withdraw->withdraw_amount, 'method' => $withdraw->withdrawMethod->name, 'currency' => $general->site_currency], $withdraw->user);
+        }
+        $notify[] = ['success', 'Withdraw Accepted Successfully'];
+        return redirect()->back()->withNotify($notify);
+    }
+
+
+    public function bulkWithdrawReject(Request $request)
+    {
+        $ids = json_decode($request->bulk_ids);
+        $request->validate(['reason_of_reject' => 'required']);
+
+        $general = GeneralSetting::first();
+        $withdrawals = Withdraw::whereIn('id', $ids)->latest()->get();
+
+        foreach ($withdrawals as $withdraw) {
+            $withdraw->status = 2;
+            $withdraw->reason_of_reject = $request->reason_of_reject;
+            $withdraw->save();
+
+            $withdraw->user->balance = $withdraw->user->balance + $withdraw->withdraw_amount;
+            $withdraw->user->save();
+
+            Transaction::create([
+
+                'trx' => $withdraw->transaction_id,
+                'user_id' => $withdraw->user->id,
+                'gateway_id' => $withdraw->withdrawMethod->id,
+                'amount' => $withdraw->withdraw_amount,
+                'currency' => $general->site_currency ?? 'USD',
+                'charge' => $withdraw->withdraw_charge,
+                'details' => 'Rejected Withdraw via ' . $withdraw->withdrawMethod->name,
+                'type' => '-'
+            ]);
+
+            sendMail('WITHDRAW_REJECTED', ['amount' => $withdraw->withdraw_amount, 'method' => $withdraw->withdrawMethod->name, 'currency' => $general->site_currency, 'reason' => $withdraw->reason_of_reject], $withdraw->user);
+        }
+        $notify[] = ['success', 'Withdraws Rejected Successfully'];
+        return redirect()->back()->withNotify($notify);
     }
 }

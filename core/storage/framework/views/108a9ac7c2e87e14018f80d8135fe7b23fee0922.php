@@ -36,6 +36,34 @@
             <?php echo e($commison->links('backend.partial.paginate')); ?>
 
         </div>
+        <div class="row mt-3">
+            <h3>Withdraw Commission</h3>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table cmn-table">
+                <thead>
+                    <tr class="bg-yellow">
+                        <th scope="col"><?php echo e(__('Amount')); ?></th>
+                        <th scope="col"><?php echo e(__('Date')); ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $__empty_1 = true; $__currentLoopData = $sponsers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                        <tr>
+                            <td data-caption="To"><?php echo e(number_format($item->amounts, 5)); ?> <?php echo e(@$general->site_currency); ?></td>
+                            <td data-caption="<?php echo e(__('date')); ?>"><?php echo e($item->created_at->format('d-M-Y')); ?></td>
+                        </tr>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                        <tr>
+                            <td data-caption="Data" class="text-center" colspan="100%"><?php echo e(__('No Data Found')); ?></td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+            <?php echo e($sponsers->links('backend.partial.paginate')); ?>
+
+        </div>
     </div>
 <?php $__env->stopSection(); ?>
 
