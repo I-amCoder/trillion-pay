@@ -82,6 +82,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('login/message', [AdminController::class, 'loginMessage'])->name('login.message');
         Route::post('login/message', [AdminController::class, 'loginMessageUpdate'])->name('login.message.update');
 
+
+        Route::get('slider/all', [AdminController::class, 'sliders'])->name('sliders.all');
+        Route::post('slider/store', [AdminController::class, 'storeSlider'])->name('slider.store');
+        Route::post('slider/{id}/update', [AdminController::class, 'updateSlider'])->name('slider.update');
+        Route::delete('slider/{id}/delete', [AdminController::class, 'deleteSlider'])->name('slider.delete');
+
         // Route::get('advertise', [AdvertiseController::class ,'advertisements'])->name('advertisements');
         // Route::post('advertise/store', [AdvertiseController::class ,'advertisementStore'])->name('advertisements.store');
         // Route::post('advertise/update/{id}', [AdvertiseController::class ,'advertisementUpdate'])->name('advertisements.update');

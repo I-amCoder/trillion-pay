@@ -134,8 +134,8 @@
                         </p>
                         <div class="text-center finance-buttons">
                             <button class="btn btn-outline-light deposit_now"
-                                data-href="{{ route('user.paynow', $gateway->id) }}" data-wallet_type="current_wallet"
-                                data-id="{{ $gateway->id }}">Deposit</button>
+                                data-href="{{ route('user.paynow', $gateway->id ?? 0) }}" data-wallet_type="current_wallet"
+                                data-id="{{ $gateway->id ?? 0 }}">Deposit</button>
                             <button class="btn btn-outline-light ml-2 withdraw_now" data-wallet_type="current_wallet"
                                 data-href="{{ route('user.wallet.withdraw', 'current_wallet') }}">Transfer</button>
                         </div>
@@ -195,8 +195,8 @@
                         </p>
                         <div class="text-center finance-buttons">
                             <button class="btn btn-outline-light deposit_now"
-                                data-href="{{ route('user.paynow', $gateway->id) }}" data-wallet_type="saving_wallet"
-                                data-id="{{ $gateway->id }}">Deposit</button>
+                                data-href="{{ route('user.paynow', $gateway->id ?? 0) }}" data-wallet_type="saving_wallet"
+                                data-id="{{ $gateway->id ?? 0 }}">Deposit</button>
                             <button class="btn btn-outline-light ml-2 withdraw_now"
                                 data-href="{{ route('user.wallet.withdraw', 'saving_wallet') }}"
                                 data-wallet_type="saving_wallet">Transfer</button>
@@ -258,8 +258,8 @@
                         </p>
                         <div class="text-center finance-buttons ">
                             <button class="btn btn-outline-light deposit_now"
-                                data-href="{{ route('user.paynow', $gateway->id) }}" data-wallet_type="sharing_wallet"
-                                data-id="{{ $gateway->id }}">Deposit</button>
+                                data-href="{{ route('user.paynow', $gateway->id ?? 0) }}" data-wallet_type="sharing_wallet"
+                                data-id="{{ $gateway->id ?? 0 }}">Deposit</button>
                             <button class="btn btn-outline-light ml-2 withdraw_now"
                                 data-href="{{ route('user.wallet.withdraw', 'sharing_wallet') }}"
                                 data-wallet_type="sharing_wallet">Transfer</button>
