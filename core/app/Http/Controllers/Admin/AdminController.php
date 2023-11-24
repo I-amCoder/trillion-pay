@@ -211,16 +211,20 @@ class AdminController extends Controller
             'image' => 'nullable|mimes:jpg,png,jpeg'
         ]);
 
+        $status = ($request->has('status') && $request->status == "on") ? 1: 0;
+
         if ($msg != '') {
             $msg->update([
                 'message' => $request->message,
-                'picture' => $request->has('image') ? uploadImage($request->image, filePath('admins')) : $msg->picture
+                'picture' => $request->has('image') ? uploadImage($request->image, filePath('admins')) : $msg->picture,
+                'status' => $status
             ]);
             return redirect()->back()->with('success', 'Successfully updated');
         } else {
             $msg =  LoginMessage::create([
                 'message' => $request->message,
-                'picture' => $request->has('image') ? uploadImage($request->image, filePath('admins')) : ''
+                'picture' => $request->has('image') ? uploadImage($request->image, filePath('admins')) : '',
+                'status' => $status
             ]);
             return redirect()->back()->with('success', 'Successfully inserted');
         }
