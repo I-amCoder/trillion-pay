@@ -134,8 +134,8 @@
                         </p>
                         <div class="text-center finance-buttons">
                             <button class="btn btn-outline-light deposit_now"
-                                data-href="<?php echo e(route('user.paynow', $gateway->id)); ?>" data-wallet_type="current_wallet"
-                                data-id="<?php echo e($gateway->id); ?>">Deposit</button>
+                                data-href="<?php echo e(route('user.paynow', $gateway->id ?? 0)); ?>" data-wallet_type="current_wallet"
+                                data-id="<?php echo e($gateway->id ?? 0); ?>">Deposit</button>
                             <button class="btn btn-outline-light ml-2 withdraw_now" data-wallet_type="current_wallet"
                                 data-href="<?php echo e(route('user.wallet.withdraw', 'current_wallet')); ?>">Transfer</button>
                         </div>
@@ -197,8 +197,8 @@
                         </p>
                         <div class="text-center finance-buttons">
                             <button class="btn btn-outline-light deposit_now"
-                                data-href="<?php echo e(route('user.paynow', $gateway->id)); ?>" data-wallet_type="saving_wallet"
-                                data-id="<?php echo e($gateway->id); ?>">Deposit</button>
+                                data-href="<?php echo e(route('user.paynow', $gateway->id ?? 0)); ?>"
+                                data-wallet_type="saving_wallet" data-id="<?php echo e($gateway->id ?? 0); ?>">Deposit</button>
                             <button class="btn btn-outline-light ml-2 withdraw_now"
                                 data-href="<?php echo e(route('user.wallet.withdraw', 'saving_wallet')); ?>"
                                 data-wallet_type="saving_wallet">Transfer</button>
@@ -262,8 +262,8 @@
                         </p>
                         <div class="text-center finance-buttons ">
                             <button class="btn btn-outline-light deposit_now"
-                                data-href="<?php echo e(route('user.paynow', $gateway->id)); ?>" data-wallet_type="sharing_wallet"
-                                data-id="<?php echo e($gateway->id); ?>">Deposit</button>
+                                data-href="<?php echo e(route('user.paynow', $gateway->id ?? 0)); ?>"
+                                data-wallet_type="sharing_wallet" data-id="<?php echo e($gateway->id ?? 0); ?>">Deposit</button>
                             <button class="btn btn-outline-light ml-2 withdraw_now"
                                 data-href="<?php echo e(route('user.wallet.withdraw', 'sharing_wallet')); ?>"
                                 data-wallet_type="sharing_wallet">Transfer</button>
@@ -353,7 +353,37 @@
                 </div>
             </div>
         </div>
-
+        <?php if(count($sliders) > 0): ?>
+        <hr class="mt-4">
+        <h3>Members</h3>
+        <div class="row  justify-content-center ">
+            <div class="col-md-8 text-center">
+                <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <?php $__currentLoopData = $sliders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $slider): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <div class="carousel-item <?php echo e($loop->first ? 'active' : ''); ?>">
+                                <img style="min-height: 200px; max-height: 500px; object-fit: cover; border-radius: 5px"
+                                    src="<?php echo e(getFile('admins', $slider->image)); ?>" class="d-block w-100" alt="...">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <p><?php echo e($slider->title); ?></p>
+                                </div>
+                            </div>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
 
         <div class="mt-4">
             <label><?php echo e(__('Your refferal link')); ?></label>
@@ -361,12 +391,10 @@
                 <input type="text" id="refer-link" class="form-control copy-text"
                     value="<?php echo e(route('user.register', @Auth::user()->username)); ?>" placeholder="referallink.com/refer"
                     aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
-                <button type="button" class="input-group-text  copy cmn-btn" id="basic-addon2"><?php echo e(__('Copy')); ?></button>
+                <button type="button" class="input-group-text  copy cmn-btn"
+                    id="basic-addon2"><?php echo e(__('Copy')); ?></button>
             </div>
         </div>
-
-
-
 
     </div>
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\LoginMessage;
 use App\Models\User;
+use App\Models\UserSlider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
@@ -224,4 +225,44 @@ class AdminController extends Controller
             return redirect()->back()->with('success', 'Successfully inserted');
         }
     }
+
+    public function sliders()
+    {
+        $pageTitle = "User Dashboard Sliders";
+        $sliders = UserSlider::all();
+        return view('backend.user_slider', compact('pageTitle', 'sliders'));
+    }
+
+    public function storeSlider(Request $request)
+    {
+        $request->validate([
+            'title'=>'required|string',
+            'image'=>'required|mimes:jpg,jpeg,png,webp'
+        ]);
+        $slider = new UserSlider();
+        $slider->title = $request->title;
+        $slider->image = uploadImage($request->image, filePath('admins'));
+        $slider->save();
+        return redirect()->back()->with('success', 'Successfully Saved');
+    }
+
+
+    public function updateSlider (Request $request,$id)
+    {
+
+        $slider = UserSlider::findOrFail($id);
+        $slider->title = $request->title ?? $slider->title;
+        $slider->image = $request->iamge ? uploadImage($request->image, filePath('admins')) : $slider->image;
+        $slider->save();
+        return redirect()->back()->with('success', 'Successfully Updated');
+    }
+
+    public function deleteSlider($id){
+        $slider = UserSlider::findOrFail($id);
+        $slider->delete();
+        return redirect()->back()->with('success', 'Successfully Deleted');
+
+    }
+
+
 }

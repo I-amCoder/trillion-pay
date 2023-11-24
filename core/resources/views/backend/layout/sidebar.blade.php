@@ -145,6 +145,15 @@
                 </li>
             @endif
 
+            @if (auth()->guard('admin'))
+                <li class="nav-item dropdown {{ menuActive('admin.sliders.all') }}">
+                    <a href="{{ route('admin.sliders.all') }}" class="nav-link ">
+                        <i data-feather="file-plus"></i>
+                        <span>{{ __('Manage Slider') }}</span>
+                    </a>
+                </li>
+            @endif
+
 
 
 
