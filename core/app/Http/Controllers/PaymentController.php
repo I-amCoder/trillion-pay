@@ -55,7 +55,10 @@ class PaymentController extends Controller
 
 
 
-        $gateway = Gateway::where('status', 1)->findOrFail($request->id);
+        $gateway = Gateway::where('status', 1)->find($request->id);
+        if(!$gateway){
+            return back()->withError("Gateway Not Found");
+        }
         $trx = strtoupper(Str::random());
         $final_amount = ($request->amount * $gateway->rate) + $gateway->charge;
 
