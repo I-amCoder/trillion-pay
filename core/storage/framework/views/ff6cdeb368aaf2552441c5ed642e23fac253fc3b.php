@@ -148,7 +148,7 @@
             <?php if(auth()->guard('admin')): ?>
                 <li class="nav-item dropdown <?php echo e(menuActive('admin.sliders.all')); ?>">
                     <a href="<?php echo e(route('admin.sliders.all')); ?>" class="nav-link ">
-                        <i class="fa fa-wallet"></i>
+                        <i data-feather="file-plus"></i>
                         <span><?php echo e(__('Manage Slider')); ?></span>
                     </a>
                 </li>

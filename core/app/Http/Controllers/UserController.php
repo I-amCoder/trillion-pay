@@ -19,6 +19,7 @@ use App\Models\MoneyTransfer;
 use App\Models\SponserAmount;
 use App\Models\SponserCommision;
 use App\Models\UserRanking;
+use App\Models\UserSlider;
 use App\Models\WalletProfits;
 use Illuminate\Http\Request;
 use Nette\Utils\Random;
@@ -57,9 +58,10 @@ class UserController extends Controller
         $gateway = Gateway::where('is_created', 1)->latest()->first();
         $settings = WalletProfits::first();
         $loginMessage = LoginMessage::first();
+        $sliders = UserSlider::where('status',1)->latest()->get();
 
 
-        return view($this->template . 'user.dashboard', compact('commison', 'pageTitle', 'interestLogs', 'totalInvest', 'currentInvest', 'currentPlan', 'allPlan', 'withdraw', 'pendingInvest', 'pendingWithdraw', 'totalDeposit', 'gateway', 'settings', 'loginMessage'));
+        return view($this->template . 'user.dashboard', compact('commison', 'pageTitle', 'interestLogs', 'totalInvest', 'currentInvest', 'currentPlan', 'allPlan', 'withdraw', 'pendingInvest', 'pendingWithdraw', 'totalDeposit', 'gateway', 'settings', 'loginMessage','sliders'));
     }
 
     public function profile()

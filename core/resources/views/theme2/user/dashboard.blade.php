@@ -195,8 +195,8 @@
                         </p>
                         <div class="text-center finance-buttons">
                             <button class="btn btn-outline-light deposit_now"
-                                data-href="{{ route('user.paynow', $gateway->id ?? 0) }}" data-wallet_type="saving_wallet"
-                                data-id="{{ $gateway->id ?? 0 }}">Deposit</button>
+                                data-href="{{ route('user.paynow', $gateway->id ?? 0) }}"
+                                data-wallet_type="saving_wallet" data-id="{{ $gateway->id ?? 0 }}">Deposit</button>
                             <button class="btn btn-outline-light ml-2 withdraw_now"
                                 data-href="{{ route('user.wallet.withdraw', 'saving_wallet') }}"
                                 data-wallet_type="saving_wallet">Transfer</button>
@@ -258,8 +258,8 @@
                         </p>
                         <div class="text-center finance-buttons ">
                             <button class="btn btn-outline-light deposit_now"
-                                data-href="{{ route('user.paynow', $gateway->id ?? 0) }}" data-wallet_type="sharing_wallet"
-                                data-id="{{ $gateway->id ?? 0 }}">Deposit</button>
+                                data-href="{{ route('user.paynow', $gateway->id ?? 0) }}"
+                                data-wallet_type="sharing_wallet" data-id="{{ $gateway->id ?? 0 }}">Deposit</button>
                             <button class="btn btn-outline-light ml-2 withdraw_now"
                                 data-href="{{ route('user.wallet.withdraw', 'sharing_wallet') }}"
                                 data-wallet_type="sharing_wallet">Transfer</button>
@@ -349,7 +349,37 @@
                 </div>
             </div>
         </div>
-
+        @if(count($sliders) > 0)
+        <hr class="mt-4">
+        <h3>Members</h3>
+        <div class="row  justify-content-center ">
+            <div class="col-md-8 text-center">
+                <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        @foreach ($sliders as $slider)
+                            <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                <img style="min-height: 200px; max-height: 500px; object-fit: cover; border-radius: 5px"
+                                    src="{{ getFile('admins', $slider->image) }}" class="d-block w-100" alt="...">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <p>{{ $slider->title }}</p>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        @endif
 
         <div class="mt-4">
             <label>{{ __('Your refferal link') }}</label>
@@ -357,12 +387,10 @@
                 <input type="text" id="refer-link" class="form-control copy-text"
                     value="{{ route('user.register', @Auth::user()->username) }}" placeholder="referallink.com/refer"
                     aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
-                <button type="button" class="input-group-text  copy cmn-btn" id="basic-addon2">{{ __('Copy') }}</button>
+                <button type="button" class="input-group-text  copy cmn-btn"
+                    id="basic-addon2">{{ __('Copy') }}</button>
             </div>
         </div>
-
-
-
 
     </div>
 
