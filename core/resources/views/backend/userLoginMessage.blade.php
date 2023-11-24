@@ -24,7 +24,7 @@
 
                                     <div class="form-group col-12">
                                         <label>{{ __('Message') }}</label>
-                                        <input type="text" class="form-control" value="{{ $msg->message }}"
+                                        <input type="text" class="form-control" value="{{ $msg->message ?? ""}}"
                                             name="message" required>
                                     </div>
 
@@ -32,14 +32,14 @@
                                         <label class="col-form-label">{{ __('Profile Image') }}</label>
 
                                         <div id="image-preview" class="image-preview"
-                                            style="background-image:url({{ getFile('admins', $msg->picture) }});">
+                                            style="background-image:url({{ getFile('admins', $msg->picture?? "") }});">
                                             <label for="image-upload" id="image-label">{{ __('Choose File') }}</label>
                                             <input type="file" name="image" id="image-upload" />
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-check ">
-                                            <input name="status" {{ $msg->status == 1 ? 'checked' : '' }}
+                                            <input name="status" {{ ($msg->status ?? 1) == 1 ? 'checked' : '' }}
                                                 class="form-check-input" type="checkbox"
                                                 id="flexCheckDefault">
                                             <label class="form-check-label" for="flexCheckDefault">
