@@ -3,10 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\BusinessPackPayment;
+use App\Models\BusinessValuePayment;
+use App\Models\CurrentWalletPayment;
+use App\Models\Deposit;
 use App\Models\Gateway;
 use App\Models\MoneyTransfer;
 use App\Models\Payment;
 use App\Models\Plan;
+use App\Models\SavingWalletPayment;
+use App\Models\SharingWalletPayment;
 use App\Models\Transaction;
 use App\Models\Subscriber;
 use App\Models\User;
@@ -26,8 +32,8 @@ class HomeController extends Controller
         $data['pageTitle'] = 'Dashboard';
         $data['navDashboardActiveClass'] = "active";
 
-        $data['totalPayments'] = Payment::where('payment_status', 1)->sum('final_amount');
-        $data['totalPendingPayments'] = Payment::where('payment_status', 0)->sum('final_amount');
+        $data['totalPayments'] = Deposit::where('payment_status', 1)->sum('final_amount');
+        $data['totalPendingPayments'] = Deposit::where('payment_status', 0)->sum('final_amount');
         $data['totalWithdraw'] = Withdraw::where('status', 1)->sum('withdraw_amount');
 
         $data['totalUser'] = User::count();
@@ -67,9 +73,15 @@ class HomeController extends Controller
         $data['totalGateways'] = Gateway::where('gateway_name', '!=', 'bank')->count();
         $data['totalWithdrawCharge'] = Withdraw::where('status', 1)->sum('withdraw_charge');
         $data['totalWithdrawGateways'] = WithdrawGateway::where('status', 1)->count();
-        $data['totalInterest'] = Payment::where('payment_status', 1)->sum('interest_amount');
+        $data['totalInterest'] = 0;
+        $data['totalInterest'] += CurrentWalletPayment::sum('interest_amount');
+        $data['totalInterest'] += SavingWalletPayment::sum('interest_amount');
+        $data['totalInterest'] += SharingWalletPayment::sum('interest_amount');
+        $data['totalInterest'] += BusinessPackPayment::sum('interest_amount');
+        $data['totalInterest'] += BusinessValuePayment::sum('interest_amount');
+
         $data['pendignWithdraw'] = Withdraw::where('status', 0)->sum('withdraw_amount');
-        
+
 
 
         return view('backend.dashboard')->with($data);

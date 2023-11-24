@@ -7,11 +7,12 @@
             <h3>Members</h3>
             <div class="row mt-4 justify-content-center ">
                 <div class="col-md-6 text-center">
-                    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-interval="300"
+                        data-bs-ride="carousel">
                         <div class="carousel-inner">
                             @foreach ($sliders as $slider)
                                 <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                                    <img style="min-height: 200px; max-height: 600px; object-fit: cover; border-radius: 5px"
+                                    <img style="min-height: 200px; max-height: 600px; object-fit: contain; border-radius: 5px"
                                         src="{{ getFile('admins', $slider->image) }}" class="d-block w-100" alt="...">
                                     <div class="carousel-caption d-none d-md-block">
                                         <p>{{ $slider->title }}</p>
@@ -886,7 +887,9 @@
                 $("#loginMessageModal").modal('show');
             @endif
 
-
+            $('#carouselExampleFade').carousel({
+                interval: 2000
+            })
         })
 
 
