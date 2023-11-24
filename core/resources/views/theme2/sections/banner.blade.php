@@ -3,7 +3,7 @@
     $counter = element('banner.element');
 @endphp
 
-<section id="banner" class="banner-section">
+<section id="banner" class="banner-section section-bg">
     <div class="globe-el">
         <img src="{{ getFile('bg', 'globe2.png') }}" alt="globe elements">
     </div>

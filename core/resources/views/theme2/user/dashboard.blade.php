@@ -2,15 +2,7 @@
 
 @section('content2')
     <div class="dashboard-body-part">
-        <div class="mt-4">
-            <label>{{ __('Your refferal link') }}</label>
-            <div class="input-group mb-3">
-                <input type="text" id="refer-link" class="form-control copy-text"
-                    value="{{ route('user.register', @Auth::user()->username) }}" placeholder="referallink.com/refer"
-                    aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
-                <button type="button" class="input-group-text  copy cmn-btn" id="basic-addon2">{{ __('Copy') }}</button>
-            </div>
-        </div>
+
         <div class="row gy-4">
             <div class="col-xxl-6">
                 <div class="d-box-one h-100">
@@ -359,7 +351,15 @@
         </div>
 
 
-
+        <div class="mt-4">
+            <label>{{ __('Your refferal link') }}</label>
+            <div class="input-group mb-3">
+                <input type="text" id="refer-link" class="form-control copy-text"
+                    value="{{ route('user.register', @Auth::user()->username) }}" placeholder="referallink.com/refer"
+                    aria-label="Recipient's username" aria-describedby="basic-addon2" readonly>
+                <button type="button" class="input-group-text  copy cmn-btn" id="basic-addon2">{{ __('Copy') }}</button>
+            </div>
+        </div>
 
 
 
