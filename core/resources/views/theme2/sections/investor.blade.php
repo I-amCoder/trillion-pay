@@ -1,4 +1,4 @@
-@php
+{{-- @php
 $investor = content('investor.content');
 
 $topInvestor = App\Models\Payment::where('payment_status',1)->groupBy('user_id')
@@ -42,4 +42,4 @@ $topInvestor = App\Models\Payment::where('payment_status',1)->groupBy('user_id')
         </div>
     </div>
 </section>
-<!-- investor section end -->
+<!-- investor section end --> --}}

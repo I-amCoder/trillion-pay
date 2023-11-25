@@ -1,4 +1,4 @@
-@php
+{{-- @php
 $content = content('transaction.content');
 $recentTransactions = App\Models\Payment::with('user', 'gateway')
                                         ->latest()
@@ -120,4 +120,4 @@ $recentwithdraw = App\Models\Withdraw::with('user', 'withdrawMethod')
         </div>
 
     </div>
-</section><!-- End Transaction Section -->
+</section><!-- End Transaction Section --> --}}
