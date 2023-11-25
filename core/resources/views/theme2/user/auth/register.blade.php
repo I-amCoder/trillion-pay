@@ -15,6 +15,7 @@
                 <p class="mb-0"><span class="me-2">{{ __('Already registered?') }}</span> <a class="cmn-btn btn-sm"
                         href="{{ route('user.login') }}">{{ __('Login') }}</a></p>
             </div>
+
             <div class="auth-body-part">
                 <div class="auth-form-wrapper">
                     <h3 class="text-center mb-4">{{ __('Create An Account') }}</h3>
