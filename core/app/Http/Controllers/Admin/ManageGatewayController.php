@@ -1441,7 +1441,7 @@ class ManageGatewayController extends Controller
         ]);
 
 
-        sendMail('PAYMENT_CONFIRMED', ['trx' => $booking->transaction_id, 'amount' => $booking->amount, 'charge' => number_format($gateway->charge, 4), 'plan' => 'deposit', 'currency' => $general->site_currency], $booking->user);
+        sendMail('PAYMENT_CONFIRMED', ['trx' => $booking->transaction_id, 'amount' => $booking->amount, 'charge' => number_format($booking->gateway->charge, 4), 'plan' => 'deposit', 'currency' => $general->site_currency], $booking->user);
 
         $notify[] = ['success', "$type Payment Confirmed Successfully"];
 
