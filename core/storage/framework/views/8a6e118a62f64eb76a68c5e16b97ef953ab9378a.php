@@ -22,7 +22,7 @@
 
                                     <div class="form-group col-12">
                                         <label><?php echo e(__('Message')); ?></label>
-                                        <input type="text" class="form-control" value="<?php echo e($msg->message); ?>"
+                                        <input type="text" class="form-control" value="<?php echo e($msg->message ?? ""); ?>"
                                             name="message" required>
                                     </div>
 
@@ -30,14 +30,14 @@
                                         <label class="col-form-label"><?php echo e(__('Profile Image')); ?></label>
 
                                         <div id="image-preview" class="image-preview"
-                                            style="background-image:url(<?php echo e(getFile('admins', $msg->picture)); ?>);">
+                                            style="background-image:url(<?php echo e(getFile('admins', $msg->picture?? "")); ?>);">
                                             <label for="image-upload" id="image-label"><?php echo e(__('Choose File')); ?></label>
                                             <input type="file" name="image" id="image-upload" />
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-check ">
-                                            <input name="status" <?php echo e($msg->status == 1 ? 'checked' : ''); ?>
+                                            <input name="status" <?php echo e(($msg->status ?? 1) == 1 ? 'checked' : ''); ?>
 
                                                 class="form-check-input" type="checkbox"
                                                 id="flexCheckDefault">

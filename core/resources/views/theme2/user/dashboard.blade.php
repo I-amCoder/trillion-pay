@@ -3,17 +3,16 @@
 @section('content2')
     <div class="dashboard-body-part">
         @if (count($sliders) > 0)
-            <hr class="mt-4">
-            <h3>Members</h3>
-            <div class="row mt-4 justify-content-center ">
-                <div class="col-md-6 text-center">
-                    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-interval="300"
+            <div class="row mt-4 justify-content-center bg-section">
+                <div class="col-md-8 text-center">
+                    <div id="carouselExampleFade"
+                        class="carousel slide carousel-fade
                         data-bs-ride="carousel">
                         <div class="carousel-inner">
                             @foreach ($sliders as $slider)
                                 <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                                    <img style="min-height: 200px; max-height: 600px; object-fit: contain; border-radius: 5px"
-                                        src="{{ getFile('admins', $slider->image) }}" class="d-block w-100" alt="...">
+                                    <img class="slider-img" src="{{ getFile('admins', $slider->image) }}" class="d-block w-100"
+                                        alt="...">
                                     <div class="carousel-caption d-none d-md-block">
                                         <p>{{ $slider->title }}</p>
                                     </div>
@@ -791,6 +790,20 @@
 
         .timer {
             color: aquamarine;
+        }
+
+        .slider-img {
+            height: 600px;
+             object-fit: contain;
+            border-radius: 5px;
+        }
+
+        @media only screen and (max-width: 600px) {
+
+            /*Big smartphones [426px -> 600px]*/
+            .slider-img {
+                height: 400px;
+            }
         }
     </style>
 @endpush
