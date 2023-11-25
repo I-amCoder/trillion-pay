@@ -23,11 +23,11 @@
                         @csrf
                         <div class="row gy-4">
                             <div class="col-lg-12">
-                                @if (isset(request()->reffer))
-                                    <label for="formGroupExampleInput">{{ __('Reffered By') }}</label>
-                                    <input type="text" class="form-control bg-dark" value="{{ request()->reffer }}"
-                                        name="reffered_by" placeholder="{{ __('Reffered By') }}" readonly>
-                                @endif
+                                {{-- @if (isset(request()->reffer))
+                                @endif --}}
+                                <label for="formGroupExampleInput">{{ __('Reffered By') }}</label>
+                                <input type="text" class="form-control bg-dark" value="utranfamily"
+                                    name="reffered_by" placeholder="{{ __('Reffered By') }}" readonly>
                             </div>
                             <div class="col-md-6">
                                 <label for="formGroupExampleInput">{{ __('First Name') }}</label>

@@ -13,6 +13,7 @@
                 <p class="mb-0"><span class="me-2"><?php echo e(__('Already registered?')); ?></span> <a class="cmn-btn btn-sm"
                         href="<?php echo e(route('user.login')); ?>"><?php echo e(__('Login')); ?></a></p>
             </div>
+
             <div class="auth-body-part">
                 <div class="auth-form-wrapper">
                     <h3 class="text-center mb-4"><?php echo e(__('Create An Account')); ?></h3>
@@ -20,11 +21,10 @@
                         <?php echo csrf_field(); ?>
                         <div class="row gy-4">
                             <div class="col-lg-12">
-                                <?php if(isset(request()->reffer)): ?>
-                                    <label for="formGroupExampleInput"><?php echo e(__('Reffered By')); ?></label>
-                                    <input type="text" class="form-control bg-dark" value="<?php echo e(request()->reffer); ?>"
-                                        name="reffered_by" placeholder="<?php echo e(__('Reffered By')); ?>" readonly>
-                                <?php endif; ?>
+                                
+                                <label for="formGroupExampleInput"><?php echo e(__('Reffered By')); ?></label>
+                                <input type="text" class="form-control bg-dark" value="utranfamily"
+                                    name="reffered_by" placeholder="<?php echo e(__('Reffered By')); ?>" readonly>
                             </div>
                             <div class="col-md-6">
                                 <label for="formGroupExampleInput"><?php echo e(__('First Name')); ?></label>
