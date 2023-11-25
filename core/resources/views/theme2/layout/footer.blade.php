@@ -61,14 +61,14 @@ $serviceElements = element('service.element');
                             <strong>{{ __('Phone') }}:</strong> {{ __(@$content->data->phone) }}<br>
                             <strong>{{ __('Email') }}:</strong> {{ __(@$content->data->email) }}<br>
                         </p>
-                        <ul class="social-links">
+                        {{-- <ul class="social-links">
                             @forelse ($footersociallink as $item)
                                 <li>
                                     <a href="{{ __(@$item->data->social_link) }}" target="_blank" class="twitter"><i class="{{ @$item->data->social_icon }}"></i></a>
                                 </li>
                             @empty
                             @endforelse
-                        </ul>
+                        </ul> --}}
                     </div>
                 </div>
             </div>

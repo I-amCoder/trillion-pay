@@ -39,14 +39,7 @@ $serviceElements = element('service.element');
                             <strong><?php echo e(__('Phone')); ?>:</strong> <?php echo e(__(@$content->data->phone)); ?><br>
                             <strong><?php echo e(__('Email')); ?>:</strong> <?php echo e(__(@$content->data->email)); ?><br>
                         </p>
-                        <ul class="social-links">
-                            <?php $__empty_1 = true; $__currentLoopData = $footersociallink; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-                                <li>
-                                    <a href="<?php echo e(__(@$item->data->social_link)); ?>" target="_blank" class="twitter"><i class="<?php echo e(@$item->data->social_icon); ?>"></i></a>
-                                </li>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-                            <?php endif; ?>
-                        </ul>
+                        
                     </div>
                 </div>
             </div>
