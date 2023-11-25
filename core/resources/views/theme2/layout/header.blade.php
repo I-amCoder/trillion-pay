@@ -62,7 +62,7 @@
               @if (Auth::user())
                   <a href="{{ route('user.dashboard') }}" class="nav-link">{{ __('Dashboard') }}</a>
               @else
-                  <a href="{{ route('user.login') }}" class="nav-link">{{ __('Login') }}</a>
+                  {{-- <a href="{{ route('user.login') }}" class="nav-link">{{ __('Login') }}</a> --}}
               @endif
             </li>
           </ul>

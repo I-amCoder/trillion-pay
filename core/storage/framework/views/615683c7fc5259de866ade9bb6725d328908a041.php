@@ -53,7 +53,7 @@
               <?php if(Auth::user()): ?>
                   <a href="<?php echo e(route('user.dashboard')); ?>" class="nav-link"><?php echo e(__('Dashboard')); ?></a>
               <?php else: ?>
-                  <a href="<?php echo e(route('user.login')); ?>" class="nav-link"><?php echo e(__('Login')); ?></a>
+                  
               <?php endif; ?>
             </li>
           </ul>
