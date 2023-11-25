@@ -156,6 +156,9 @@ class ReferralController extends Controller
     {
         $log = RefferedCommission::find($id);
         if ($log) {
+            $user = $log->parent;
+            $user->profit_balance -= $log->amount;
+            $user->save();
             $log->delete();
 
             return redirect()->back()->withSuccess('Commision Deleted Successfully');

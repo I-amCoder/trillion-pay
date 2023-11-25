@@ -59,13 +59,13 @@
             <li class="nav-item"><a href="#about" class="nav-link">{{__('About')}}</a></li>
             <li class="nav-item"><a href="#why-choose" class="nav-link">{{__('Why Choose')}}</a></li>
             <li class="nav-item"><a href="#how-start" class="nav-link">{{__('How Work')}}</a></li>
-            <li class="account-btn">
+            {{-- <li class="account-btn">
               @if (Auth::user())
                   <a href="{{ route('user.dashboard') }}" class="nav-link">{{ __('Dashboard') }}</a>
               @else
-                  {{-- <a href="{{ route('user.login') }}" class="nav-link">{{ __('Login') }}</a> --}}
+                  <a href="{{ route('user.login') }}" class="nav-link">{{ __('Login') }}</a>
               @endif
-            </li>
+            </li> --}}
           </ul>
         </div>
       </nav>

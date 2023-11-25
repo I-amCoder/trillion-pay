@@ -12,7 +12,7 @@
                                     <img class="slider-img" src="<?php echo e(getFile('admins', $slider->image)); ?>" class="d-block w-100"
                                         alt="...">
                                     <div class="carousel-caption d-none d-md-block">
-                                        <p><?php echo e($slider->title); ?></p>
+                                        <h1 ><?php echo e($slider->title); ?></h1>
                                     </div>
                                 </div>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -801,6 +801,13 @@
             height: 600px;
              object-fit: contain;
             border-radius: 5px;
+        }
+        .carousel-caption h1{
+            color: rgb(252, 251, 121);
+            font-weight: bold;
+            text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px;
+            -webkit-text-stroke: 1px #000000;
+
         }
 
         @media  only screen and (max-width: 600px) {

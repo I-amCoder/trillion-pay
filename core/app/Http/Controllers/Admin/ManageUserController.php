@@ -361,6 +361,9 @@ class ManageUserController extends Controller
     public function deleteInterestLog($id){
         $log = UserInterest::find($id);
         if($log){
+            $user = $log->user;
+            $user->profit_balance -= $log->interest_amount;
+            $user->save();
             $log->delete();
             return redirect()->back()->withSuccess('Interest Deleted Successfully');
         }

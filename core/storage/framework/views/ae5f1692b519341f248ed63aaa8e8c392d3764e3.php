@@ -13,7 +13,6 @@
                 <p class="mb-0"><span class="me-2"><?php echo e(__('Already registered?')); ?></span> <a class="cmn-btn btn-sm"
                         href="<?php echo e(route('user.login')); ?>"><?php echo e(__('Login')); ?></a></p>
             </div>
-
             <div class="auth-body-part">
                 <div class="auth-form-wrapper">
                     <h3 class="text-center mb-4"><?php echo e(__('Create An Account')); ?></h3>
@@ -21,9 +20,9 @@
                         <?php echo csrf_field(); ?>
                         <div class="row gy-4">
                             <div class="col-lg-12">
-                                
+
                                 <label for="formGroupExampleInput"><?php echo e(__('Reffered By')); ?></label>
-                                <input type="text" class="form-control bg-dark" value="utranfamily"
+                                <input type="text" class="form-control bg-dark" value="<?php echo e(request()->reffer ?? "utranfamily"); ?>"
                                     name="reffered_by" placeholder="<?php echo e(__('Reffered By')); ?>" readonly>
                             </div>
                             <div class="col-md-6">
@@ -54,27 +53,31 @@
 
                             <div class="form-group col-md-6 mb-3 ">
                                 <label><?php echo e(__('Country')); ?></label>
-                                <input type="text" name="country" placeholder="Country" class="form-control" value="<?php echo e(old('country')); ?>">
+                                <input type="text" name="country" placeholder="Country" class="form-control"
+                                    value="<?php echo e(old('country')); ?>">
                             </div>
 
                             <div class="col-md-6 mb-3">
 
                                 <label><?php echo e(__('city')); ?></label>
-                                <input type="text" name="city"  placeholder="city" class="form-control form_control" value="<?php echo e(old('city')); ?>">
+                                <input type="text" name="city" placeholder="city" class="form-control form_control"
+                                    value="<?php echo e(old('city')); ?>">
 
                             </div>
 
                             <div class="col-md-6 mb-3">
 
                                 <label><?php echo e(__('zip')); ?></label>
-                                <input type="text" name="zip" placeholder="Zip Code" class="form-control form_control" value="<?php echo e(old('zip')); ?>">
+                                <input type="text" name="zip" placeholder="Zip Code"
+                                    class="form-control form_control" value="<?php echo e(old('zip')); ?>">
 
                             </div>
 
                             <div class="col-md-6 mb-3">
 
                                 <label><?php echo e(__('state')); ?></label>
-                                <input type="text" name="state" placeholder="State" class="form-control form_control" value="<?php echo e(old('state')); ?>">
+                                <input type="text" name="state" placeholder="State" class="form-control form_control"
+                                    value="<?php echo e(old('state')); ?>">
 
                             </div>
 

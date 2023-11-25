@@ -69,11 +69,16 @@ class RegisterController extends Controller
             $referUser = User::where('username', $request->reffered_by)->first();
 
 
-            if ($referUser) {
-                $referid = $referUser->id;
-                // $notify[] = ['error', 'No User Found Assocciated with this reffer Name'];
+            if (!$referUser) {
+                $notify[] = ['error', 'No User Found Assocciated with this reffer Name'];
 
-                // return redirect()->route('user.register')->withNotify($notify);
+                return redirect()->route('user.register')->withNotify($notify);
+            }
+            $referid = $referUser->id;
+        } else {
+            $referUser = User::where('username', 'utranfamily')->first();
+            if (!$referUser) {
+                $referid = $referUser->id;
             }
         }
 
@@ -112,7 +117,7 @@ class RegisterController extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'phone' => $request->phone,
-            'address'=>$data,
+            'address' => $data,
             'status' => 1,
             'password' => bcrypt($request->password),
             'reffered_by' => $referid ?? ''

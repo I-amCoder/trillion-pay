@@ -15,7 +15,6 @@
                 <p class="mb-0"><span class="me-2">{{ __('Already registered?') }}</span> <a class="cmn-btn btn-sm"
                         href="{{ route('user.login') }}">{{ __('Login') }}</a></p>
             </div>
-
             <div class="auth-body-part">
                 <div class="auth-form-wrapper">
                     <h3 class="text-center mb-4">{{ __('Create An Account') }}</h3>
@@ -23,10 +22,9 @@
                         @csrf
                         <div class="row gy-4">
                             <div class="col-lg-12">
-                                {{-- @if (isset(request()->reffer))
-                                @endif --}}
+
                                 <label for="formGroupExampleInput">{{ __('Reffered By') }}</label>
-                                <input type="text" class="form-control bg-dark" value="utranfamily"
+                                <input type="text" class="form-control bg-dark" value="{{ request()->reffer ?? "utranfamily" }}"
                                     name="reffered_by" placeholder="{{ __('Reffered By') }}" readonly>
                             </div>
                             <div class="col-md-6">
@@ -57,27 +55,31 @@
 
                             <div class="form-group col-md-6 mb-3 ">
                                 <label>{{ __('Country') }}</label>
-                                <input type="text" name="country" placeholder="Country" class="form-control" value="{{ old('country') }}">
+                                <input type="text" name="country" placeholder="Country" class="form-control"
+                                    value="{{ old('country') }}">
                             </div>
 
                             <div class="col-md-6 mb-3">
 
                                 <label>{{ __('city') }}</label>
-                                <input type="text" name="city"  placeholder="city" class="form-control form_control" value="{{ old('city') }}">
+                                <input type="text" name="city" placeholder="city" class="form-control form_control"
+                                    value="{{ old('city') }}">
 
                             </div>
 
                             <div class="col-md-6 mb-3">
 
                                 <label>{{ __('zip') }}</label>
-                                <input type="text" name="zip" placeholder="Zip Code" class="form-control form_control" value="{{ old('zip') }}">
+                                <input type="text" name="zip" placeholder="Zip Code"
+                                    class="form-control form_control" value="{{ old('zip') }}">
 
                             </div>
 
                             <div class="col-md-6 mb-3">
 
                                 <label>{{ __('state') }}</label>
-                                <input type="text" name="state" placeholder="State" class="form-control form_control" value="{{ old('state') }}">
+                                <input type="text" name="state" placeholder="State" class="form-control form_control"
+                                    value="{{ old('state') }}">
 
                             </div>
 
