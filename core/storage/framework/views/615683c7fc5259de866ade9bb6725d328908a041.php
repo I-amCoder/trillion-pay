@@ -10,9 +10,7 @@
       <div class="row align-items-center gy-2">
         <div class="col-lg-8 col-md-7">
           <ul class="header-top-info-list">
-            <li>
-              <a href="tel:<?php echo e(@$contact->data->phone); ?>"><i class="fas fa-phone"></i> <?php echo e(@$contact->data->phone); ?></a>
-            </li>
+            
             <li>
               <a href="mailto:<?php echo e(@$contact->data->email); ?>"><i class="fas fa-envelope"></i> <?php echo e(@$contact->data->email); ?></a>
             </li>
@@ -50,10 +48,7 @@
             <li class="nav-item"><a href="#banner" class="nav-link active"><?php echo e(__('Home')); ?></a></li>
             <li class="nav-item"><a href="#about" class="nav-link"><?php echo e(__('About')); ?></a></li>
             <li class="nav-item"><a href="#why-choose" class="nav-link"><?php echo e(__('Why Choose')); ?></a></li>
-            <li class="nav-item"><a href="#investment" class="nav-link"><?php echo e(__('Plan')); ?></a></li>
             <li class="nav-item"><a href="#how-start" class="nav-link"><?php echo e(__('How Work')); ?></a></li>
-            <li class="nav-item"><a href="#faq" class="nav-link"><?php echo e(__('Faq')); ?></a></li>
-            <li class="nav-item"><a href="#testimonial" class="nav-link"><?php echo e(__('Testimonial')); ?></a></li>
             <li class="account-btn">
               <?php if(Auth::user()): ?>
                   <a href="<?php echo e(route('user.dashboard')); ?>" class="nav-link"><?php echo e(__('Dashboard')); ?></a>

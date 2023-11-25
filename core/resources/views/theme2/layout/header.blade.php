@@ -10,9 +10,9 @@
       <div class="row align-items-center gy-2">
         <div class="col-lg-8 col-md-7">
           <ul class="header-top-info-list">
-            <li>
+            {{-- <li>
               <a href="tel:{{@$contact->data->phone}}"><i class="fas fa-phone"></i> {{@$contact->data->phone}}</a>
-            </li>
+            </li> --}}
             <li>
               <a href="mailto:{{@$contact->data->email}}"><i class="fas fa-envelope"></i> {{@$contact->data->email}}</a>
             </li>
@@ -57,10 +57,7 @@
             <li class="nav-item"><a href="#banner" class="nav-link active">{{__('Home')}}</a></li>
             <li class="nav-item"><a href="#about" class="nav-link">{{__('About')}}</a></li>
             <li class="nav-item"><a href="#why-choose" class="nav-link">{{__('Why Choose')}}</a></li>
-            <li class="nav-item"><a href="#investment" class="nav-link">{{__('Plan')}}</a></li>
             <li class="nav-item"><a href="#how-start" class="nav-link">{{__('How Work')}}</a></li>
-            <li class="nav-item"><a href="#faq" class="nav-link">{{__('Faq')}}</a></li>
-            <li class="nav-item"><a href="#testimonial" class="nav-link">{{__('Testimonial')}}</a></li>
             <li class="account-btn">
               @if (Auth::user())
                   <a href="{{ route('user.dashboard') }}" class="nav-link">{{ __('Dashboard') }}</a>

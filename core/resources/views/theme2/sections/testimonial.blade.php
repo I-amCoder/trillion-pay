@@ -1,4 +1,4 @@
-@php
+{{-- @php
 $content = content('testimonial.content');
 $elements = element('testimonial.element');
 
@@ -47,4 +47,4 @@ $elements = element('testimonial.element');
     </div>
     </div>
 </section>
-<!-- testimonial section end -->
+<!-- testimonial section end --> --}}

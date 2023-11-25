@@ -1,4 +1,4 @@
-@php
+{{-- @php
 $content = content('faq.content');
 $elements = element('faq.element');
 @endphp
@@ -34,4 +34,4 @@ $elements = element('faq.element');
         </div>
       </div>
     </section>
-    <!-- faq section end -->
+    <!-- faq section end --> --}}

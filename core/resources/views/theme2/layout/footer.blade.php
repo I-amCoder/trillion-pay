@@ -29,7 +29,7 @@ $serviceElements = element('service.element');
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-4 col-sm-6">
+                {{-- <div class="col-lg-2 col-md-4 col-sm-6">
                     <div class="footer-box">
                         <h4 class="title">{{ __('Useful Links') }}</h4>
                         <ul class="footer-link-list">
@@ -52,7 +52,7 @@ $serviceElements = element('service.element');
                             @endforeach
                         </ul>
                     </div>
-                </div>
+                </div> --}}
                 <div class="col-lg-3 col-md-4">
                     <div class="footer-box">
                         <h4 class="title">{{ __('Location') }}</h4>

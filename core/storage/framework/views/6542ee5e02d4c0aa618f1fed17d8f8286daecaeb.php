@@ -30,30 +30,7 @@ $serviceElements = element('service.element');
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-4 col-sm-6">
-                    <div class="footer-box">
-                        <h4 class="title"><?php echo e(__('Useful Links')); ?></h4>
-                        <ul class="footer-link-list">
-                            <li> <a href="<?php echo e(route('home')); ?>"><?php echo e(__('Home')); ?></a></li>
-                            <?php $__empty_1 = true; $__currentLoopData = $pages; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $page): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-                                <li><a href="<?php echo e(route('pages', $page->slug)); ?>"><?php echo e(__($page->name)); ?></a></li>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-                            <?php endif; ?>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="footer-box">
-                        <h4 class="title"><?php echo e(__('Our Services')); ?></h4>
-                        <ul class="footer-link-list">
-                            <?php $__currentLoopData = $serviceElements; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $serviceelement): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <li><a
-                                        href="<?php echo e(route('service', $serviceelement->data->slug)); ?>"><?php echo e(__(@$serviceelement->data->title)); ?></a>
-                                </li>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                        </ul>
-                    </div>
-                </div>
+                
                 <div class="col-lg-3 col-md-4">
                     <div class="footer-box">
                         <h4 class="title"><?php echo e(__('Location')); ?></h4>

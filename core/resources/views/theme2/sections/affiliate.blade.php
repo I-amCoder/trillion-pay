@@ -1,4 +1,4 @@
-@php
+{{-- @php
 $content = content('affiliate.content');
 
 $invest = \App\Models\Refferal::where('type', 'invest')->first();
@@ -38,4 +38,4 @@ $invest = \App\Models\Refferal::where('type', 'invest')->first();
         </div>
     </div>
     </div>
-</section>
+</section> --}}
