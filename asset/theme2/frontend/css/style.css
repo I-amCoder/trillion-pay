@@ -335,7 +335,7 @@ img {
 }
 
 .header.header-fixed .header-bottom {
-    background-color: #0e0e0e;
+    background-color: var(--secondary-color);
 }
 
 .header-top {
@@ -344,7 +344,7 @@ img {
 }
 
 .header-bottom, .header-top {
-    background-color: #0e0e0e;
+    background-color: var(--secondary-color);
 }
 
 .header-top-info-list li a:hover {

@@ -5,7 +5,7 @@
 
 <!-- header-section start  -->
 <header class="header ">
-  <div class="header-top  "  style="background: #5A5A5A
+  <div class="header-top"
   ">
     <div class="container">
       <div class="row align-items-center gy-2">
@@ -44,7 +44,7 @@
     </div>
   </div>
 
-  <div class="header-bottom " style="background: #5A5A5A " >
+  <div class="header-bottom "  >
     <div class="container">
       <nav class="navbar navbar-expand-xl p-0 align-items-center">
         <a class="site-logo site-title" href="{{ route('home') }}">

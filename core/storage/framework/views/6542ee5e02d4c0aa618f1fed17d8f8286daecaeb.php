@@ -24,10 +24,7 @@ $serviceElements = element('service.element');
                             </h1>
                         </a>
                         <p><?php echo e(__(@$contentlink->data->footer_short_description)); ?></p>
-                        <div class="footer-payment">
-                            <h5><?php echo e(__('Payment Methods')); ?></h5>
-                            <img src="<?php echo e(getFile('footer', @$contentlink->data->payment_image)); ?>" alt="">
-                        </div>
+                        
                     </div>
                 </div>
                 

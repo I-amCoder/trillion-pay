@@ -23,10 +23,10 @@ $serviceElements = element('service.element');
                             </h1>
                         </a>
                         <p>{{ __(@$contentlink->data->footer_short_description) }}</p>
-                        <div class="footer-payment">
+                        {{-- <div class="footer-payment">
                             <h5>{{ __('Payment Methods') }}</h5>
                             <img src="{{ getFile('footer', @$contentlink->data->payment_image) }}" alt="">
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 {{-- <div class="col-lg-2 col-md-4 col-sm-6">

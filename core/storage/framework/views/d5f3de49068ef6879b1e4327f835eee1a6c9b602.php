@@ -2,7 +2,7 @@
     <div class="dashboard-body-part">
         <?php if(count($sliders) > 0): ?>
             <div class="row mt-4 justify-content-center bg-section">
-                <div class="col-md-8 text-center">
+                <div class="col-md-6 text-center">
                     <div id="carouselExampleFade"
                         class="carousel slide carousel-fade
                         data-bs-ride="carousel">

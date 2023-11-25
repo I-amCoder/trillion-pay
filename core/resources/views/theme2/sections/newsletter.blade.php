@@ -1,4 +1,4 @@
-@php
+{{-- @php
 $content = content('newsletter.content');
 @endphp
 
@@ -26,4 +26,4 @@ $content = content('newsletter.content');
             </div>
         </div>
     </div>
-</section>
+</section> --}}
