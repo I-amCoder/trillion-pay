@@ -5,7 +5,8 @@
 
 <!-- header-section start  -->
 <header class="header ">
-  <div class="header-top  text-dark" style="background: rgb(3, 162, 215)">
+  <div class="header-top  "  style="background: #5A5A5A
+  ">
     <div class="container">
       <div class="row align-items-center gy-2">
         <div class="col-lg-8 col-md-7">
@@ -43,7 +44,7 @@
     </div>
   </div>
 
-  <div class="header-bottom" style="background: rgb(3, 162, 215)">
+  <div class="header-bottom " style="background: #5A5A5A " >
     <div class="container">
       <nav class="navbar navbar-expand-xl p-0 align-items-center">
         <a class="site-logo site-title" href="{{ route('home') }}">
