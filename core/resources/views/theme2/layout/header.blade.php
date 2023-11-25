@@ -4,12 +4,12 @@
 @endphp
 
 <!-- header-section start  -->
-<header class="header">
-  <div class="header-top">
+<header class="header ">
+  <div class="header-top  text-dark" style="background: rgb(3, 162, 215)">
     <div class="container">
       <div class="row align-items-center gy-2">
         <div class="col-lg-8 col-md-7">
-          <ul class="header-top-info-list">
+          <ul class="header-top-info-list text-light">
             {{-- <li>
               <a href="tel:{{@$contact->data->phone}}"><i class="fas fa-phone"></i> {{@$contact->data->phone}}</a>
             </li> --}}
@@ -43,7 +43,7 @@
     </div>
   </div>
 
-  <div class="header-bottom">
+  <div class="header-bottom" style="background: rgb(3, 162, 215)">
     <div class="container">
       <nav class="navbar navbar-expand-xl p-0 align-items-center">
         <a class="site-logo site-title" href="{{ route('home') }}">

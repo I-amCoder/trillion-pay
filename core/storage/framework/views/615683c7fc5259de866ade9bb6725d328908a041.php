@@ -4,12 +4,12 @@
 ?>
 
 <!-- header-section start  -->
-<header class="header">
-  <div class="header-top">
+<header class="header ">
+  <div class="header-top  text-dark" style="background: rgb(3, 162, 215)">
     <div class="container">
       <div class="row align-items-center gy-2">
         <div class="col-lg-8 col-md-7">
-          <ul class="header-top-info-list">
+          <ul class="header-top-info-list text-light">
             
             <li>
               <a href="mailto:<?php echo e(@$contact->data->email); ?>"><i class="fas fa-envelope"></i> <?php echo e(@$contact->data->email); ?></a>
@@ -34,7 +34,7 @@
     </div>
   </div>
 
-  <div class="header-bottom">
+  <div class="header-bottom" style="background: rgb(3, 162, 215)">
     <div class="container">
       <nav class="navbar navbar-expand-xl p-0 align-items-center">
         <a class="site-logo site-title" href="<?php echo e(route('home')); ?>">
