@@ -1,4 +1,4 @@
-@php
+{{-- @php
 $content = content('blog.content');
 $blogs = element('blog.element')->take(6);
 @endphp
@@ -41,4 +41,4 @@ $blogs = element('blog.element')->take(6);
 
 
     </div>
-</section>
+</section> --}}
