@@ -115,7 +115,8 @@
                         <span class="text-white ms-2"><?php echo e(auth()->user()->full_name); ?></span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end " aria-labelledby="dropdownMenuButton1">
-
+                        <li><a class="dropdown-item "
+                            href="<?php echo e(route('user.team')); ?>"><?php echo e(__('Referral Team')); ?></a></li>
                         <li><a class="dropdown-item" href="<?php echo e(route('user.2fa')); ?>"><?php echo e(__('2FA')); ?></a>
                         </li>
                         <li><a class="dropdown-item"

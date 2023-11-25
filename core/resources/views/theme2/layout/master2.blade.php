@@ -124,7 +124,8 @@
                         <span class="text-white ms-2">{{ auth()->user()->full_name }}</span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end " aria-labelledby="dropdownMenuButton1">
-
+                        <li><a class="dropdown-item "
+                            href="{{ route('user.team') }}">{{ __('Referral Team') }}</a></li>
                         <li><a class="dropdown-item" href="{{ route('user.2fa') }}">{{ __('2FA') }}</a>
                         </li>
                         <li><a class="dropdown-item"
