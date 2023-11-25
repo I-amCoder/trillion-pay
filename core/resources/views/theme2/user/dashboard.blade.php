@@ -99,8 +99,6 @@
                             <li><a class="dropdown-item text-dark"
                                     href="{{ route('user.commision') }}">{{ __('Referral Commission History') }}</a></li>
                             <li><a class="dropdown-item text-dark"
-                                    href="{{ route('user.team') }}">{{ __('Referral Team') }}</a></li>
-                            <li><a class="dropdown-item text-dark"
                                     href="{{ route('user.transaction.log') }}">{{ __('Transaction History') }}</a></li>
                         </ul>
                     </div>
