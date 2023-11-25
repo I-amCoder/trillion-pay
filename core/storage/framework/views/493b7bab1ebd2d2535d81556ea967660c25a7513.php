@@ -96,7 +96,7 @@
                 
                 <h3 class="logo me-auto p-2 me-lg-0 ">
                     <a href="<?php echo e(route('user.dashboard')); ?>">
-                        <i class="fa fa-tachometer-alt" aria-hidden="true"></i> Dashboard
+                        <i class="fa fa-home" aria-hidden="true"></i>
 
                     </a>
                 </h3>
