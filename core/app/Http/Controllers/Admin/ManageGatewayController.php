@@ -1434,7 +1434,7 @@ class ManageGatewayController extends Controller
             'amount' => $booking->amount,
             'currency' => $general->site_currency,
             'details' => 'Payment Successfull',
-            'charge' => $gateway->charge,
+            'charge' => $booking->gateway->charge,
             'type' => $type,
             'user_id' => $booking->user_id,
             'payment_status' => 1
